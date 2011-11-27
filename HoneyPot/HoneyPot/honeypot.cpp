@@ -11,4 +11,6 @@ honeypot::~honeypot()
 
 }
 
-void honeypot::Slot1(int v){}
+int honeypot::Slot1(int v){return 1;}
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(honeypot::Options);

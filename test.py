@@ -14,7 +14,7 @@ _0x = hex
 
 def get_sectionordinal_by_physical_address(pe, phys_addr):
     for i, section in enumerate(pe.sections):
-        if section.PointerToRawData <= phys_addr and phys_addr < section.PointerToRawData + section.SizeOfRawData:
+        if section.PointerToRawData <= phys_addr <  section.PointerToRawData + section.SizeOfRawData:
             return i
     raise ValueError("Invalid PhyisicalAddress")
 
@@ -24,7 +24,7 @@ def get_sectionname_by_physical_address(pe, phys_addr):
 
 def get_sectionordinal_by_virtual_address(pe, virtual_addr):
     for i, section in enumerate(pe.sections):
-        if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_addr and virtual_addr < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
+        if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_addr < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
             return i
     raise ValueError("Invalid VirtualAddress")
 
@@ -33,11 +33,15 @@ def get_sectionname_by_virtual_address(pe, virtual_addr):
     return pe.sections[ordinal].Name
 
 def virtual_address_to_physical_address(pe, virt_addr):
+    if not virt_addr:
+        return 0
     sectionordinal = get_sectionordinal_by_virtual_address(pe, virt_addr)
     section = pe.sections[sectionordinal]
-    return virt_addr-pe.OPTIONAL_HEADER.ImageBase - section.VirtualAddress + section.PointerToRawData 
+    return virt_addr - pe.OPTIONAL_HEADER.ImageBase - section.VirtualAddress + section.PointerToRawData 
 
 def physical_address_to_virtual_address(pe, phys_addr):
+    if not phys_addr:
+        return 0
     sectionordinal = get_sectionordinal_by_physical_address(pe, phys_addr)
     section = pe.sections[sectionordinal]
     return phys_addr - section.PointerToRawData + pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress
@@ -72,24 +76,40 @@ pattern = [0x8B, 0x41, 0x04, 0x8b, 0x40, 0x18, 0x85, 0xc0, 0x75, 0x05, 0xb8, Non
 regexp_pattern =  ''.join(map(chr, regexify(pattern)))
 compiled_regexp = re.compile(regexp_pattern, flags=re.DOTALL)
 
-def info_writer(pe, match_object, mmaped_file):
+from collections import namedtuple
+QMetaObject = namedtuple('QMetaObject', 'parent_staticMetaObject qt_meta_stringdata qt_meta_data zero')
+QMetaObjectReader = struct.Struct("iiii")
+
+QMetaObjectData = namedtuple('QMetaObjectData', 'revision classname classinfoCount \
+  classinfos methodCount methods propertyCount properties enumCount enums \
+  constuctorCount constructors flags signals'
+)
+QMetaObjectDataReader = struct.Struct("iiiiiiiiiiiiii")
+
+QMetaClassInfo
+QMetaObjectClassinfoReader = struct.Struct('ii')
+
+def info_writer(pe, match_object, mmapped_file):
     metaObjectVirtualAddress = little_endian_string_to_number(match_object.group(1))
     metaObjectPhysicalAddress = virtual_address_to_physical_address(pe, metaObjectVirtualAddress)
+    metaObjectMemoryImage = mmapped_file[metaObjectPhysicalAddress:][:4*4]
+    parsedMetaObject = QMetaObject._make(QMetaObjectReader.unpack(metaObjectMemoryImage))
+    parsedMetaObjectPhysAddress = QMetaObject._make(map(lambda virtualaddress: virtual_address_to_physical_address(pe, virtualaddress), parsedMetaObject))
     print "found metaObject() function at %s psysical address, at %s virtual address, with metaObject at %s virtual address and %s physical address"%\
       (_0x(match_object.start()), _0x(physical_address_to_virtual_address(pe, match_object.start())), _0x(metaObjectVirtualAddress), _0x(metaObjectPhysicalAddress))
-    someParentVirtualAddress = struct.unpack("<i",mmaped_file[metaObjectPhysicalAddress:][:4])[0]
-    textInfoVirtualAddress = struct.unpack("<i", mmaped_file[metaObjectPhysicalAddress+4:][:4])[0]
-    textInfoPhysicalAddress = virtual_address_to_physical_address(pe, textInfoVirtualAddress)
-    metaInfoVirtualAddress = little_endian_string_to_number(mmaped_file[metaObjectPhysicalAddress+8:][:4])
-    metaInfoPhysicalAddress = virtual_address_to_physical_address(pe, metaInfoVirtualAddress)
-    print "class name: %s"%''.join(string_reader(mmaped_file[textInfoPhysicalAddress:]))
-    #print len(list(string_reader(mmaped_file[textInfoPhysicalAddress:100])))
-    #print ''.join(string_reader(mmaped_file[textInfoPhysicalAddress:100]))
-    print "\t%s %s %s"%\
-      (_0x(someParentVirtualAddress),_0x(textInfoVirtualAddress), _0x(metaInfoVirtualAddress))
+    
+    print "class name: %s" % ''.join(string_reader(mmapped_file[parsedMetaObjectPhysAddress.qt_meta_stringdata:]))
+    metaObjectDataMemoryImage = mmapped_file[parsedMetaObjectPhysAddress.qt_meta_data:][:14*4]
+    parsedQMetaObjectData = QMetaObjectData._make(QMetaObjectDataReader.unpack(metaObjectDataMemoryImage))
+    for i in xrange(parsedQMetaObjectData.classinfoCount):
 
+    #print len(list(string_reader(mmapped_file[textInfoPhysicalAddress:100])))
+    #print ''.join(string_reader(mmapped_file[textInfoPhysicalAddress:100]))
+    #print "\t%s %s %s"%\
+    #  (_0x(someParentVirtualAddress),_0x(textInfoVirtualAddress), _0x(metaInfoVirtualAddress))
 
-fd = os.open('ftp.exe', os.O_RDWR)
+fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
+#fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
     pe = pefile.PE(data=mmapped_file)
     pprint(pe)

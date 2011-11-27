@@ -1,6 +1,9 @@
 doksik
-ftp.exe
 env/
+
+#binary stuff
+*.exe
+*.pdb
 
 #OS junk files
 [Tt]humbs.db
