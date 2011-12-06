@@ -1,15 +1,38 @@
 import struct
-from collections import namedtuple
+import collections
 
-class QMetaClassInfo(object):
-    t = namedtuple
-    def __init__(self, name, key):
-        self.name = name
-        self.key = key
-    def name(self):
-        return self.name
-    def key(self):
-        return self.key
+#class QMetaClassInfo(namedtuple('QMetaClassInfo', 'name, key')):
+#    pass
+
+def struct_compiler(name, bases, dict):
+    print dict
+    print bases
+    if 'struct' in dict:
+        dict['struct'] = struct.Struct(dict['struct'])
+    return type(name, bases, dict)
+
+class MetaClassParser(object):
+
+    __metaclass__ = struct_compiler
+
+    def __new__(cls, memory_image):
+        if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
+            raise NotImplementedError("Define inherited class' struct and fields attributes")
+        return cls.namedtuple_factory()(*cls.struct.unpack(memory_image))
+    
+    @classmethod
+    def namedtuple_factory(cls):
+        return collections.namedtuple(cls.__name__, cls.fields)
+
+print MetaClassParser.__class__
+print 1, type(MetaClassParser)
+
+class QMetaClassInfo(MetaClassParser):
+    struct = "ii"
+    fields = 'name, key'
+
+print QMetaClassInfo.struct
+print QMetaClassInfo('\01\00\00\00\00\01\00\00')
 
 class QMetaMethod(object):
 
