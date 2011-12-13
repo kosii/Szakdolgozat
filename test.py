@@ -4,6 +4,7 @@ import re
 import mmap
 import contextlib
 from pprint import pprint
+
 from itertools import takewhile
 import itertools
 import operator
@@ -45,6 +46,28 @@ def physical_address_to_virtual_address(pe, phys_addr):
     sectionordinal = get_sectionordinal_by_physical_address(pe, phys_addr)
     section = pe.sections[sectionordinal]
     return phys_addr - section.PointerToRawData + pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress
+
+def get_sectionname_by_physical_address(pe, phys_addr):
+
+    for section in pe.sections:
+        if section.PointerToRawData <= phys_addr and phys_addr < section.PointerToRawData + section.SizeOfRawData:
+            return section.Name
+    return None
+
+def get_sectionname_by_virtual_address(pe, virtual_address):
+
+    for section in pe.sections:
+        if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_address and virtual_address < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
+            return section.Name
+    return None 
+
+def litte_endian_integer(bytes, len):
+    b = 256
+    i = 1
+    s = 0
+    bytes_generator = iter(bytes)
+    while len:
+        s += ord(next(bytes_generator))
 
 def little_endian_string_to_number(address):
     return reduce(lambda x, y: x*256 + y, reversed(map(ord, address)))
@@ -124,4 +147,3 @@ with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
         info_writer(pe, matchObject, mmapped_file)
         #print i, get_sectionname_by_physical_address(pe, matchObject.start()), hex(matchObject.start()), get_sectionname_by_virtual_address(pe, little_endian_string_to_number(matchObject.group(1))), hex(little_endian_string_to_number(matchObject.group(1)))
         #print hex(physical_address_to_virtual_address(pe, matchObject.start()))
-    

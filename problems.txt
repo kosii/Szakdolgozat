@@ -1,0 +1,23 @@
+Stackoverflow question
+
+I'm playing around with python metaclasses, and I'd like to somewhat inherit it from a base class.
+When there is no __metaclass__ attribute specified in a class' namespace, these rules applied to find one:
+1. If dict['__metaclass__'] exists, it is used.
+2. Otherwise, if there is at least one base class, its metaclass is used (this looks for a __class__ attribute first and if not found, uses its type).
+3. Otherwise, if a global variable named __metaclass__ exists, it is used.
+4. Otherwise, the old-style, classic metaclass (types.ClassType) is used.
+
+
+possible duplicate: http://stackoverflow.com/questions/4651729/metaclass-mixin-or-chaining
+
+class MetaClassParser(object):
+	
+	__metaclass__ = descriptor_metaclass
+    def __new__(cls, memory_image):
+        if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
+            raise NotImplementedError("Define inherited class' struct and fields attributes")
+        return cls.namedtuple_factory()(*cls.struct.unpack(memory_image))
+    
+    @classmethod
+    def namedtuple_factory(cls):
+        return collections.namedtuple(cls.__name__, cls.fields)
