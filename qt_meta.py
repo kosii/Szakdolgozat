@@ -5,11 +5,11 @@ import collections
 #    pass
 
 def struct_compiler(name, bases, dict):
-    print dict
-    print bases
     if 'struct' in dict:
         dict['struct'] = struct.Struct(dict['struct'])
     return type(name, bases, dict)
+
+
 
 class MetaClassParser(object):
 
@@ -24,7 +24,7 @@ class MetaClassParser(object):
     def namedtuple_factory(cls):
         return collections.namedtuple(cls.__name__, cls.fields)
 
-print MetaClassParser.__class__
+MetaClassParser.__class__ = struct_compiler
 print 1, type(MetaClassParser)
 
 class QMetaClassInfo(MetaClassParser):
