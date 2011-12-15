@@ -5,11 +5,13 @@ import mmap
 import contextlib
 from pprint import pprint
 
-from itertools import takewhile
+from itertools import takewhile, islice
 import itertools
 import operator
 import pefile
 import struct
+
+from qt_meta import *
 
 _0x = hex
 
@@ -33,14 +35,14 @@ def get_sectionname_by_virtual_address(pe, virtual_addr):
     ordinal = get_sectionordinal_by_virtual_address(pe, virtual_addr)
     return pe.sections[ordinal].Name
 
-def virtual_address_to_physical_address(pe, virt_addr):
+def vtop(pe, virt_addr):
     if not virt_addr:
         return 0
     sectionordinal = get_sectionordinal_by_virtual_address(pe, virt_addr)
     section = pe.sections[sectionordinal]
     return virt_addr - pe.OPTIONAL_HEADER.ImageBase - section.VirtualAddress + section.PointerToRawData 
 
-def physical_address_to_virtual_address(pe, phys_addr):
+def ptov(pe, phys_addr):
     if not phys_addr:
         return 0
     sectionordinal = get_sectionordinal_by_physical_address(pe, phys_addr)
@@ -59,28 +61,7 @@ def get_sectionname_by_virtual_address(pe, virtual_address):
     for section in pe.sections:
         if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_address and virtual_address < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
             return section.Name
-    return None 
-
-def litte_endian_integer(bytes, len):
-    b = 256
-    i = 1
-    s = 0
-    bytes_generator = iter(bytes)
-    while len:
-        s += ord(next(bytes_generator))
-
-def little_endian_string_to_number(address):
-    return reduce(lambda x, y: x*256 + y, reversed(map(ord, address)))
-
-def integer(iterator, byte=4):
-
-    def magnitude(base):
-        i = 1
-        while True:
-            yield i
-            i *= base
-    
-    return sum(map(operator.mul, itertools.islice(iterator, 0, byte), magnitude(256)))
+    return None
 
 def string_reader(address):
     # ch == 0x00 nem mukodott. utanajarni hogy miert nem
@@ -109,23 +90,26 @@ QMetaObjectData = namedtuple('QMetaObjectData', 'revision classname classinfoCou
 )
 QMetaObjectDataReader = struct.Struct("iiiiiiiiiiiiii")
 
-QMetaClassInfo
-QMetaObjectClassinfoReader = struct.Struct('ii')
-
 def info_writer(pe, match_object, mmapped_file):
-    metaObjectVirtualAddress = little_endian_string_to_number(match_object.group(1))
-    metaObjectPhysicalAddress = virtual_address_to_physical_address(pe, metaObjectVirtualAddress)
+    metaObjectVirtualAddress = struct.Struct('i').unpack(match_object.group(1))[0]
+    print hex(metaObjectVirtualAddress)
+    metaObjectPhysicalAddress = vtop(pe, metaObjectVirtualAddress)
+    print hex(metaObjectPhysicalAddress)
+    meta_obj_descr = QMetaObjectDescriptor(islice(mmapped_file, metaObjectPhysicalAddress, None))
+    print 'sdf', meta_obj_descr
+    meta_obj_data_descr = QMetaObjectDataDescriptor
+
     metaObjectMemoryImage = mmapped_file[metaObjectPhysicalAddress:][:4*4]
     parsedMetaObject = QMetaObject._make(QMetaObjectReader.unpack(metaObjectMemoryImage))
-    parsedMetaObjectPhysAddress = QMetaObject._make(map(lambda virtualaddress: virtual_address_to_physical_address(pe, virtualaddress), parsedMetaObject))
+    parsedMetaObjectPhysAddress = QMetaObject._make(map(lambda virtualaddress: vtop(pe, virtualaddress), parsedMetaObject))
     print "found metaObject() function at %s psysical address, at %s virtual address, with metaObject at %s virtual address and %s physical address"%\
-      (_0x(match_object.start()), _0x(physical_address_to_virtual_address(pe, match_object.start())), _0x(metaObjectVirtualAddress), _0x(metaObjectPhysicalAddress))
+      (_0x(match_object.start()), _0x(ptov(pe, match_object.start())), _0x(metaObjectVirtualAddress), _0x(metaObjectPhysicalAddress))
     
     print "class name: %s" % ''.join(string_reader(mmapped_file[parsedMetaObjectPhysAddress.qt_meta_stringdata:]))
     metaObjectDataMemoryImage = mmapped_file[parsedMetaObjectPhysAddress.qt_meta_data:][:14*4]
     parsedQMetaObjectData = QMetaObjectData._make(QMetaObjectDataReader.unpack(metaObjectDataMemoryImage))
     for i in xrange(parsedQMetaObjectData.classinfoCount):
-
+        pass
     #print len(list(string_reader(mmapped_file[textInfoPhysicalAddress:100])))
     #print ''.join(string_reader(mmapped_file[textInfoPhysicalAddress:100]))
     #print "\t%s %s %s"%\
@@ -146,4 +130,4 @@ with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
             break
         info_writer(pe, matchObject, mmapped_file)
         #print i, get_sectionname_by_physical_address(pe, matchObject.start()), hex(matchObject.start()), get_sectionname_by_virtual_address(pe, little_endian_string_to_number(matchObject.group(1))), hex(little_endian_string_to_number(matchObject.group(1)))
-        #print hex(physical_address_to_virtual_address(pe, matchObject.start()))
+        #print hex(ptov(pe, matchObject.start()))
