@@ -32,19 +32,5 @@ class PE(pefile.PE):
         if not phys_addr:
             return 0
         ordinal = self.GetPhysicalAddressSectionOrdinal(phys_addr)
-        section = pe.sections[ordinal]
+        section = self.sections[ordinal]
         return phys_addr - section.PointerToRawData + self.OPTIONAL_HEADER.ImageBase + section.VirtualAddress
-
-def get_sectionname_by_physical_address(pe, phys_addr):
-
-    for section in pe.sections:
-        if section.PointerToRawData <= phys_addr and phys_addr < section.PointerToRawData + section.SizeOfRawData:
-            return section.Name
-    return None
-
-def get_sectionname_by_virtual_address(pe, virtual_address):
-
-    for section in pe.sections:
-        if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_address and virtual_address < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
-            return section.Name
-    return None
