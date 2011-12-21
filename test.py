@@ -8,7 +8,7 @@ from pprint import pprint
 from itertools import takewhile, islice
 import itertools
 import operator
-import pefile
+import pefile_mod
 import struct
 
 from qt_meta import *
@@ -97,8 +97,9 @@ def info_writer(pe, match_object, mmapped_file):
     print hex(metaObjectPhysicalAddress)
     meta_obj_descr = QMetaObjectDescriptor(islice(mmapped_file, metaObjectPhysicalAddress, None))
     print 'sdf', meta_obj_descr
-    meta_obj_data_descr = QMetaObjectDataDescriptor
-
+    qmetaobject_data = islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
+    meta_obj_data_descr = QMetaObjectDataDescriptor(qmetaobject_data)
+    print meta_obj_data_descr
     metaObjectMemoryImage = mmapped_file[metaObjectPhysicalAddress:][:4*4]
     parsedMetaObject = QMetaObject._make(QMetaObjectReader.unpack(metaObjectMemoryImage))
     parsedMetaObjectPhysAddress = QMetaObject._make(map(lambda virtualaddress: vtop(pe, virtualaddress), parsedMetaObject))
@@ -115,10 +116,10 @@ def info_writer(pe, match_object, mmapped_file):
     #print "\t%s %s %s"%\
     #  (_0x(someParentVirtualAddress),_0x(textInfoVirtualAddress), _0x(metaInfoVirtualAddress))
 
-fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
-#fd = os.open('ftp.exe', os.O_RDWR)
+#fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
+fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
-    pe = pefile.PE(data=mmapped_file)
+    pe = pefile_mod.PE(data=mmapped_file)
     pprint(pe)
     print hex(pe.OPTIONAL_HEADER.AddressOfEntryPoint)
     print hex(pe.OPTIONAL_HEADER.ImageBase)

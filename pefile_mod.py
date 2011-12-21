@@ -12,8 +12,8 @@ class PE(pefile.PE):
         return self.sections[ordinal].Name
 
     def GetVirtualAddressSectionOrdinal(self, virt_addr):
-        for i, section in enumerate(pe.sections):
-            if pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virtual_addr < pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
+        for i, section in enumerate(self.sections):
+            if self.OPTIONAL_HEADER.ImageBase + section.VirtualAddress <= virt_addr < self.OPTIONAL_HEADER.ImageBase + section.VirtualAddress + section.SizeOfRawData:
                 return i
         raise ValueError("Invalid VirtualAddress")
     
@@ -25,7 +25,7 @@ class PE(pefile.PE):
         if not virt_addr:
             return 0
         ordinal = self.GetVirtualAddressSectionOrdinal(virt_addr)
-        section = pe.sections[ordinal]
+        section = self.sections[ordinal]
         return virt_addr - self.OPTIONAL_HEADER.ImageBase - section.VirtualAddress + section.PointerToRawData 
     
     def ptov(self, phys_addr):

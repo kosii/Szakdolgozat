@@ -51,7 +51,7 @@ class QMetaEnumDataDescriptor(Descriptor):
 
 class QMetaObjectDataDescriptor(Descriptor):
     __metaclass__ = descriptor_metaclass
-    struct = 'iiiiiiiiiiiii'
+    struct = 'iiiiiiiiiiiiii'
     fields = ('revision, classname, classinfoCount, '
         'classinfos, methodCount, methods, propertyCount, properties, enumCount, enums, '
         'constuctorCount, constructors, flags, signals')
