@@ -43,7 +43,19 @@ def info_writer(pe, match_object, mmapped_file):
     qmetaobject_data = islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
     meta_obj_data_descr = QMetaObjectDataDescriptor(qmetaobject_data)
     print meta_obj_data_descr
-
+    for i in xrange(meta_obj_data_descr.classinfoCount):
+        print QMetaClassInfoDescriptor(qmetaobject_data)
+    for i in xrange(meta_obj_data_descr.methodCount):
+        print QMetaMethodDescriptor(qmetaobject_data)
+    for i in xrange(meta_obj_data_descr.propertyCount):
+        print QMetaPropertyDescriptor(qmetaobject_data)
+    enum_count = 0
+    for i in xrange(meta_obj_data_descr.enumCount):
+        enum_descriptor = QMetaEnumDescriptor(qmetaobject_data)
+        enum_count += enum_descriptor.count
+        print enum_descriptor
+    for i in xrange(enum_count):
+        print QMetaEnumDataDescriptor(qmetaobject_data)
     print "found metaObject() function at %s psysical address, at %s virtual address, with metaObject at %s virtual address and %s physical address"%\
       (_0x(match_object.start()), _0x(pe.ptov(match_object.start())), _0x(metaObjectVirtualAddress), _0x(metaObjectPhysicalAddress))
     
@@ -61,5 +73,7 @@ with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
         print section.Name, section.VirtualAddress, hex(section.VirtualAddress), type(section.VirtualAddress), section.SizeOfRawData
     for i, matchObject in enumerate(compiled_regexp.finditer(mmapped_file)):
         info_writer(pe, matchObject, mmapped_file)
+        if i > 5:
+            break
         #print i, get_sectionname_by_physical_address(pe, matchObject.start()), hex(matchObject.start()), get_sectionname_by_virtual_address(pe, little_endian_string_to_number(matchObject.group(1))), hex(little_endian_string_to_number(matchObject.group(1)))
         #print hex(ptov(pe, matchObject.start()))

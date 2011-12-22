@@ -46,7 +46,7 @@ class QMetaEnumDescriptor(Descriptor):
 
 class QMetaEnumDataDescriptor(Descriptor):
     __metaclass__ = descriptor_metaclass
-    struct = 'iiii'
+    struct = 'ii'
     fields = 'key, value'
 
 class QMetaObjectDataDescriptor(Descriptor):
@@ -64,3 +64,9 @@ class QMetaObjectDescriptor(Descriptor):
     def __str__(self):
         return '%s(parent_staticMetaObject=%s, qt_meta_stringdata=%s, qt_meta_data=%s, zero=%s)'\
             %(self.__class__.__name__, hex(self.parent_staticMetaObject), hex(self.qt_meta_stringdata), hex(self.qt_meta_data), hex(self.zero))
+
+class QT(object):
+    """
+    """
+    def __init__(self):
+        pass

@@ -35,8 +35,6 @@ env/
 ipch/
 obj/
 [Bb]in
-HoneyPot/[Dd]ebug*/
-HoneyPot/[Rr]elease*/
 Ankh.NoLoad
 
 #Tooling
