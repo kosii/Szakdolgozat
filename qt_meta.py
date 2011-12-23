@@ -14,6 +14,13 @@ def descriptor_metaclass(name, bases, dict):
 class Descriptor(object):
 
     __metaclass__ = descriptor_metaclass
+    string=set()
+    def __getattribute__(self, attr):
+        v = super(Descriptor, self).__getattribute__(attr)
+        if not attr.startswith('_') and attr in self.__class__.string:
+            print self.__class__.string
+            return 'HOLA'
+        return v
 
     def __new__(cls, memory_image):
         if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
@@ -24,13 +31,14 @@ class Descriptor(object):
     
 class QMetaClassInfoDescriptor(Descriptor):
     __metaclass__  = descriptor_metaclass
+    string = set(('name', ))
     struct = 'ii'
     fields = 'name, key'
 
-print QMetaClassInfoDescriptor('\00\01\00\00\01\00\01\00')
-
 class QMetaMethodDescriptor(Descriptor):
     __metaclass__  = descriptor_metaclass
+
+    string = set(['signature, parameters'])
     struct = 'iiiii'
     fields = 'signature, parameters, type, tag, flags'
 
