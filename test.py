@@ -61,8 +61,8 @@ def info_writer(pe, match_object, mmapped_file):
     
     print "class name: %s" % ''.join(string_reader(mmapped_file[pe.vtop(meta_obj_descr.qt_meta_stringdata):]))
 
-#fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
-fd = os.open('ftp.exe', os.O_RDWR)
+fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
+#fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
     pe = pefile_mod.PE(data=mmapped_file)
     pprint(pe)

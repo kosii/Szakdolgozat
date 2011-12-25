@@ -5,6 +5,14 @@ import itertools
 def _take(n, iterable):
     return ''.join(itertools.islice(iterable, n))
 
+
+"""
+ahhoz, hogy faszan hozzaferhessunk az adatokhoz, felul kell irni hogy 
+bizonyosokhoz hogy hogyan ferunk hozza. nehanyat at kell szamolni fizikai cimre,
+nehanybol a stringet kell kapni, nehanyat 
+uint(honeypot::High) <-  ilyen formaban akarunk visszakapni.
+"""
+
 def descriptor_metaclass(name, bases, dict):
     if 'struct' in dict and 'fields':
         dict['struct'] = struct.Struct(dict['struct'])
