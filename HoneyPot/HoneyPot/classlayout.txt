@@ -1,0 +1,5401 @@
+honeypot.cpp
+class _PMD	size(12):
+	+---
+ 0	| mdisp
+ 4	| pdisp
+ 8	| vdisp
+	+---
+
+
+
+class _TypeDescriptor	size(8):
+	+---
+ 0	| pVFTable
+ 4	| spare
+ 8	| name
+	+---
+
+
+
+class _s__CatchableType	size(28):
+	+---
+ 0	| properties
+ 4	| pType
+ 8	| _PMD thisDisplacement
+20	| sizeOrOffset
+24	| copyFunction
+	+---
+
+
+
+class _s__CatchableTypeArray	size(4):
+	+---
+ 0	| nCatchableTypes
+ 4	| arrayOfCatchableTypes
+	+---
+
+
+
+class _s__ThrowInfo	size(16):
+	+---
+ 0	| attributes
+ 4	| pmfnUnwind
+ 8	| pForwardCompat
+12	| pCatchableTypeArray
+	+---
+
+
+
+class _s__RTTIBaseClassDescriptor2	size(28):
+	+---
+ 0	| pTypeDescriptor
+ 4	| numContainedBases
+ 8	| _PMD where
+20	| attributes
+24	| pClassDescriptor
+	+---
+
+
+
+class _s__RTTIBaseClassArray	size(1):
+	+---
+ 0	| arrayOfBaseClassDescriptors
+	+---
+
+
+
+class _s__RTTIClassHierarchyDescriptor	size(16):
+	+---
+ 0	| signature
+ 4	| attributes
+ 8	| numBaseClasses
+12	| pBaseClassArray
+	+---
+
+
+
+class _s__RTTICompleteObjectLocator	size(20):
+	+---
+ 0	| signature
+ 4	| offset
+ 8	| cdOffset
+12	| pTypeDescriptor
+16	| pClassDescriptor
+	+---
+
+
+
+class __s_GUID	size(16):
+	+---
+ 0	| Data1
+ 4	| Data2
+ 6	| Data3
+ 8	| Data4
+	+---
+
+
+
+class default_valueAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class attributeAttribute	size(8):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+ 5	| Inherited
+  	| <alignment member> (size=2)
+	+---
+
+
+
+class source_annotation_attributeAttribute	size(8):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class v1_earlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class v1_nameAttribute	size(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class v1_alttypeAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class usageAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class repeatableAttribute	size(1):
+	+---
+	+---
+
+
+
+class as_stringAttribute	size(1):
+	+---
+	+---
+
+
+
+class process_earlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class notify_atlprovAttribute	size(1):
+	+---
+	+---
+
+
+
+class help_stringAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class requires_valueAttribute	size(1):
+	+---
+	+---
+
+
+
+class multi_valueAttribute	size(1):
+	+---
+	+---
+
+
+
+class event_receiverAttribute	size(8):
+	+---
+ 0	| type_e type
+ 4	| layout_dependent
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class no_injected_textAttribute	size(1):
+	+---
+ 0	| value
+	+---
+
+
+
+class emitidlAttribute	size(8):
+	+---
+ 0	| value
+ 4	| defaultimports
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class exportAttribute	size(1):
+	+---
+	+---
+
+
+
+class idl_moduleAttribute	size(32):
+	+---
+ 0	| name
+ 4	| dllname
+ 8	| version
+12	| uuid
+16	| helpstring
+20	| helpstringcontext
+24	| helpcontext
+28	| hidden
+29	| restricted
+  	| <alignment member> (size=2)
+	+---
+
+
+
+class idl_quoteAttribute	size(4):
+	+---
+ 0	| text
+	+---
+
+
+
+class implementsAttribute	size(8):
+	+---
+ 0	| interfaces
+ 4	| dispinterfaces
+	+---
+
+
+
+class importidlAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class includelibAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class library_blockAttribute	size(1):
+	+---
+	+---
+
+
+
+class satypeAttribute	size(4):
+	+---
+ 0	| type
+	+---
+
+
+
+class propgetAttribute	size(1):
+	+---
+	+---
+
+
+
+class propputAttribute	size(1):
+	+---
+	+---
+
+
+
+class propputrefAttribute	size(1):
+	+---
+	+---
+
+
+
+class providerAttribute	size(12):
+	+---
+ 0	| name
+ 4	| uuid
+ 8	| cookies
+	+---
+
+
+
+class coclassAttribute	size(1):
+	+---
+	+---
+
+
+
+class controlAttribute	size(1):
+	+---
+	+---
+
+
+
+class customAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class dispinterfaceAttribute	size(1):
+	+---
+	+---
+
+
+
+class dualAttribute	size(1):
+	+---
+	+---
+
+
+
+class lcidAttribute	size(1):
+	+---
+	+---
+
+
+
+class objectAttribute	size(1):
+	+---
+	+---
+
+
+
+class progidAttribute	size(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class threadingAttribute	size(4):
+	+---
+ 0	| threading_e value
+	+---
+
+
+
+class uuidAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class versionAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class vi_progidAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class moduleAttribute	size(56):
+	+---
+ 0	| type_e type
+ 4	| name
+ 8	| version
+12	| uuid
+16	| lcid
+20	| control
+  	| <alignment member> (size=3)
+24	| helpstring
+28	| helpstringcontext
+32	| helpstringdll
+36	| helpfile
+40	| helpcontext
+44	| hidden
+45	| restricted
+  	| <alignment member> (size=2)
+48	| custom
+52	| resource_name
+	+---
+
+
+
+class aggregatableAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class appobjectAttribute	size(1):
+	+---
+	+---
+
+
+
+class async_uuidAttribute	size(4):
+	+---
+ 0	| uuid
+	+---
+
+
+
+class bindableAttribute	size(1):
+	+---
+	+---
+
+
+
+class call_asAttribute	size(4):
+	+---
+ 0	| local_proc
+	+---
+
+
+
+class caseAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class cpp_quoteAttribute	size(4):
+	+---
+ 0	| string
+	+---
+
+
+
+class defaultAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class defaultbindAttribute	size(1):
+	+---
+	+---
+
+
+
+class defaultcollelemAttribute	size(1):
+	+---
+	+---
+
+
+
+class defaultvalueAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class defaultvtableAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class displaybindAttribute	size(1):
+	+---
+	+---
+
+
+
+class entryAttribute	size(4):
+	+---
+ 0	| entry_id
+	+---
+
+
+
+class first_isAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class helpcontextAttribute	size(4):
+	+---
+ 0	| helpcontext_value
+	+---
+
+
+
+class helpfileAttribute	size(4):
+	+---
+ 0	| filename
+	+---
+
+
+
+class helpstringAttribute	size(4):
+	+---
+ 0	| help_text_string
+	+---
+
+
+
+class helpstringcontextAttribute	size(4):
+	+---
+ 0	| contextid
+	+---
+
+
+
+class helpstringdllAttribute	size(4):
+	+---
+ 0	| dllname
+	+---
+
+
+
+class hiddenAttribute	size(1):
+	+---
+	+---
+
+
+
+class idAttribute	size(4):
+	+---
+ 0	| id_num
+	+---
+
+
+
+class iid_isAttribute	size(4):
+	+---
+ 0	| limited_expression
+	+---
+
+
+
+class immediatebindAttribute	size(1):
+	+---
+	+---
+
+
+
+class importAttribute	size(4):
+	+---
+ 0	| idl_file
+	+---
+
+
+
+class importlibAttribute	size(4):
+	+---
+ 0	| tlb_file
+	+---
+
+
+
+class inAttribute	size(1):
+	+---
+	+---
+
+
+
+class includeAttribute	size(4):
+	+---
+ 0	| include_file
+	+---
+
+
+
+class last_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class length_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class licensedAttribute	size(1):
+	+---
+	+---
+
+
+
+class localAttribute	size(1):
+	+---
+	+---
+
+
+
+class max_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class ms_unionAttribute	size(1):
+	+---
+	+---
+
+
+
+class nonbrowsableAttribute	size(1):
+	+---
+	+---
+
+
+
+class noncreatableAttribute	size(1):
+	+---
+	+---
+
+
+
+class nonextensibleAttribute	size(1):
+	+---
+	+---
+
+
+
+class odlAttribute	size(1):
+	+---
+	+---
+
+
+
+class oleautomationAttribute	size(1):
+	+---
+	+---
+
+
+
+class optionalAttribute	size(1):
+	+---
+	+---
+
+
+
+class outAttribute	size(1):
+	+---
+	+---
+
+
+
+class pointer_defaultAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+
+
+class pragmaAttribute	size(4):
+	+---
+ 0	| token_sequence
+	+---
+
+
+
+class ptrAttribute	size(1):
+	+---
+	+---
+
+
+
+class publicAttribute	size(1):
+	+---
+	+---
+
+
+
+class rangeAttribute	size(8):
+	+---
+ 0	| low_val
+ 4	| high_val
+	+---
+
+
+
+class readonlyAttribute	size(1):
+	+---
+	+---
+
+
+
+class refAttribute	size(1):
+	+---
+	+---
+
+
+
+class requesteditAttribute	size(1):
+	+---
+	+---
+
+
+
+class restrictedAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class retvalAttribute	size(1):
+	+---
+	+---
+
+
+
+class size_isAttribute	size(4):
+	+---
+ 0	| expression
+	+---
+
+
+
+class stringAttribute	size(1):
+	+---
+	+---
+
+
+
+class sourceAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class switch_isAttribute	size(4):
+	+---
+ 0	| limited_expression
+	+---
+
+
+
+class switch_typeAttribute	size(4):
+	+---
+ 0	| switch_type_specifier
+	+---
+
+
+
+class transmit_asAttribute	size(4):
+	+---
+ 0	| xmit_type
+	+---
+
+
+
+class uidefaultAttribute	size(1):
+	+---
+	+---
+
+
+
+class uniqueAttribute	size(1):
+	+---
+	+---
+
+
+
+class usesgetlasterrorAttribute	size(1):
+	+---
+	+---
+
+
+
+class v1_enumAttribute	size(1):
+	+---
+	+---
+
+
+
+class varargAttribute	size(1):
+	+---
+	+---
+
+
+
+class wire_marshalAttribute	size(4):
+	+---
+ 0	| wire_type
+	+---
+
+
+
+class event_sourceAttribute	size(12):
+	+---
+ 0	| type_e type
+ 4	| optimize_e optimize
+ 8	| decorate
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class hookAttribute	size(16):
+	+---
+ 0	| event
+ 4	| source
+ 8	| handler
+12	| receiver
+	+---
+
+
+
+class unhookAttribute	size(16):
+	+---
+ 0	| event
+ 4	| source
+ 8	| handler
+12	| receiver
+	+---
+
+
+
+class synchronizeAttribute	size(1):
+	+---
+	+---
+
+
+
+class soap_handlerAttribute	size(20):
+	+---
+ 0	| name
+ 4	| namespace
+ 8	| protocol
+12	| style
+16	| use
+	+---
+
+
+
+class soap_methodAttribute	size(4):
+	+---
+ 0	| name
+	+---
+
+
+
+class soap_headerAttribute	size(8):
+	+---
+ 0	| value
+ 4	| required
+ 5	| in
+ 6	| out
+  	| <alignment member> (size=1)
+	+---
+
+
+
+class soap_namespaceAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class com_interface_entryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class support_error_infoAttribute	size(4):
+	+---
+ 0	| error_interface
+	+---
+
+
+
+class aggregatesAttribute	size(4):
+	+---
+ 0	| clsid
+	+---
+
+
+
+class implements_categoryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class requires_categoryAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+
+
+class rdxAttribute	size(12):
+	+---
+ 0	| key
+ 4	| valuename
+ 8	| regtype
+	+---
+
+
+
+class registration_scriptAttribute	size(4):
+	+---
+ 0	| script
+	+---
+
+
+
+class db_sourceAttribute	size(12):
+	+---
+ 0	| source
+ 4	| name
+ 8	| hresult
+	+---
+
+
+
+class db_commandAttribute	size(24):
+	+---
+ 0	| command
+ 4	| name
+ 8	| source_name
+12	| hresult
+16	| bindings
+20	| bulk_fetch
+	+---
+
+
+
+class db_tableAttribute	size(20):
+	+---
+ 0	| table
+ 4	| name
+ 8	| source_name
+12	| hresult
+16	| bulk_fetch
+	+---
+
+
+
+class db_accessorAttribute	size(8):
+	+---
+ 0	| id
+ 4	| auto_
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class db_columnAttribute	size(24):
+	+---
+ 0	| ordinal
+ 4	| dbtype
+ 8	| precision
+12	| scale
+16	| status
+20	| length
+	+---
+
+
+
+class db_paramAttribute	size(28):
+	+---
+ 0	| ordinal
+ 4	| paramtype
+ 8	| dbtype
+12	| precision
+16	| scale
+20	| status
+24	| length
+	+---
+
+
+
+class tag_nameAttribute	size(8):
+	+---
+ 0	| name
+ 4	| parse_func
+	+---
+
+
+
+class request_handlerAttribute	size(8):
+	+---
+ 0	| name
+ 4	| sdl
+	+---
+
+
+
+class perfmonAttribute	size(8):
+	+---
+ 0	| name
+ 4	| register
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class perf_objectAttribute	size(32):
+	+---
+ 0	| name_res
+ 4	| help_res
+ 8	| namestring
+12	| helpstring
+16	| detail
+20	| no_instances
+  	| <alignment member> (size=3)
+24	| class_
+28	| maxinstnamelen
+	+---
+
+
+
+class perf_counterAttribute	size(40):
+	+---
+ 0	| namestring
+ 4	| helpstring
+ 8	| name_res
+12	| help_res
+16	| countertype
+20	| defscale
+24	| default_counter
+  	| <alignment member> (size=3)
+28	| detail
+32	| max_counter_size
+36	| countertype_string
+	+---
+
+
+
+class PreAttribute	size(84):
+	+---
+ 0	| Deref
+ 4	| YesNoMaybe Valid
+ 8	| YesNoMaybe Null
+12	| YesNoMaybe Tainted
+16	| AccessType Access
+20	| ValidElementsConst
+24	| ValidBytesConst
+28	| ValidElements
+32	| ValidBytes
+36	| ValidElementsLength
+40	| ValidBytesLength
+44	| WritableElementsConst
+48	| WritableBytesConst
+52	| WritableElements
+56	| WritableBytes
+60	| WritableElementsLength
+64	| WritableBytesLength
+68	| ElementSizeConst
+72	| ElementSize
+76	| YesNoMaybe NullTerminated
+80	| Condition
+	+---
+
+
+
+class PostAttribute	size(88):
+	+---
+ 0	| Deref
+ 4	| YesNoMaybe Valid
+ 8	| YesNoMaybe Null
+12	| YesNoMaybe Tainted
+16	| AccessType Access
+20	| ValidElementsConst
+24	| ValidBytesConst
+28	| ValidElements
+32	| ValidBytes
+36	| ValidElementsLength
+40	| ValidBytesLength
+44	| WritableElementsConst
+48	| WritableBytesConst
+52	| WritableElements
+56	| WritableBytes
+60	| WritableElementsLength
+64	| WritableBytesLength
+68	| ElementSizeConst
+72	| ElementSize
+76	| YesNoMaybe NullTerminated
+80	| YesNoMaybe MustCheck
+84	| Condition
+	+---
+
+
+
+class FormatStringAttribute	size(8):
+	+---
+ 0	| Style
+ 4	| UnformattedAlternative
+	+---
+
+
+
+class InvalidCheckAttribute	size(4):
+	+---
+ 0	| Value
+	+---
+
+
+
+class SuccessAttribute	size(4):
+	+---
+ 0	| Condition
+	+---
+
+
+
+class PreBoundAttribute	size(4):
+	+---
+ 0	| Deref
+	+---
+
+
+
+class PostBoundAttribute	size(4):
+	+---
+ 0	| Deref
+	+---
+
+
+
+class PreRangeAttribute	size(12):
+	+---
+ 0	| Deref
+ 4	| MinVal
+ 8	| MaxVal
+	+---
+
+
+
+class PostRangeAttribute	size(12):
+	+---
+ 0	| Deref
+ 4	| MinVal
+ 8	| MaxVal
+	+---
+
+
+
+class localeinfo_struct	size(8):
+	+---
+ 0	| locinfo
+ 4	| mbcinfo
+	+---
+
+
+
+class tagLC_ID	size(6):
+	+---
+ 0	| wLanguage
+ 2	| wCountry
+ 4	| wCodePage
+	+---
+
+
+
+class <unnamed-tag>	size(16):
+	+---
+ 0	| locale
+ 4	| wlocale
+ 8	| refcount
+12	| wrefcount
+	+---
+
+
+
+class threadlocaleinfostruct	size(216):
+	+---
+ 0	| refcount
+ 4	| lc_codepage
+ 8	| lc_collate_cp
+12	| lc_handle
+36	| lc_id
+72	| lc_category
+168	| lc_clike
+172	| mb_cur_max
+176	| lconv_intl_refcount
+180	| lconv_num_refcount
+184	| lconv_mon_refcount
+188	| lconv
+192	| ctype1_refcount
+196	| ctype1
+200	| pctype
+204	| pclmap
+208	| pcumap
+212	| lc_time_curr
+	+---
+
+
+
+class ?$QIntegerForSize@$00	size(1):
+	+---
+	+---
+
+
+
+class ?$QIntegerForSize@$01	size(1):
+	+---
+	+---
+
+
+
+class ?$QIntegerForSize@$03	size(1):
+	+---
+	+---
+
+
+
+class ?$QIntegerForSize@$07	size(1):
+	+---
+	+---
+
+
+
+class ?$QIntegerForSizeof@PAX	size(1):
+	+---
+	| +--- (base class ?$QIntegerForSize@$03)
+	| +---
+	+---
+
+
+
+class QSysInfo	size(1):
+	+---
+	+---
+
+
+
+class QBool	size(1):
+	+---
+ 0	| b
+	+---
+
+
+
+class U	size(8):
+	+---
+ 0	| d
+ 0	| u
+	+---
+
+
+
+class U	size(4):
+	+---
+ 0	| f
+ 0	| u
+	+---
+
+
+
+class ?$QTypeInfo@_N	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@D	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@C	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@E	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@F	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@G	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@H	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@I	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@J	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@K	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@_J	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@_K	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@M	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@N	size(1):
+	+---
+	+---
+
+
+
+class ?$QTypeInfo@O	size(1):
+	+---
+	+---
+
+
+
+class QFlag	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class QIncompatibleFlag	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class QForeachContainerBase	size(1):
+	+---
+	+---
+
+
+
+class ?$QFlags@W4MouseButton@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4Orientation@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4KeyboardModifier@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4WindowType@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4AlignmentFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4ImageConversionFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4DockWidgetArea@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4ToolBarArea@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4WindowState@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4DropAction@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4ItemFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4MatchFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4TextInteractionFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4InputMethodHint@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4TouchPointState@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$QFlags@W4GestureFlag@Qt@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class QInternal	size(1):
+	+---
+	+---
+
+
+
+class QGenericArgument	size(8):
+	+---
+ 0	| _data
+ 4	| _name
+	+---
+
+
+
+class QGenericReturnArgument	size(8):
+	+---
+	| +--- (base class QGenericArgument)
+ 0	| | _data
+ 4	| | _name
+	| +---
+	+---
+
+
+
+class <unnamed-tag>	size(16):
+	+---
+ 0	| superdata
+ 4	| stringdata
+ 8	| data
+12	| extradata
+	+---
+
+
+
+class QMetaObject	size(16):
+	+---
+ 0	| <unnamed-type-d> d
+	+---
+
+
+
+class QMetaObjectExtraData	size(8):
+	+---
+ 0	| objects
+ 4	| static_metacall
+	+---
+
+
+
+class QLatin1Char	size(1):
+	+---
+ 0	| ch
+	+---
+
+
+
+class QChar	size(2):
+	+---
+ 0	| ucs
+	+---
+
+
+
+class ?$QTypeInfo@VQChar@@	size(1):
+	+---
+	+---
+
+
+
+class <unnamed-tag>	size(4):
+	+---
+ 0	| _q_value
+	+---
+
+
+
+class QBasicAtomicInt	size(4):
+	+---
+  	| <unnamed-tag> <alignment member> (size=0)
+ 0	| _q_value
+  	| <unnamed-tag> <alignment member> (size=0)
+	+---
+
+
+
+class <unnamed-tag>	size(0):
+	+---
+ 0	| _q_value
+ 0	| _q_value_integral
+	+---
+
+
+
+class QAtomicInt	size(4):
+	+---
+	| +--- (base class QBasicAtomicInt)
+  	| | <unnamed-tag> <alignment member> (size=0)
+ 0	| | _q_value
+  	| | <unnamed-tag> <alignment member> (size=0)
+	| +---
+	+---
+
+
+
+class Data	size(20):
+	+---
+ 0	| QBasicAtomicInt ref
+ 4	| alloc
+ 8	| size
+12	| data
+16	| array
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class QByteArray	size(4):
+	+---
+ 0	| d
+	+---
+
+
+
+class QByteRef	size(8):
+	+---
+ 0	| a
+ 4	| i
+	+---
+
+
+
+class ?$QTypeInfo@VQByteArray@@	size(1):
+	+---
+	+---
+
+
+
+class _Lockit	size(4):
+	+---
+ 0	| _Locktype
+	+---
+
+
+
+class _Mutex	size(4):
+	+---
+ 0	| _Mtx
+	+---
+
+
+
+class _Init_locks	size(1):
+	+---
+	+---
+
+
+
+class _exception	size(32):
+	+---
+ 0	| type
+ 4	| name
+ 8	| arg1
+16	| arg2
+24	| retval
+	+---
+
+
+
+class _complex	size(16):
+	+---
+ 0	| x
+ 8	| y
+	+---
+
+
+
+class _iobuf	size(32):
+	+---
+ 0	| _ptr
+ 4	| _cnt
+ 8	| _base
+12	| _flag
+16	| _file
+20	| _charbuf
+24	| _bufsiz
+28	| _tmpfname
+	+---
+
+
+
+class _div_t	size(8):
+	+---
+ 0	| quot
+ 4	| rem
+	+---
+
+
+
+class _ldiv_t	size(8):
+	+---
+ 0	| quot
+ 4	| rem
+	+---
+
+
+
+class _lldiv_t	size(16):
+	+---
+ 0	| quot
+ 8	| rem
+	+---
+
+
+
+class <unnamed-tag>	size(10):
+	+---
+ 0	| ld
+	+---
+
+
+
+class <unnamed-tag>	size(8):
+	+---
+ 0	| x
+	+---
+
+
+
+class <unnamed-tag>	size(4):
+	+---
+ 0	| f
+	+---
+
+
+
+class <unnamed-tag>	size(8):
+	+---
+ 0	| x
+	+---
+
+
+
+class <unnamed-tag>	size(12):
+	+---
+ 0	| ld12
+	+---
+
+
+
+class _Bool_struct	size(4):
+	+---
+ 0	| _Member
+	+---
+
+
+
+class _heapinfo	size(12):
+	+---
+ 0	| _pentry
+ 4	| _size
+ 8	| _useflag
+	+---
+
+
+
+class exception	size(12):
+	+---
+ 0	| {vfptr}
+ 4	| _Mywhat
+ 8	| _Mydofree
+  	| <alignment member> (size=3)
+	+---
+
+exception::$vftable@:
+	| &exception_meta
+	|  0
+ 0	| &exception::{dtor}
+ 1	| &exception::what
+
+exception::{dtor} this adjustor: 0
+exception::what this adjustor: 0
+exception::__delDtor this adjustor: 0
+exception::__vecDelDtor this adjustor: 0
+
+
+class bad_exception	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+bad_exception::$vftable@:
+	| &bad_exception_meta
+	|  0
+ 0	| &bad_exception::{dtor}
+ 1	| &exception::what
+
+bad_exception::{dtor} this adjustor: 0
+bad_exception::__delDtor this adjustor: 0
+bad_exception::__vecDelDtor this adjustor: 0
+
+
+class bad_alloc	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+bad_alloc::$vftable@:
+	| &bad_alloc_meta
+	|  0
+ 0	| &bad_alloc::{dtor}
+ 1	| &exception::what
+
+bad_alloc::{dtor} this adjustor: 0
+bad_alloc::__delDtor this adjustor: 0
+bad_alloc::__vecDelDtor this adjustor: 0
+
+
+class bad_array_new_length	size(12):
+	+---
+	| +--- (base class bad_alloc)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+bad_array_new_length::$vftable@:
+	| &bad_array_new_length_meta
+	|  0
+ 0	| &bad_array_new_length::{dtor}
+ 1	| &exception::what
+
+bad_array_new_length::{dtor} this adjustor: 0
+bad_array_new_length::__delDtor this adjustor: 0
+bad_array_new_length::__vecDelDtor this adjustor: 0
+
+
+class _Exception_ptr	size(8):
+	+---
+ 0	| _Data1
+ 4	| _Data2
+	+---
+
+
+
+class nothrow_t	size(1):
+	+---
+	+---
+
+
+
+class _wfinddata32_t	size(540):
+	+---
+ 0	| attrib
+ 4	| time_create
+ 8	| time_access
+12	| time_write
+16	| size
+20	| name
+	+---
+
+
+
+class _wfinddata32i64_t	size(544):
+	+---
+ 0	| attrib
+ 4	| time_create
+ 8	| time_access
+12	| time_write
+16	| size
+24	| name
+	+---
+
+
+
+class _wfinddata64i32_t	size(560):
+	+---
+ 0	| attrib
+  	| <alignment member> (size=4)
+ 8	| time_create
+16	| time_access
+24	| time_write
+32	| size
+36	| name
+  	| <alignment member> (size=4)
+	+---
+
+
+
+class _wfinddata64_t	size(560):
+	+---
+ 0	| attrib
+  	| <alignment member> (size=4)
+ 8	| time_create
+16	| time_access
+24	| time_write
+32	| size
+40	| name
+	+---
+
+
+
+class _stat32	size(36):
+	+---
+ 0	| st_dev
+ 4	| st_ino
+ 6	| st_mode
+ 8	| st_nlink
+10	| st_uid
+12	| st_gid
+  	| <alignment member> (size=2)
+16	| st_rdev
+20	| st_size
+24	| st_atime
+28	| st_mtime
+32	| st_ctime
+	+---
+
+
+
+class stat	size(48):
+	+---
+ 0	| st_dev
+ 4	| st_ino
+ 6	| st_mode
+ 8	| st_nlink
+10	| st_uid
+12	| st_gid
+  	| <alignment member> (size=2)
+16	| st_rdev
+20	| st_size
+24	| st_atime
+32	| st_mtime
+40	| st_ctime
+	+---
+
+
+
+class _stat32i64	size(48):
+	+---
+ 0	| st_dev
+ 4	| st_ino
+ 6	| st_mode
+ 8	| st_nlink
+10	| st_uid
+12	| st_gid
+  	| <alignment member> (size=2)
+16	| st_rdev
+  	| <alignment member> (size=4)
+24	| st_size
+32	| st_atime
+36	| st_mtime
+40	| st_ctime
+  	| <alignment member> (size=4)
+	+---
+
+
+
+class _stat64i32	size(48):
+	+---
+ 0	| st_dev
+ 4	| st_ino
+ 6	| st_mode
+ 8	| st_nlink
+10	| st_uid
+12	| st_gid
+  	| <alignment member> (size=2)
+16	| st_rdev
+20	| st_size
+24	| st_atime
+32	| st_mtime
+40	| st_ctime
+	+---
+
+
+
+class _stat64	size(56):
+	+---
+ 0	| st_dev
+ 4	| st_ino
+ 6	| st_mode
+ 8	| st_nlink
+10	| st_uid
+12	| st_gid
+  	| <alignment member> (size=2)
+16	| st_rdev
+  	| <alignment member> (size=4)
+24	| st_size
+32	| st_atime
+40	| st_mtime
+48	| st_ctime
+	+---
+
+
+
+class tm	size(36):
+	+---
+ 0	| tm_sec
+ 4	| tm_min
+ 8	| tm_hour
+12	| tm_mday
+16	| tm_mon
+20	| tm_year
+24	| tm_wday
+28	| tm_yday
+32	| tm_isdst
+	+---
+
+
+
+class _CrtMemState	size(52):
+	+---
+ 0	| pBlockHeader
+ 4	| lCounts
+24	| lSizes
+44	| lHighWaterCount
+48	| lTotalCount
+	+---
+
+
+
+class ?$char_traits@_W	size(1):
+	+---
+	+---
+
+
+
+class ?$char_traits@G	size(1):
+	+---
+	+---
+
+
+
+class ?$char_traits@D	size(1):
+	+---
+	+---
+
+
+
+class <unnamed-tag>	size(16):
+	+---
+ 0	| _Word
+ 0	| _Float
+ 0	| _Double
+ 0	| _Long_double
+	+---
+
+
+
+class _Num_base	size(1):
+	+---
+	+---
+
+
+
+class _Num_int_base	size(1):
+	+---
+	| +--- (base class _Num_base)
+	| +---
+	+---
+
+
+
+class _Num_float_base	size(1):
+	+---
+	| +--- (base class _Num_base)
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@D	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@_W	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@_N	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@C	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@E	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@F	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@G	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@H	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@I	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@J	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@K	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@_J	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@_K	size(1):
+	+---
+	| +--- (base class _Num_int_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@M	size(1):
+	+---
+	| +--- (base class _Num_float_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@N	size(1):
+	+---
+	| +--- (base class _Num_float_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class ?$numeric_limits@O	size(1):
+	+---
+	| +--- (base class _Num_float_base)
+	| | +--- (base class _Num_base)
+	| | +---
+	| +---
+	+---
+
+
+
+class _Nil	size(1):
+	+---
+	+---
+
+
+
+class ?$integral_constant@_N$0A@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Or@$0A@$0A@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$integral_constant@_N$00	size(1):
+	+---
+	+---
+
+
+
+class ?$_Or@$0A@$00	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Or@$00$0A@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Or@$00$00	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Cat_base@$0A@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$_Cat_base@$00	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@_N	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@D	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@E	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@C	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@_W	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@G	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@F	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@I	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@H	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@K	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@J	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@_J	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_integral@_K	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_floating_point@M	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_floating_point@N	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Is_floating_point@O	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$add_reference@X	size(1):
+	+---
+	+---
+
+
+
+class ?$add_reference@$$CBX	size(1):
+	+---
+	+---
+
+
+
+class ?$add_reference@$$CCX	size(1):
+	+---
+	+---
+
+
+
+class ?$add_reference@$$CDX	size(1):
+	+---
+	+---
+
+
+
+class ?$add_rvalue_reference@X	size(1):
+	+---
+	+---
+
+
+
+class ?$add_rvalue_reference@$$CBX	size(1):
+	+---
+	+---
+
+
+
+class ?$add_rvalue_reference@$$CCX	size(1):
+	+---
+	+---
+
+
+
+class ?$add_rvalue_reference@$$CDX	size(1):
+	+---
+	+---
+
+
+
+class ?$_Is_void@X	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class ?$_Get_align@J	size(12):
+	+---
+ 0	| _Elt0
+ 4	| _Elt1
+  	| <alignment member> (size=3)
+ 8	| _Elt2
+	+---
+
+
+
+class ?$_Get_align@H	size(12):
+	+---
+ 0	| _Elt0
+ 4	| _Elt1
+  	| <alignment member> (size=3)
+ 8	| _Elt2
+	+---
+
+
+
+class ?$_Get_align@F	size(6):
+	+---
+ 0	| _Elt0
+ 2	| _Elt1
+  	| <alignment member> (size=1)
+ 4	| _Elt2
+	+---
+
+
+
+class ?$_Get_align@D	size(3):
+	+---
+ 0	| _Elt0
+ 1	| _Elt1
+ 2	| _Elt2
+	+---
+
+
+
+class ?$integral_constant@I$0A@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@_N	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@D	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@C	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@E	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@F	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@G	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@H	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@I	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@J	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@K	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@_J	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@_K	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@M	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@N	size(1):
+	+---
+	+---
+
+
+
+class ?$_Arithmetic_traits@O	size(1):
+	+---
+	+---
+
+
+
+class ?$_Pickinteger@$00	size(1):
+	+---
+	+---
+
+
+
+class _Container_base0	size(1):
+	+---
+	+---
+
+
+
+class _Iterator_base0	size(1):
+	+---
+	+---
+
+
+
+class _Container_proxy	size(8):
+	+---
+ 0	| _Mycont
+ 4	| _Myfirstiter
+	+---
+
+
+
+class _Container_base12	size(4):
+	+---
+ 0	| _Myproxy
+	+---
+
+
+
+class _Iterator_base12	size(8):
+	+---
+ 0	| _Myproxy
+ 4	| _Mynextiter
+	+---
+
+
+
+class input_iterator_tag	size(1):
+	+---
+	+---
+
+
+
+class output_iterator_tag	size(1):
+	+---
+	+---
+
+
+
+class forward_iterator_tag	size(1):
+	+---
+	| +--- (base class input_iterator_tag)
+	| +---
+	| +--- (base class output_iterator_tag)
+	| +---
+	+---
+
+
+
+class bidirectional_iterator_tag	size(1):
+	+---
+	| +--- (base class forward_iterator_tag)
+	| | +--- (base class input_iterator_tag)
+	| | +---
+	| | +--- (base class output_iterator_tag)
+	| | +---
+	| +---
+	+---
+
+
+
+class random_access_iterator_tag	size(1):
+	+---
+	| +--- (base class bidirectional_iterator_tag)
+	| | +--- (base class forward_iterator_tag)
+	| | | +--- (base class input_iterator_tag)
+	| | | +---
+	| | | +--- (base class output_iterator_tag)
+	| | | +---
+	| | +---
+	| +---
+	+---
+
+
+
+class _Int_iterator_tag	size(1):
+	+---
+	+---
+
+
+
+class _Nonscalar_ptr_iterator_tag	size(1):
+	+---
+	+---
+
+
+
+class _Scalar_ptr_iterator_tag	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator@Uoutput_iterator_tag@std@@XXXX	size(1):
+	+---
+	+---
+
+
+
+class _Outit	size(1):
+	+---
+	| +--- (base class ?$iterator@Uoutput_iterator_tag@std@@XXXX)
+	| +---
+	+---
+
+
+
+class ?$iterator_traits@_N	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@D	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@C	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@E	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@_W	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@F	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@G	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@H	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@I	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@J	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@K	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@_J	size(1):
+	+---
+	+---
+
+
+
+class ?$iterator_traits@_K	size(1):
+	+---
+	+---
+
+
+
+class ?$allocator@X	size(1):
+	+---
+	+---
+
+
+
+class _Bxty	size(0):
+	+---
+ 0	| _Buf
+ 0	| _Ptr
+ 0	| _Alias
+	+---
+
+
+
+class logic_error	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+logic_error::$vftable@:
+	| &logic_error_meta
+	|  0
+ 0	| &logic_error::{dtor}
+ 1	| &exception::what
+
+logic_error::{dtor} this adjustor: 0
+logic_error::__delDtor this adjustor: 0
+logic_error::__vecDelDtor this adjustor: 0
+
+
+class ?$_Allocator_base@D	size(1):
+	+---
+	+---
+
+
+
+class ?$allocator@D	size(1):
+	+---
+	| +--- (base class ?$_Allocator_base@D)
+	| +---
+	+---
+
+
+
+class ?$rebind@D	size(1):
+	+---
+	+---
+
+
+
+class _Bxty	size(16):
+	+---
+ 0	| _Buf
+ 0	| _Ptr
+ 0	| _Alias
+	+---
+
+
+
+class ?$_String_val@DV?$allocator@D@std@@	size(28):
+	+---
+	| +--- (base class _Container_base0)
+	| +---
+ 0	| _Bxty _Bx
+16	| _Mysize
+20	| _Myres
+24	| ?$allocator@D _Alval
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@	size(28):
+	+---
+	| +--- (base class ?$_String_val@DV?$allocator@D@std@@)
+	| | +--- (base class _Container_base0)
+	| | +---
+ 0	| | _Bxty _Bx
+16	| | _Mysize
+20	| | _Myres
+24	| | ?$allocator@D _Alval
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+
+
+class domain_error	size(12):
+	+---
+	| +--- (base class logic_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+domain_error::$vftable@:
+	| &domain_error_meta
+	|  0
+ 0	| &domain_error::{dtor}
+ 1	| &exception::what
+
+domain_error::{dtor} this adjustor: 0
+domain_error::__delDtor this adjustor: 0
+domain_error::__vecDelDtor this adjustor: 0
+
+
+class invalid_argument	size(12):
+	+---
+	| +--- (base class logic_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+invalid_argument::$vftable@:
+	| &invalid_argument_meta
+	|  0
+ 0	| &invalid_argument::{dtor}
+ 1	| &exception::what
+
+invalid_argument::{dtor} this adjustor: 0
+invalid_argument::__delDtor this adjustor: 0
+invalid_argument::__vecDelDtor this adjustor: 0
+
+
+class length_error	size(12):
+	+---
+	| +--- (base class logic_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+length_error::$vftable@:
+	| &length_error_meta
+	|  0
+ 0	| &length_error::{dtor}
+ 1	| &exception::what
+
+length_error::{dtor} this adjustor: 0
+length_error::__delDtor this adjustor: 0
+length_error::__vecDelDtor this adjustor: 0
+
+
+class out_of_range	size(12):
+	+---
+	| +--- (base class logic_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+out_of_range::$vftable@:
+	| &out_of_range_meta
+	|  0
+ 0	| &out_of_range::{dtor}
+ 1	| &exception::what
+
+out_of_range::{dtor} this adjustor: 0
+out_of_range::__delDtor this adjustor: 0
+out_of_range::__vecDelDtor this adjustor: 0
+
+
+class runtime_error	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+runtime_error::$vftable@:
+	| &runtime_error_meta
+	|  0
+ 0	| &runtime_error::{dtor}
+ 1	| &exception::what
+
+runtime_error::{dtor} this adjustor: 0
+runtime_error::__delDtor this adjustor: 0
+runtime_error::__vecDelDtor this adjustor: 0
+
+
+class overflow_error	size(12):
+	+---
+	| +--- (base class runtime_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+overflow_error::$vftable@:
+	| &overflow_error_meta
+	|  0
+ 0	| &overflow_error::{dtor}
+ 1	| &exception::what
+
+overflow_error::{dtor} this adjustor: 0
+overflow_error::__delDtor this adjustor: 0
+overflow_error::__vecDelDtor this adjustor: 0
+
+
+class underflow_error	size(12):
+	+---
+	| +--- (base class runtime_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+underflow_error::$vftable@:
+	| &underflow_error_meta
+	|  0
+ 0	| &underflow_error::{dtor}
+ 1	| &exception::what
+
+underflow_error::{dtor} this adjustor: 0
+underflow_error::__delDtor this adjustor: 0
+underflow_error::__vecDelDtor this adjustor: 0
+
+
+class range_error	size(12):
+	+---
+	| +--- (base class runtime_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+range_error::$vftable@:
+	| &range_error_meta
+	|  0
+ 0	| &range_error::{dtor}
+ 1	| &exception::what
+
+range_error::{dtor} this adjustor: 0
+range_error::__delDtor this adjustor: 0
+range_error::__vecDelDtor this adjustor: 0
+
+
+class __type_info_node	size(8):
+	+---
+ 0	| _MemPtr
+ 4	| _Next
+	+---
+
+
+
+class type_info	size(12):
+	+---
+ 0	| {vfptr}
+ 4	| _M_data
+ 8	| _M_d_name
+  	| <alignment member> (size=3)
+	+---
+
+type_info::$vftable@:
+	| &type_info_meta
+	|  0
+ 0	| &type_info::{dtor}
+
+type_info::{dtor} this adjustor: 0
+type_info::__delDtor this adjustor: 0
+type_info::__vecDelDtor this adjustor: 0
+
+
+class bad_cast	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+bad_cast::$vftable@:
+	| &bad_cast_meta
+	|  0
+ 0	| &bad_cast::{dtor}
+ 1	| &exception::what
+
+bad_cast::{dtor} this adjustor: 0
+bad_cast::__delDtor this adjustor: 0
+bad_cast::__vecDelDtor this adjustor: 0
+
+
+class bad_typeid	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+bad_typeid::$vftable@:
+	| &bad_typeid_meta
+	|  0
+ 0	| &bad_typeid::{dtor}
+ 1	| &exception::what
+
+bad_typeid::{dtor} this adjustor: 0
+bad_typeid::__delDtor this adjustor: 0
+bad_typeid::__vecDelDtor this adjustor: 0
+
+
+class __non_rtti_object	size(12):
+	+---
+	| +--- (base class bad_typeid)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+	+---
+
+__non_rtti_object::$vftable@:
+	| &__non_rtti_object_meta
+	|  0
+ 0	| &__non_rtti_object::{dtor}
+ 1	| &exception::what
+
+__non_rtti_object::{dtor} this adjustor: 0
+__non_rtti_object::__delDtor this adjustor: 0
+__non_rtti_object::__vecDelDtor this adjustor: 0
+
+
+class lconv	size(80):
+	+---
+ 0	| decimal_point
+ 4	| thousands_sep
+ 8	| grouping
+12	| int_curr_symbol
+16	| currency_symbol
+20	| mon_decimal_point
+24	| mon_thousands_sep
+28	| mon_grouping
+32	| positive_sign
+36	| negative_sign
+40	| int_frac_digits
+41	| frac_digits
+42	| p_cs_precedes
+43	| p_sep_by_space
+44	| n_cs_precedes
+45	| n_sep_by_space
+46	| p_sign_posn
+47	| n_sign_posn
+48	| _W_decimal_point
+52	| _W_thousands_sep
+56	| _W_int_curr_symbol
+60	| _W_currency_symbol
+64	| _W_mon_decimal_point
+68	| _W_mon_thousands_sep
+72	| _W_positive_sign
+76	| _W_negative_sign
+	+---
+
+
+
+class _Collvec	size(8):
+	+---
+ 0	| _Hand
+ 4	| _Page
+	+---
+
+
+
+class _Ctypevec	size(16):
+	+---
+ 0	| _Hand
+ 4	| _Page
+ 8	| _Table
+12	| _Delfl
+	+---
+
+
+
+class _Cvtvec	size(8):
+	+---
+ 0	| _Hand
+ 4	| _Page
+	+---
+
+
+
+class _Timevec	size(4):
+	+---
+ 0	| _Timeptr
+	+---
+
+
+
+class ?$_Yarn@D	size(8):
+	+---
+ 0	| _Myptr
+ 4	| _Nul
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class _Locinfo	size(36):
+	+---
+ 0	| _Lockit _Lock
+ 4	| ?$_Yarn@D _Days
+12	| ?$_Yarn@D _Months
+20	| ?$_Yarn@D _Oldlocname
+28	| ?$_Yarn@D _Newlocname
+	+---
+
+
+
+class _DebugHeapTag_t	size(4):
+	+---
+ 0	| _Type
+	+---
+
+
+
+class ?$_Locbase@H	size(1):
+	+---
+	+---
+
+
+
+class id	size(4):
+	+---
+ 0	| _Id
+	+---
+
+
+
+class facet	size(8):
+	+---
+ 0	| {vfptr}
+ 4	| _Refs
+	+---
+
+facet::$vftable@:
+	| &facet_meta
+	|  0
+ 0	| &facet::{dtor}
+
+facet::{dtor} this adjustor: 0
+facet::__delDtor this adjustor: 0
+facet::__vecDelDtor this adjustor: 0
+
+
+class _Locimp	size(32):
+	+---
+	| +--- (base class facet)
+ 0	| | {vfptr}
+ 4	| | _Refs
+	| +---
+ 8	| _Facetvec
+12	| _Facetcount
+16	| _Catmask
+20	| _Xparent
+  	| <alignment member> (size=3)
+24	| ?$_Yarn@D _Name
+	+---
+
+_Locimp::$vftable@:
+	| &_Locimp_meta
+	|  0
+ 0	| &_Locimp::{dtor}
+
+_Locimp::{dtor} this adjustor: 0
+_Locimp::__delDtor this adjustor: 0
+_Locimp::__vecDelDtor this adjustor: 0
+
+
+class locale	size(4):
+	+---
+	| +--- (base class ?$_Locbase@H)
+	| +---
+ 0	| _Ptr
+	+---
+
+
+
+class codecvt_base	size(8):
+	+---
+	| +--- (base class facet)
+ 0	| | {vfptr}
+ 4	| | _Refs
+	| +---
+	+---
+
+codecvt_base::$vftable@:
+	| &codecvt_base_meta
+	|  0
+ 0	| &codecvt_base::{dtor}
+ 1	| &codecvt_base::do_always_noconv
+ 2	| &codecvt_base::do_max_length
+ 3	| &codecvt_base::do_encoding
+
+codecvt_base::{dtor} this adjustor: 0
+codecvt_base::do_always_noconv this adjustor: 0
+codecvt_base::do_max_length this adjustor: 0
+codecvt_base::do_encoding this adjustor: 0
+codecvt_base::__delDtor this adjustor: 0
+codecvt_base::__vecDelDtor this adjustor: 0
+
+
+class ?$codecvt@_WDH	size(16):
+	+---
+	| +--- (base class codecvt_base)
+	| | +--- (base class facet)
+ 0	| | | {vfptr}
+ 4	| | | _Refs
+	| | +---
+	| +---
+ 8	| _Cvtvec _Cvt
+	+---
+
+?$codecvt@_WDH::$vftable@:
+	| &?$codecvt@_WDH_meta
+	|  0
+ 0	| &?$codecvt@_WDH::{dtor}
+ 1	| &?$codecvt@_WDH::do_always_noconv
+ 2	| &?$codecvt@_WDH::do_max_length
+ 3	| &codecvt_base::do_encoding
+ 4	| &?$codecvt@_WDH::do_in
+ 5	| &?$codecvt@_WDH::do_out
+ 6	| &?$codecvt@_WDH::do_unshift
+ 7	| &?$codecvt@_WDH::do_length
+
+?$codecvt@_WDH::{dtor} this adjustor: 0
+?$codecvt@_WDH::do_in this adjustor: 0
+?$codecvt@_WDH::do_out this adjustor: 0
+?$codecvt@_WDH::do_unshift this adjustor: 0
+?$codecvt@_WDH::do_length this adjustor: 0
+?$codecvt@_WDH::do_always_noconv this adjustor: 0
+?$codecvt@_WDH::do_max_length this adjustor: 0
+?$codecvt@_WDH::__delDtor this adjustor: 0
+?$codecvt@_WDH::__vecDelDtor this adjustor: 0
+
+
+class ?$codecvt@GDH	size(16):
+	+---
+	| +--- (base class codecvt_base)
+	| | +--- (base class facet)
+ 0	| | | {vfptr}
+ 4	| | | _Refs
+	| | +---
+	| +---
+ 8	| _Cvtvec _Cvt
+	+---
+
+?$codecvt@GDH::$vftable@:
+	| &?$codecvt@GDH_meta
+	|  0
+ 0	| &?$codecvt@GDH::{dtor}
+ 1	| &?$codecvt@GDH::do_always_noconv
+ 2	| &?$codecvt@GDH::do_max_length
+ 3	| &codecvt_base::do_encoding
+ 4	| &?$codecvt@GDH::do_in
+ 5	| &?$codecvt@GDH::do_out
+ 6	| &?$codecvt@GDH::do_unshift
+ 7	| &?$codecvt@GDH::do_length
+
+?$codecvt@GDH::{dtor} this adjustor: 0
+?$codecvt@GDH::do_in this adjustor: 0
+?$codecvt@GDH::do_out this adjustor: 0
+?$codecvt@GDH::do_unshift this adjustor: 0
+?$codecvt@GDH::do_length this adjustor: 0
+?$codecvt@GDH::do_always_noconv this adjustor: 0
+?$codecvt@GDH::do_max_length this adjustor: 0
+?$codecvt@GDH::__delDtor this adjustor: 0
+?$codecvt@GDH::__vecDelDtor this adjustor: 0
+
+
+class ctype_base	size(8):
+	+---
+	| +--- (base class facet)
+ 0	| | {vfptr}
+ 4	| | _Refs
+	| +---
+	+---
+
+ctype_base::$vftable@:
+	| &ctype_base_meta
+	|  0
+ 0	| &ctype_base::{dtor}
+
+ctype_base::{dtor} this adjustor: 0
+ctype_base::__delDtor this adjustor: 0
+ctype_base::__vecDelDtor this adjustor: 0
+
+
+class ?$ctype@D	size(24):
+	+---
+	| +--- (base class ctype_base)
+	| | +--- (base class facet)
+ 0	| | | {vfptr}
+ 4	| | | _Refs
+	| | +---
+	| +---
+ 8	| _Ctypevec _Ctype
+	+---
+
+?$ctype@D::$vftable@:
+	| &?$ctype@D_meta
+	|  0
+ 0	| &?$ctype@D::{dtor}
+ 1	| &?$ctype@D::do_tolower
+ 2	| &?$ctype@D::do_tolower
+ 3	| &?$ctype@D::do_toupper
+ 4	| &?$ctype@D::do_toupper
+ 5	| &?$ctype@D::do_widen
+ 6	| &?$ctype@D::do_widen
+ 7	| &?$ctype@D::do_narrow
+ 8	| &?$ctype@D::do_narrow
+
+?$ctype@D::{dtor} this adjustor: 0
+?$ctype@D::do_tolower this adjustor: 0
+?$ctype@D::do_tolower this adjustor: 0
+?$ctype@D::do_toupper this adjustor: 0
+?$ctype@D::do_toupper this adjustor: 0
+?$ctype@D::do_widen this adjustor: 0
+?$ctype@D::do_widen this adjustor: 0
+?$ctype@D::do_narrow this adjustor: 0
+?$ctype@D::do_narrow this adjustor: 0
+?$ctype@D::__delDtor this adjustor: 0
+?$ctype@D::__vecDelDtor this adjustor: 0
+
+
+class ?$ctype@_W	size(32):
+	+---
+	| +--- (base class ctype_base)
+	| | +--- (base class facet)
+ 0	| | | {vfptr}
+ 4	| | | _Refs
+	| | +---
+	| +---
+ 8	| _Ctypevec _Ctype
+24	| _Cvtvec _Cvt
+	+---
+
+?$ctype@_W::$vftable@:
+	| &?$ctype@_W_meta
+	|  0
+ 0	| &?$ctype@_W::{dtor}
+ 1	| &?$ctype@_W::do_is
+ 2	| &?$ctype@_W::do_is
+ 3	| &?$ctype@_W::do_scan_is
+ 4	| &?$ctype@_W::do_scan_not
+ 5	| &?$ctype@_W::do_tolower
+ 6	| &?$ctype@_W::do_tolower
+ 7	| &?$ctype@_W::do_toupper
+ 8	| &?$ctype@_W::do_toupper
+ 9	| &?$ctype@_W::do_widen
+10	| &?$ctype@_W::do_widen
+11	| &?$ctype@_W::do_narrow
+12	| &?$ctype@_W::do_narrow
+
+?$ctype@_W::{dtor} this adjustor: 0
+?$ctype@_W::do_is this adjustor: 0
+?$ctype@_W::do_is this adjustor: 0
+?$ctype@_W::do_scan_is this adjustor: 0
+?$ctype@_W::do_scan_not this adjustor: 0
+?$ctype@_W::do_tolower this adjustor: 0
+?$ctype@_W::do_tolower this adjustor: 0
+?$ctype@_W::do_toupper this adjustor: 0
+?$ctype@_W::do_toupper this adjustor: 0
+?$ctype@_W::do_widen this adjustor: 0
+?$ctype@_W::do_widen this adjustor: 0
+?$ctype@_W::do_narrow this adjustor: 0
+?$ctype@_W::do_narrow this adjustor: 0
+?$ctype@_W::__delDtor this adjustor: 0
+?$ctype@_W::__vecDelDtor this adjustor: 0
+
+
+class ?$ctype@G	size(32):
+	+---
+	| +--- (base class ctype_base)
+	| | +--- (base class facet)
+ 0	| | | {vfptr}
+ 4	| | | _Refs
+	| | +---
+	| +---
+ 8	| _Ctypevec _Ctype
+24	| _Cvtvec _Cvt
+	+---
+
+?$ctype@G::$vftable@:
+	| &?$ctype@G_meta
+	|  0
+ 0	| &?$ctype@G::{dtor}
+ 1	| &?$ctype@G::do_is
+ 2	| &?$ctype@G::do_is
+ 3	| &?$ctype@G::do_scan_is
+ 4	| &?$ctype@G::do_scan_not
+ 5	| &?$ctype@G::do_tolower
+ 6	| &?$ctype@G::do_tolower
+ 7	| &?$ctype@G::do_toupper
+ 8	| &?$ctype@G::do_toupper
+ 9	| &?$ctype@G::do_widen
+10	| &?$ctype@G::do_widen
+11	| &?$ctype@G::do_narrow
+12	| &?$ctype@G::do_narrow
+
+?$ctype@G::{dtor} this adjustor: 0
+?$ctype@G::do_is this adjustor: 0
+?$ctype@G::do_is this adjustor: 0
+?$ctype@G::do_scan_is this adjustor: 0
+?$ctype@G::do_scan_not this adjustor: 0
+?$ctype@G::do_tolower this adjustor: 0
+?$ctype@G::do_tolower this adjustor: 0
+?$ctype@G::do_toupper this adjustor: 0
+?$ctype@G::do_toupper this adjustor: 0
+?$ctype@G::do_widen this adjustor: 0
+?$ctype@G::do_widen this adjustor: 0
+?$ctype@G::do_narrow this adjustor: 0
+?$ctype@G::do_narrow this adjustor: 0
+?$ctype@G::__delDtor this adjustor: 0
+?$ctype@G::__vecDelDtor this adjustor: 0
+
+
+class ?$ctype_byname@D	size(24):
+	+---
+	| +--- (base class ?$ctype@D)
+	| | +--- (base class ctype_base)
+	| | | +--- (base class facet)
+ 0	| | | | {vfptr}
+ 4	| | | | _Refs
+	| | | +---
+	| | +---
+ 8	| | _Ctypevec _Ctype
+	| +---
+	+---
+
+?$ctype_byname@D::$vftable@:
+	| &?$ctype_byname@D_meta
+	|  0
+ 0	| &?$ctype_byname@D::{dtor}
+ 1	| &?$ctype@D::do_tolower
+ 2	| &?$ctype@D::do_tolower
+ 3	| &?$ctype@D::do_toupper
+ 4	| &?$ctype@D::do_toupper
+ 5	| &?$ctype@D::do_widen
+ 6	| &?$ctype@D::do_widen
+ 7	| &?$ctype@D::do_narrow
+ 8	| &?$ctype@D::do_narrow
+
+?$ctype_byname@D::{dtor} this adjustor: 0
+?$ctype_byname@D::__delDtor this adjustor: 0
+?$ctype_byname@D::__vecDelDtor this adjustor: 0
+
+
+class ?$is_error_condition_enum@W4errc@1std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$00)
+	| +---
+	+---
+
+
+
+class error_category	size(4):
+	+---
+ 0	| {vfptr}
+	+---
+
+error_category::$vftable@:
+	| &error_category_meta
+	|  0
+ 0	| &error_category::{dtor}
+ 1	| &error_category::name
+ 2	| &error_category::message
+ 3	| &error_category::default_error_condition
+ 4	| &error_category::equivalent
+ 5	| &error_category::equivalent
+
+error_category::{dtor} this adjustor: 0
+error_category::name this adjustor: 0
+error_category::message this adjustor: 0
+error_category::default_error_condition this adjustor: 0
+error_category::equivalent this adjustor: 0
+error_category::equivalent this adjustor: 0
+error_category::__delDtor this adjustor: 0
+error_category::__vecDelDtor this adjustor: 0
+
+
+class error_code	size(8):
+	+---
+ 0	| _Myval
+ 4	| _Mycat
+	+---
+
+
+
+class error_condition	size(8):
+	+---
+ 0	| _Myval
+ 4	| _Mycat
+	+---
+
+
+
+class ?$is_error_condition_enum@H	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$enable_if@$0A@Verror_condition@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$is_error_condition_enum@Verror_condition@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@H	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$enable_if@$0A@Verror_code@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$is_error_code_enum@Verror_condition@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_condition_enum@Verror_code@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@W4errc@1std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@Verror_code@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@W4io_errc@1std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$enable_if@$00Verror_condition@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$is_error_condition_enum@W4io_errc@1std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$unary_function@Verror_code@std@@I	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@Verror_code@std@@	size(1):
+	+---
+	| +--- (base class ?$unary_function@Verror_code@std@@I)
+	| +---
+	+---
+
+
+
+class ?$unary_function@Verror_condition@std@@I	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@Verror_condition@std@@	size(1):
+	+---
+	| +--- (base class ?$unary_function@Verror_condition@std@@I)
+	| +---
+	+---
+
+
+
+class system_error	size(20):
+	+---
+	| +--- (base class runtime_error)
+	| | +--- (base class exception)
+ 0	| | | {vfptr}
+ 4	| | | _Mywhat
+ 8	| | | _Mydofree
+  	| | | <alignment member> (size=3)
+	| | +---
+	| +---
+12	| error_code _Mycode
+	+---
+
+system_error::$vftable@:
+	| &system_error_meta
+	|  0
+ 0	| &system_error::{dtor}
+ 1	| &exception::what
+
+system_error::{dtor} this adjustor: 0
+system_error::__delDtor this adjustor: 0
+system_error::__vecDelDtor this adjustor: 0
+
+
+class ?$_Iosb@H	size(1):
+	+---
+	+---
+
+
+
+class failure	size(20):
+	+---
+	| +--- (base class system_error)
+	| | +--- (base class runtime_error)
+	| | | +--- (base class exception)
+ 0	| | | | {vfptr}
+ 4	| | | | _Mywhat
+ 8	| | | | _Mydofree
+  	| | | | <alignment member> (size=3)
+	| | | +---
+	| | +---
+12	| | error_code _Mycode
+	| +---
+	+---
+
+failure::$vftable@:
+	| &failure_meta
+	|  0
+ 0	| &failure::{dtor}
+ 1	| &exception::what
+
+failure::{dtor} this adjustor: 0
+failure::__delDtor this adjustor: 0
+failure::__vecDelDtor this adjustor: 0
+
+
+class Init	size(1):
+	+---
+	+---
+
+
+
+class _Iosarray	size(16):
+	+---
+ 0	| _Next
+ 4	| _Index
+ 8	| _Lo
+12	| _Vp
+	+---
+
+
+
+class _Fnarray	size(12):
+	+---
+ 0	| _Next
+ 4	| _Index
+ 8	| _Pfn
+	+---
+
+
+
+class ios_base	size(56):
+	+---
+ 0	| {vfptr}
+	| +--- (base class ?$_Iosb@H)
+	| +---
+ 8	| _Stdstr
+12	| _Mystate
+16	| _Except
+20	| _Fmtfl
+24	| _Prec
+32	| _Wide
+40	| _Arr
+44	| _Calls
+48	| _Ploc
+  	| <alignment member> (size=4)
+	+---
+
+ios_base::$vftable@:
+	| &ios_base_meta
+	|  0
+ 0	| &ios_base::{dtor}
+
+ios_base::{dtor} this adjustor: 0
+ios_base::__delDtor this adjustor: 0
+ios_base::__vecDelDtor this adjustor: 0
+
+
+class ?$is_error_code_enum@Vfailure@ios_base@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class _Sentry_base	size(0):
+	+---
+ 0	| _Myostr
+	+---
+
+
+
+class sentry	size(0):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myostr
+	| +---
+ 0	| _Ok
+	+---
+
+
+
+class ?$basic_ios@DU?$char_traits@D@std@@	size(72):
+	+---
+	| +--- (base class ios_base)
+ 0	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+ 8	| | _Stdstr
+12	| | _Mystate
+16	| | _Except
+20	| | _Fmtfl
+24	| | _Prec
+32	| | _Wide
+40	| | _Arr
+44	| | _Calls
+48	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+56	| _Mystrbuf
+60	| _Tiestr
+64	| _Fillch
+  	| <alignment member> (size=7)
+	+---
+
+?$basic_ios@DU?$char_traits@D@std@@::$vftable@:
+	| &?$basic_ios@DU?$char_traits@D@std@@_meta
+	|  0
+ 0	| &?$basic_ios@DU?$char_traits@D@std@@::{dtor}
+
+?$basic_ios@DU?$char_traits@D@std@@::{dtor} this adjustor: 0
+?$basic_ios@DU?$char_traits@D@std@@::__delDtor this adjustor: 0
+?$basic_ios@DU?$char_traits@D@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$basic_ostream@DU?$char_traits@D@std@@	size(80):
+	+---
+ 0	| {vbptr}
+  	| <alignment member> (size=4)
+	+---
+	+--- (virtual base ?$basic_ios@DU?$char_traits@D@std@@)
+	| +--- (base class ios_base)
+ 8	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+16	| | _Stdstr
+20	| | _Mystate
+24	| | _Except
+28	| | _Fmtfl
+32	| | _Prec
+40	| | _Wide
+48	| | _Arr
+52	| | _Calls
+56	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+64	| _Mystrbuf
+68	| _Tiestr
+72	| _Fillch
+  	| <alignment member> (size=7)
+	+---
+
+?$basic_ostream@DU?$char_traits@D@std@@::$vbtable@:
+ 0	| 0
+ 1	| 8 (?$basic_ostream@DU?$char_traits@D@std@@d(?$basic_ostream@DU?$char_traits@D@std@@+0)?$basic_ios@DU?$char_traits@D@std@@)
+
+?$basic_ostream@DU?$char_traits@D@std@@::$vftable@:
+	| -8
+ 0	| &?$basic_ostream@DU?$char_traits@D@std@@::{dtor}
+
+?$basic_ostream@DU?$char_traits@D@std@@::{dtor} this adjustor: 8
+?$basic_ostream@DU?$char_traits@D@std@@::__delDtor this adjustor: 8
+?$basic_ostream@DU?$char_traits@D@std@@::__vecDelDtor this adjustor: 8
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@DU?$char_traits@D@std@@       8       0       4 0
+
+
+class ?$basic_ios@_WU?$char_traits@_W@std@@	size(72):
+	+---
+	| +--- (base class ios_base)
+ 0	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+ 8	| | _Stdstr
+12	| | _Mystate
+16	| | _Except
+20	| | _Fmtfl
+24	| | _Prec
+32	| | _Wide
+40	| | _Arr
+44	| | _Calls
+48	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+56	| _Mystrbuf
+60	| _Tiestr
+64	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_ios@_WU?$char_traits@_W@std@@::$vftable@:
+	| &?$basic_ios@_WU?$char_traits@_W@std@@_meta
+	|  0
+ 0	| &?$basic_ios@_WU?$char_traits@_W@std@@::{dtor}
+
+?$basic_ios@_WU?$char_traits@_W@std@@::{dtor} this adjustor: 0
+?$basic_ios@_WU?$char_traits@_W@std@@::__delDtor this adjustor: 0
+?$basic_ios@_WU?$char_traits@_W@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$basic_ostream@_WU?$char_traits@_W@std@@	size(80):
+	+---
+ 0	| {vbptr}
+  	| <alignment member> (size=4)
+	+---
+	+--- (virtual base ?$basic_ios@_WU?$char_traits@_W@std@@)
+	| +--- (base class ios_base)
+ 8	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+16	| | _Stdstr
+20	| | _Mystate
+24	| | _Except
+28	| | _Fmtfl
+32	| | _Prec
+40	| | _Wide
+48	| | _Arr
+52	| | _Calls
+56	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+64	| _Mystrbuf
+68	| _Tiestr
+72	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_ostream@_WU?$char_traits@_W@std@@::$vbtable@:
+ 0	| 0
+ 1	| 8 (?$basic_ostream@_WU?$char_traits@_W@std@@d(?$basic_ostream@_WU?$char_traits@_W@std@@+0)?$basic_ios@_WU?$char_traits@_W@std@@)
+
+?$basic_ostream@_WU?$char_traits@_W@std@@::$vftable@:
+	| -8
+ 0	| &?$basic_ostream@_WU?$char_traits@_W@std@@::{dtor}
+
+?$basic_ostream@_WU?$char_traits@_W@std@@::{dtor} this adjustor: 8
+?$basic_ostream@_WU?$char_traits@_W@std@@::__delDtor this adjustor: 8
+?$basic_ostream@_WU?$char_traits@_W@std@@::__vecDelDtor this adjustor: 8
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@_WU?$char_traits@_W@std@@       8       0       4 0
+
+
+class ?$basic_ios@GU?$char_traits@G@std@@	size(72):
+	+---
+	| +--- (base class ios_base)
+ 0	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+ 8	| | _Stdstr
+12	| | _Mystate
+16	| | _Except
+20	| | _Fmtfl
+24	| | _Prec
+32	| | _Wide
+40	| | _Arr
+44	| | _Calls
+48	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+56	| _Mystrbuf
+60	| _Tiestr
+64	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_ios@GU?$char_traits@G@std@@::$vftable@:
+	| &?$basic_ios@GU?$char_traits@G@std@@_meta
+	|  0
+ 0	| &?$basic_ios@GU?$char_traits@G@std@@::{dtor}
+
+?$basic_ios@GU?$char_traits@G@std@@::{dtor} this adjustor: 0
+?$basic_ios@GU?$char_traits@G@std@@::__delDtor this adjustor: 0
+?$basic_ios@GU?$char_traits@G@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$basic_ostream@GU?$char_traits@G@std@@	size(80):
+	+---
+ 0	| {vbptr}
+  	| <alignment member> (size=4)
+	+---
+	+--- (virtual base ?$basic_ios@GU?$char_traits@G@std@@)
+	| +--- (base class ios_base)
+ 8	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+16	| | _Stdstr
+20	| | _Mystate
+24	| | _Except
+28	| | _Fmtfl
+32	| | _Prec
+40	| | _Wide
+48	| | _Arr
+52	| | _Calls
+56	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+64	| _Mystrbuf
+68	| _Tiestr
+72	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_ostream@GU?$char_traits@G@std@@::$vbtable@:
+ 0	| 0
+ 1	| 8 (?$basic_ostream@GU?$char_traits@G@std@@d(?$basic_ostream@GU?$char_traits@G@std@@+0)?$basic_ios@GU?$char_traits@G@std@@)
+
+?$basic_ostream@GU?$char_traits@G@std@@::$vftable@:
+	| -8
+ 0	| &?$basic_ostream@GU?$char_traits@G@std@@::{dtor}
+
+?$basic_ostream@GU?$char_traits@G@std@@::{dtor} this adjustor: 8
+?$basic_ostream@GU?$char_traits@G@std@@::__delDtor this adjustor: 8
+?$basic_ostream@GU?$char_traits@G@std@@::__vecDelDtor this adjustor: 8
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@GU?$char_traits@G@std@@       8       0       4 0
+
+
+class _Sentry_base	size(0):
+	+---
+ 0	| _Myistr
+	+---
+
+
+
+class sentry	size(0):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myistr
+	| +---
+ 0	| _Ok
+	+---
+
+
+
+class ?$basic_istream@DU?$char_traits@D@std@@	size(88):
+	+---
+ 0	| {vbptr}
+ 8	| _Chcount
+	+---
+	+--- (virtual base ?$basic_ios@DU?$char_traits@D@std@@)
+	| +--- (base class ios_base)
+16	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+24	| | _Stdstr
+28	| | _Mystate
+32	| | _Except
+36	| | _Fmtfl
+40	| | _Prec
+48	| | _Wide
+56	| | _Arr
+60	| | _Calls
+64	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+72	| _Mystrbuf
+76	| _Tiestr
+80	| _Fillch
+  	| <alignment member> (size=7)
+	+---
+
+?$basic_istream@DU?$char_traits@D@std@@::$vbtable@:
+ 0	| 0
+ 1	| 16 (?$basic_istream@DU?$char_traits@D@std@@d(?$basic_istream@DU?$char_traits@D@std@@+0)?$basic_ios@DU?$char_traits@D@std@@)
+
+?$basic_istream@DU?$char_traits@D@std@@::$vftable@:
+	| -16
+ 0	| &?$basic_istream@DU?$char_traits@D@std@@::{dtor}
+
+?$basic_istream@DU?$char_traits@D@std@@::{dtor} this adjustor: 16
+?$basic_istream@DU?$char_traits@D@std@@::__delDtor this adjustor: 16
+?$basic_istream@DU?$char_traits@D@std@@::__vecDelDtor this adjustor: 16
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@DU?$char_traits@D@std@@      16       0       4 0
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myistr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myistr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$basic_streambuf@DU?$char_traits@D@std@@	size(60):
+	+---
+ 0	| {vfptr}
+ 4	| _Mutex _Mylock
+ 8	| _Gfirst
+12	| _Pfirst
+16	| _IGfirst
+20	| _IPfirst
+24	| _Gnext
+28	| _Pnext
+32	| _IGnext
+36	| _IPnext
+40	| _Gcount
+44	| _Pcount
+48	| _IGcount
+52	| _IPcount
+56	| _Plocale
+	+---
+
+?$basic_streambuf@DU?$char_traits@D@std@@::$vftable@:
+	| &?$basic_streambuf@DU?$char_traits@D@std@@_meta
+	|  0
+ 0	| &?$basic_streambuf@DU?$char_traits@D@std@@::{dtor}
+ 1	| &?$basic_streambuf@DU?$char_traits@D@std@@::_Lock
+ 2	| &?$basic_streambuf@DU?$char_traits@D@std@@::_Unlock
+ 3	| &?$basic_streambuf@DU?$char_traits@D@std@@::overflow
+ 4	| &?$basic_streambuf@DU?$char_traits@D@std@@::pbackfail
+ 5	| &?$basic_streambuf@DU?$char_traits@D@std@@::showmanyc
+ 6	| &?$basic_streambuf@DU?$char_traits@D@std@@::underflow
+ 7	| &?$basic_streambuf@DU?$char_traits@D@std@@::uflow
+ 8	| &?$basic_streambuf@DU?$char_traits@D@std@@::xsgetn
+ 9	| &?$basic_streambuf@DU?$char_traits@D@std@@::xsputn
+10	| &?$basic_streambuf@DU?$char_traits@D@std@@::seekoff
+11	| &?$basic_streambuf@DU?$char_traits@D@std@@::seekpos
+12	| &?$basic_streambuf@DU?$char_traits@D@std@@::setbuf
+13	| &?$basic_streambuf@DU?$char_traits@D@std@@::sync
+14	| &?$basic_streambuf@DU?$char_traits@D@std@@::imbue
+
+?$basic_streambuf@DU?$char_traits@D@std@@::{dtor} this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::_Lock this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::_Unlock this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::overflow this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::pbackfail this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::showmanyc this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::underflow this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::uflow this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::xsgetn this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::xsputn this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::seekoff this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::seekpos this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::setbuf this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::sync this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::imbue this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::__delDtor this adjustor: 0
+?$basic_streambuf@DU?$char_traits@D@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$basic_istream@_WU?$char_traits@_W@std@@	size(88):
+	+---
+ 0	| {vbptr}
+ 8	| _Chcount
+	+---
+	+--- (virtual base ?$basic_ios@_WU?$char_traits@_W@std@@)
+	| +--- (base class ios_base)
+16	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+24	| | _Stdstr
+28	| | _Mystate
+32	| | _Except
+36	| | _Fmtfl
+40	| | _Prec
+48	| | _Wide
+56	| | _Arr
+60	| | _Calls
+64	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+72	| _Mystrbuf
+76	| _Tiestr
+80	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_istream@_WU?$char_traits@_W@std@@::$vbtable@:
+ 0	| 0
+ 1	| 16 (?$basic_istream@_WU?$char_traits@_W@std@@d(?$basic_istream@_WU?$char_traits@_W@std@@+0)?$basic_ios@_WU?$char_traits@_W@std@@)
+
+?$basic_istream@_WU?$char_traits@_W@std@@::$vftable@:
+	| -16
+ 0	| &?$basic_istream@_WU?$char_traits@_W@std@@::{dtor}
+
+?$basic_istream@_WU?$char_traits@_W@std@@::{dtor} this adjustor: 16
+?$basic_istream@_WU?$char_traits@_W@std@@::__delDtor this adjustor: 16
+?$basic_istream@_WU?$char_traits@_W@std@@::__vecDelDtor this adjustor: 16
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@_WU?$char_traits@_W@std@@      16       0       4 0
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myistr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myistr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$basic_streambuf@_WU?$char_traits@_W@std@@	size(60):
+	+---
+ 0	| {vfptr}
+ 4	| _Mutex _Mylock
+ 8	| _Gfirst
+12	| _Pfirst
+16	| _IGfirst
+20	| _IPfirst
+24	| _Gnext
+28	| _Pnext
+32	| _IGnext
+36	| _IPnext
+40	| _Gcount
+44	| _Pcount
+48	| _IGcount
+52	| _IPcount
+56	| _Plocale
+	+---
+
+?$basic_streambuf@_WU?$char_traits@_W@std@@::$vftable@:
+	| &?$basic_streambuf@_WU?$char_traits@_W@std@@_meta
+	|  0
+ 0	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::{dtor}
+ 1	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::_Lock
+ 2	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::_Unlock
+ 3	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::overflow
+ 4	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::pbackfail
+ 5	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::showmanyc
+ 6	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::underflow
+ 7	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::uflow
+ 8	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::xsgetn
+ 9	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::xsputn
+10	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::seekoff
+11	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::seekpos
+12	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::setbuf
+13	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::sync
+14	| &?$basic_streambuf@_WU?$char_traits@_W@std@@::imbue
+
+?$basic_streambuf@_WU?$char_traits@_W@std@@::{dtor} this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::_Lock this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::_Unlock this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::overflow this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::pbackfail this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::showmanyc this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::underflow this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::uflow this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::xsgetn this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::xsputn this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::seekoff this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::seekpos this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::setbuf this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::sync this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::imbue this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::__delDtor this adjustor: 0
+?$basic_streambuf@_WU?$char_traits@_W@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$basic_istream@GU?$char_traits@G@std@@	size(88):
+	+---
+ 0	| {vbptr}
+ 8	| _Chcount
+	+---
+	+--- (virtual base ?$basic_ios@GU?$char_traits@G@std@@)
+	| +--- (base class ios_base)
+16	| | {vfptr}
+	| | +--- (base class ?$_Iosb@H)
+	| | +---
+24	| | _Stdstr
+28	| | _Mystate
+32	| | _Except
+36	| | _Fmtfl
+40	| | _Prec
+48	| | _Wide
+56	| | _Arr
+60	| | _Calls
+64	| | _Ploc
+  	| | <alignment member> (size=4)
+	| +---
+72	| _Mystrbuf
+76	| _Tiestr
+80	| _Fillch
+  	| <alignment member> (size=6)
+	+---
+
+?$basic_istream@GU?$char_traits@G@std@@::$vbtable@:
+ 0	| 0
+ 1	| 16 (?$basic_istream@GU?$char_traits@G@std@@d(?$basic_istream@GU?$char_traits@G@std@@+0)?$basic_ios@GU?$char_traits@G@std@@)
+
+?$basic_istream@GU?$char_traits@G@std@@::$vftable@:
+	| -16
+ 0	| &?$basic_istream@GU?$char_traits@G@std@@::{dtor}
+
+?$basic_istream@GU?$char_traits@G@std@@::{dtor} this adjustor: 16
+?$basic_istream@GU?$char_traits@G@std@@::__delDtor this adjustor: 16
+?$basic_istream@GU?$char_traits@G@std@@::__vecDelDtor this adjustor: 16
+
+vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+?$basic_ios@GU?$char_traits@G@std@@      16       0       4 0
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myistr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myistr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$basic_streambuf@GU?$char_traits@G@std@@	size(60):
+	+---
+ 0	| {vfptr}
+ 4	| _Mutex _Mylock
+ 8	| _Gfirst
+12	| _Pfirst
+16	| _IGfirst
+20	| _IPfirst
+24	| _Gnext
+28	| _Pnext
+32	| _IGnext
+36	| _IPnext
+40	| _Gcount
+44	| _Pcount
+48	| _IGcount
+52	| _IPcount
+56	| _Plocale
+	+---
+
+?$basic_streambuf@GU?$char_traits@G@std@@::$vftable@:
+	| &?$basic_streambuf@GU?$char_traits@G@std@@_meta
+	|  0
+ 0	| &?$basic_streambuf@GU?$char_traits@G@std@@::{dtor}
+ 1	| &?$basic_streambuf@GU?$char_traits@G@std@@::_Lock
+ 2	| &?$basic_streambuf@GU?$char_traits@G@std@@::_Unlock
+ 3	| &?$basic_streambuf@GU?$char_traits@G@std@@::overflow
+ 4	| &?$basic_streambuf@GU?$char_traits@G@std@@::pbackfail
+ 5	| &?$basic_streambuf@GU?$char_traits@G@std@@::showmanyc
+ 6	| &?$basic_streambuf@GU?$char_traits@G@std@@::underflow
+ 7	| &?$basic_streambuf@GU?$char_traits@G@std@@::uflow
+ 8	| &?$basic_streambuf@GU?$char_traits@G@std@@::xsgetn
+ 9	| &?$basic_streambuf@GU?$char_traits@G@std@@::xsputn
+10	| &?$basic_streambuf@GU?$char_traits@G@std@@::seekoff
+11	| &?$basic_streambuf@GU?$char_traits@G@std@@::seekpos
+12	| &?$basic_streambuf@GU?$char_traits@G@std@@::setbuf
+13	| &?$basic_streambuf@GU?$char_traits@G@std@@::sync
+14	| &?$basic_streambuf@GU?$char_traits@G@std@@::imbue
+
+?$basic_streambuf@GU?$char_traits@G@std@@::{dtor} this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::_Lock this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::_Unlock this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::overflow this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::pbackfail this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::showmanyc this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::underflow this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::uflow this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::xsgetn this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::xsputn this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::seekoff this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::seekpos this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::setbuf this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::sync this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::imbue this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::__delDtor this adjustor: 0
+?$basic_streambuf@GU?$char_traits@G@std@@::__vecDelDtor this adjustor: 0
+
+
+class ?$_Allocator_base@_W	size(1):
+	+---
+	+---
+
+
+
+class ?$allocator@_W	size(1):
+	+---
+	| +--- (base class ?$_Allocator_base@_W)
+	| +---
+	+---
+
+
+
+class ?$rebind@_W	size(1):
+	+---
+	+---
+
+
+
+class _Bxty	size(16):
+	+---
+ 0	| _Buf
+ 0	| _Ptr
+ 0	| _Alias
+	+---
+
+
+
+class ?$_String_val@_WV?$allocator@_W@std@@	size(28):
+	+---
+	| +--- (base class _Container_base0)
+	| +---
+ 0	| _Bxty _Bx
+16	| _Mysize
+20	| _Myres
+24	| ?$allocator@_W _Alval
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@	size(28):
+	+---
+	| +--- (base class ?$_String_val@_WV?$allocator@_W@std@@)
+	| | +--- (base class _Container_base0)
+	| | +---
+ 0	| | _Bxty _Bx
+16	| | _Mysize
+20	| | _Myres
+24	| | ?$allocator@_W _Alval
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+
+
+class Null	size(1):
+	+---
+	+---
+
+
+
+class Data	size(20):
+	+---
+ 0	| QBasicAtomicInt ref
+ 4	| alloc
+ 8	| size
+12	| data
+16.	| clean (bitstart=0,nbits=1)
+16.	| simpletext (bitstart=1,nbits=1)
+16.	| righttoleft (bitstart=2,nbits=1)
+16.	| asciiCache (bitstart=3,nbits=1)
+16.	| capacity (bitstart=4,nbits=1)
+16.	| reserved (bitstart=5,nbits=11)
+18	| array
+	+---
+
+
+
+class QString	size(4):
+	+---
+ 0	| d
+	+---
+
+
+
+class ?$QFlags@W4SectionFlag@QString@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class QLatin1String	size(4):
+	+---
+ 0	| chars
+	+---
+
+
+
+class QCharRef	size(8):
+	+---
+ 0	| s
+ 4	| i
+	+---
+
+
+
+class ?$_Iterator012@Urandom_access_iterator_tag@std@@DHPBDABDU_Iterator_base0@2@	size(1):
+	+---
+	| +--- (base class _Iterator_base0)
+	| +---
+	+---
+
+
+
+class ?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@	size(4):
+	+---
+	| +--- (base class ?$_Iterator012@Urandom_access_iterator_tag@std@@DHPBDABDU_Iterator_base0@2@)
+	| | +--- (base class _Iterator_base0)
+	| | +---
+	| +---
+ 0	| _Ptr
+	+---
+
+
+
+class ?$_Iterator012@Urandom_access_iterator_tag@std@@_WHPB_WAB_WU_Iterator_base0@2@	size(1):
+	+---
+	| +--- (base class _Iterator_base0)
+	| +---
+	+---
+
+
+
+class ?$_String_const_iterator@_WU?$char_traits@_W@std@@V?$allocator@_W@2@	size(4):
+	+---
+	| +--- (base class ?$_Iterator012@Urandom_access_iterator_tag@std@@_WHPB_WAB_WU_Iterator_base0@2@)
+	| | +--- (base class _Iterator_base0)
+	| | +---
+	| +---
+ 0	| _Ptr
+	+---
+
+
+
+class ?$_String_iterator@_WU?$char_traits@_W@std@@V?$allocator@_W@2@	size(4):
+	+---
+	| +--- (base class ?$_String_const_iterator@_WU?$char_traits@_W@std@@V?$allocator@_W@2@)
+	| | +--- (base class ?$_Iterator012@Urandom_access_iterator_tag@std@@_WHPB_WAB_WU_Iterator_base0@2@)
+	| | | +--- (base class _Iterator_base0)
+	| | | +---
+	| | +---
+ 0	| | _Ptr
+	| +---
+	+---
+
+
+
+class ?$QTypeInfo@VQString@@	size(1):
+	+---
+	+---
+
+
+
+class QStringRef	size(12):
+	+---
+ 0	| m_string
+ 4	| m_position
+ 8	| m_size
+	+---
+
+
+
+class ?$unary_function@_KI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@_K	size(1):
+	+---
+	| +--- (base class ?$unary_function@_KI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@KI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@K	size(1):
+	+---
+	| +--- (base class ?$unary_function@KI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@_JI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@_J	size(1):
+	+---
+	| +--- (base class ?$unary_function@_JI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@MI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@M	size(1):
+	+---
+	| +--- (base class ?$unary_function@MI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@NI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@N	size(1):
+	+---
+	| +--- (base class ?$unary_function@NI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@OI	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@O	size(1):
+	+---
+	| +--- (base class ?$unary_function@OI)
+	| +---
+	+---
+
+
+
+class ?$unary_function@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@	size(1):
+	+---
+	| +--- (base class ?$unary_function@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I)
+	| +---
+	+---
+
+
+
+class ?$unary_function@V?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@I	size(1):
+	+---
+	+---
+
+
+
+class ?$hash@V?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@	size(1):
+	+---
+	| +--- (base class ?$unary_function@V?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@I)
+	| +---
+	+---
+
+
+
+class _Bufpar	size(0):
+	+---
+ 0	| _Begin
+ 0	| _Current
+ 0	| _Hiwater
+ 0	| _Size
+	+---
+
+
+
+class __JUMP_BUFFER	size(64):
+	+---
+ 0	| Ebp
+ 4	| Ebx
+ 8	| Edi
+12	| Esi
+16	| Esp
+20	| Eip
+24	| Registration
+28	| TryLevel
+32	| Cookie
+36	| UnwindFunc
+40	| UnwindData
+	+---
+
+
+
+class __m64	size(8):
+	+---
+ 0	| m64_u64
+ 0	| m64_f32
+ 0	| m64_i8
+ 0	| m64_i16
+ 0	| m64_i32
+ 0	| m64_i64
+ 0	| m64_u8
+ 0	| m64_u16
+ 0	| m64_u32
+	+---
+
+
+
+class __m128	size(16):
+	+---
+ 0	| m128_f32
+ 0	| m128_u64
+ 0	| m128_i8
+ 0	| m128_i16
+ 0	| m128_i32
+ 0	| m128_i64
+ 0	| m128_u8
+ 0	| m128_u16
+ 0	| m128_u32
+	+---
+
+
+
+class __m128i	size(16):
+	+---
+ 0	| m128i_i8
+ 0	| m128i_i16
+ 0	| m128i_i32
+ 0	| m128i_i64
+ 0	| m128i_u8
+ 0	| m128i_u16
+ 0	| m128i_u32
+ 0	| m128i_u64
+	+---
+
+
+
+class __m128d	size(16):
+	+---
+ 0	| m128d_f64
+	+---
+
+
+
+class __m256	size(32):
+	+---
+ 0	| m256_f32
+	+---
+
+
+
+class <unnamed-tag>	size(32):
+	+---
+ 0	| m256d_f64
+	+---
+
+
+
+class __m256i	size(32):
+	+---
+ 0	| m256i_i8
+ 0	| m256i_i16
+ 0	| m256i_i32
+ 0	| m256i_i64
+ 0	| m256i_u8
+ 0	| m256i_u16
+ 0	| m256i_u32
+ 0	| m256i_u64
+	+---
+
+
+
+class bad_weak_ptr	size(12):
+	+---
+	| +--- (base class exception)
+ 0	| | {vfptr}
+ 4	| | _Mywhat
+ 8	| | _Mydofree
+  	| | <alignment member> (size=3)
+	| +---
+	+---
+
+bad_weak_ptr::$vftable@:
+	| &bad_weak_ptr_meta
+	|  0
+ 0	| &bad_weak_ptr::{dtor}
+ 1	| &bad_weak_ptr::what
+
+bad_weak_ptr::what this adjustor: 0
+bad_weak_ptr::{dtor} this adjustor: 0
+bad_weak_ptr::__delDtor this adjustor: 0
+bad_weak_ptr::__vecDelDtor this adjustor: 0
+
+
+class _Ref_count_base	size(12):
+	+---
+ 0	| {vfptr}
+ 4	| _Uses
+ 8	| _Weaks
+	+---
+
+_Ref_count_base::$vftable@:
+	| &_Ref_count_base_meta
+	|  0
+ 0	| &_Ref_count_base::_Destroy
+ 1	| &_Ref_count_base::_Delete_this
+ 2	| &_Ref_count_base::{dtor}
+ 3	| &_Ref_count_base::_Get_deleter
+
+_Ref_count_base::_Destroy this adjustor: 0
+_Ref_count_base::_Delete_this this adjustor: 0
+_Ref_count_base::{dtor} this adjustor: 0
+_Ref_count_base::_Get_deleter this adjustor: 0
+_Ref_count_base::__delDtor this adjustor: 0
+_Ref_count_base::__vecDelDtor this adjustor: 0
+
+
+class _Static_tag	size(1):
+	+---
+	+---
+
+
+
+class _Const_tag	size(1):
+	+---
+	+---
+
+
+
+class _Dynamic_tag	size(1):
+	+---
+	+---
+
+
+
+class _Node	size(0):
+	+---
+ 0	| _Next
+ 0	| _Prev
+ 0	| _Myval
+	+---
+
+
+
+class Data	size(24):
+	+---
+ 0	| QBasicAtomicInt ref
+ 4	| alloc
+ 8	| begin
+12	| end
+16.	| sharable (bitstart=0,nbits=1)
+20	| array
+	+---
+
+
+
+class QListData	size(4):
+	+---
+ 0	| d
+	+---
+
+
+
+class Node	size(0):
+	+---
+ 0	| v
+	+---
+
+
+
+class <unnamed-tag>	size(0):
+	+---
+ 0	| QListData p
+ 0	| d
+	+---
+
+
+
+class iterator	size(0):
+	+---
+ 0	| i
+	+---
+
+
+
+class const_iterator	size(0):
+	+---
+ 0	| i
+	+---
+
+
+
+class QScopedPointerPodDeleter	size(1):
+	+---
+	+---
+
+
+
+class <unnamed-tag>	size(4):
+	+---
+ 0	| QListData p
+ 0	| d
+	+---
+
+
+
+class ?$QList@PAVQObject@@	size(4):
+	+---
+  	| <unnamed-tag> <alignment member> (size=0)
+ 0	| QListData p
+ 0	| d
+  	| <unnamed-tag> <alignment member> (size=0)
+	+---
+
+
+
+class QObjectData	size(28):
+	+---
+ 0	| {vfptr}
+ 4	| q_ptr
+ 8	| parent
+12	| ?$QList@PAVQObject@@ children
+16.	| isWidget (bitstart=0,nbits=1)
+16.	| pendTimer (bitstart=1,nbits=1)
+16.	| blockSig (bitstart=2,nbits=1)
+16.	| wasDeleted (bitstart=3,nbits=1)
+16.	| ownObjectName (bitstart=4,nbits=1)
+16.	| sendChildEvents (bitstart=5,nbits=1)
+16.	| receiveChildEvents (bitstart=6,nbits=1)
+16.	| inEventHandler (bitstart=7,nbits=1)
+16.	| inThreadChangeEvent (bitstart=8,nbits=1)
+16.	| hasGuards (bitstart=9,nbits=1)
+16.	| unused (bitstart=10,nbits=22)
+20	| postedEvents
+24	| metaObject
+	+---
+
+QObjectData::$vftable@:
+	| &QObjectData_meta
+	|  0
+ 0	| &QObjectData::{dtor}
+
+QObjectData::{dtor} this adjustor: 0
+QObjectData::__delDtor this adjustor: 0
+QObjectData::__vecDelDtor this adjustor: 0
+
+
+class ?$QScopedPointer@VQObjectData@@U?$QScopedPointerDeleter@VQObjectData@@@@	size(4):
+	+---
+ 0	| d
+	+---
+
+
+
+class QObject	size(8):
+	+---
+ 0	| {vfptr}
+ 4	| ?$QScopedPointer@VQObjectData@@U?$QScopedPointerDeleter@VQObjectData@@@@ d_ptr
+	+---
+
+QObject::$vftable@:
+	| &QObject_meta
+	|  0
+ 0	| &QObject::metaObject
+ 1	| &QObject::qt_metacast
+ 2	| &QObject::qt_metacall
+ 3	| &QObject::{dtor}
+ 4	| &QObject::event
+ 5	| &QObject::eventFilter
+ 6	| &QObject::timerEvent
+ 7	| &QObject::childEvent
+ 8	| &QObject::customEvent
+ 9	| &QObject::connectNotify
+10	| &QObject::disconnectNotify
+
+QObject::metaObject this adjustor: 0
+QObject::qt_metacast this adjustor: 0
+QObject::qt_metacall this adjustor: 0
+QObject::{dtor} this adjustor: 0
+QObject::event this adjustor: 0
+QObject::eventFilter this adjustor: 0
+QObject::timerEvent this adjustor: 0
+QObject::childEvent this adjustor: 0
+QObject::customEvent this adjustor: 0
+QObject::connectNotify this adjustor: 0
+QObject::disconnectNotify this adjustor: 0
+QObject::__delDtor this adjustor: 0
+QObject::__vecDelDtor this adjustor: 0
+
+
+class ?$QScopedPointerDeleter@VQObjectData@@	size(1):
+	+---
+	+---
+
+
+
+class QObjectUserData	size(4):
+	+---
+ 0	| {vfptr}
+	+---
+
+QObjectUserData::$vftable@:
+	| &QObjectUserData_meta
+	|  0
+ 0	| &QObjectUserData::{dtor}
+
+QObjectUserData::{dtor} this adjustor: 0
+QObjectUserData::__delDtor this adjustor: 0
+QObjectUserData::__vecDelDtor this adjustor: 0
+
+
+class honeypot	size(12):
+	+---
+	| +--- (base class QObject)
+ 0	| | {vfptr}
+ 4	| | ?$QScopedPointer@VQObjectData@@U?$QScopedPointerDeleter@VQObjectData@@@@ d_ptr
+	| +---
+ 8	| Priority m_priority
+	+---
+
+honeypot::$vftable@:
+	| &honeypot_meta
+	|  0
+ 0	| &honeypot::metaObject
+ 1	| &honeypot::qt_metacast
+ 2	| &honeypot::qt_metacall
+ 3	| &honeypot::{dtor}
+ 4	| &QObject::event
+ 5	| &QObject::eventFilter
+ 6	| &QObject::timerEvent
+ 7	| &QObject::childEvent
+ 8	| &QObject::customEvent
+ 9	| &QObject::connectNotify
+10	| &QObject::disconnectNotify
+
+honeypot::metaObject this adjustor: 0
+honeypot::qt_metacast this adjustor: 0
+honeypot::qt_metacall this adjustor: 0
+honeypot::{dtor} this adjustor: 0
+honeypot::__delDtor this adjustor: 0
+honeypot::__vecDelDtor this adjustor: 0
+
+
+class ?$QFlags@W4Option@honeypot@@	size(4):
+	+---
+ 0	| i
+	+---
+
+
+
+class ?$identity@V?$allocator@D@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$identity@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@	size(4):
+	+---
+	| +--- (base class ?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@)
+	| | +--- (base class ?$_Iterator012@Urandom_access_iterator_tag@std@@DHPBDABDU_Iterator_base0@2@)
+	| | | +--- (base class _Iterator_base0)
+	| | | +---
+	| | +---
+ 0	| | _Ptr
+	| +---
+	+---
+
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myostr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myostr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myostr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myostr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class _Sentry_base	size(4):
+	+---
+ 0	| _Myostr
+	+---
+
+
+
+class sentry	size(8):
+	+---
+	| +--- (base class _Sentry_base)
+ 0	| | _Myostr
+	| +---
+ 4	| _Ok
+  	| <alignment member> (size=3)
+	+---
+
+
+
+class ?$fpos@H	size(24):
+	+---
+ 0	| _Myoff
+ 8	| _Fpos
+16	| _Mystate
+  	| <alignment member> (size=4)
+	+---
+
+
+
+class ?$identity@V?$allocator@_W@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$identity@V?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$is_error_condition_enum@V?$allocator@D@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@V?$allocator@D@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_condition_enum@V?$allocator@_W@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$is_error_code_enum@V?$allocator@_W@std@@	size(1):
+	+---
+	| +--- (base class ?$integral_constant@_N$0A@)
+	| +---
+	+---
+
+
+
+class ?$_Facetptr@V?$ctype@D@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Remove_reference@AAH	size(1):
+	+---
+	+---
+
+
+
+class ?$_Remove_reference@AA_J	size(1):
+	+---
+	+---
+
+
+
+class ?$_Remove_reference@AAPAU_Iosarray@ios_base@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Remove_reference@AAPAU_Fnarray@ios_base@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Remove_reference@AAPAVlocale@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Facetptr@V?$ctype@_W@std@@	size(1):
+	+---
+	+---
+
+
+
+class ?$_Facetptr@V?$ctype@G@std@@	size(1):
+	+---
+	+---
+
+
+
+Microsoft (R) Incremental Linker Version 10.00.30319.01
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:honeypot.exe 
+honeypot.obj 
+honeypot.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: static bool __cdecl QObject::connect(class QObject const *,char const *,class QObject const *,char const *,enum Qt::ConnectionType)" (__imp_?connect@QObject@@SA_NPBV1@PBD01W4ConnectionType@Qt@@@Z) referenced in function "public: __thiscall honeypot::honeypot(class QObject *)" (??0honeypot@@QAE@PAVQObject@@@Z)
+honeypot.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) char const * __cdecl qFlagLocation(char const *)" (__imp_?qFlagLocation@@YAPBDPBD@Z) referenced in function "public: __thiscall honeypot::honeypot(class QObject *)" (??0honeypot@@QAE@PAVQObject@@@Z)
+honeypot.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall QObject::QObject(class QObject *)" (__imp_??0QObject@@QAE@PAV0@@Z) referenced in function "public: __thiscall honeypot::honeypot(class QObject *)" (??0honeypot@@QAE@PAVQObject@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "public: virtual struct QMetaObject const * __thiscall honeypot::metaObject(void)const " (?metaObject@honeypot@@UBEPBUQMetaObject@@XZ)
+honeypot.obj : error LNK2001: unresolved external symbol "public: virtual void * __thiscall honeypot::qt_metacast(char const *)" (?qt_metacast@honeypot@@UAEPAXPBD@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "public: virtual int __thiscall honeypot::qt_metacall(enum QMetaObject::Call,int,void * *)" (?qt_metacall@honeypot@@UAEHW4Call@QMetaObject@@HPAPAX@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QObject::event(class QEvent *)" (?event@QObject@@UAE_NPAVQEvent@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QObject::eventFilter(class QObject *,class QEvent *)" (?eventFilter@QObject@@UAE_NPAV1@PAVQEvent@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::timerEvent(class QTimerEvent *)" (?timerEvent@QObject@@MAEXPAVQTimerEvent@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::childEvent(class QChildEvent *)" (?childEvent@QObject@@MAEXPAVQChildEvent@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::customEvent(class QEvent *)" (?customEvent@QObject@@MAEXPAVQEvent@@@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::connectNotify(char const *)" (?connectNotify@QObject@@MAEXPBD@Z)
+honeypot.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::disconnectNotify(char const *)" (?disconnectNotify@QObject@@MAEXPBD@Z)
+honeypot.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall QObject::~QObject(void)" (__imp_??1QObject@@UAE@XZ) referenced in function "public: virtual __thiscall honeypot::~honeypot(void)" (??1honeypot@@UAE@XZ)
+LIBCMT.lib(crt0.obj) : error LNK2019: unresolved external symbol _main referenced in function ___tmainCRTStartup
+honeypot.exe : fatal error LNK1120: 15 unresolved externals

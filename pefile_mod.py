@@ -1,6 +1,29 @@
 import pefile
 
 class PE(pefile.PE):
+    def __init__(self, *args, **kwargs):
+        try:
+            self.mmfile = kwargs.pop('mmfile')
+        except KeyError:
+            raise ArgumentError('argument mmfile is necessary')
+        super(PE, self).__init__(*args, **kwargs)
+    
+    def GetSectionnameOrdinal(self, section_name):
+        for i, section in enumerate(self.sections):
+            if section.Name == section_name:
+                return i
+        raise ValueError("Invalid section_name")
+
+    def GetSectionnameSection(self, section_name):
+        section_ordinal = self.GetSectionnameOrdinal(section_name)
+        return self.sections[section_ordinal]
+    
+    def GetSectionnameContent(self, section_name):
+        section = self.GetSectionnameSection(section_name)
+        start = section.PointerToRawData
+        end = start + section.SizeOfRawData
+        return self.mmfile[start:end]
+    
     def GetPhysicalAddressSectionOrdinal(self, phys_addr):
         for i, section in enumerate(self.sections):
             if section.PointerToRawData <= phys_addr < section.PointerToRawData + section.SizeOfRawData:

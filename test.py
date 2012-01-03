@@ -75,5 +75,3 @@ with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
         info_writer(pe, matchObject, mmapped_file)
         if i > 5:
             break
-        #print i, get_sectionname_by_physical_address(pe, matchObject.start()), hex(matchObject.start()), get_sectionname_by_virtual_address(pe, little_endian_string_to_number(matchObject.group(1))), hex(little_endian_string_to_number(matchObject.group(1)))
-        #print hex(ptov(pe, matchObject.start()))

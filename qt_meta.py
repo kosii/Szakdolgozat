@@ -12,7 +12,6 @@ bizonyosokhoz hogy hogyan ferunk hozza. nehanyat at kell szamolni fizikai cimre,
 nehanybol a stringet kell kapni, nehanyat 
 uint(honeypot::High) <-  ilyen formaban akarunk visszakapni.
 """
-
 def descriptor_metaclass(name, bases, dict):
     if 'struct' in dict and 'fields':
         dict['struct'] = struct.Struct(dict['struct'])
@@ -22,7 +21,8 @@ def descriptor_metaclass(name, bases, dict):
 class Descriptor(object):
 
     __metaclass__ = descriptor_metaclass
-    string=set()
+    strings=set()
+
     def __getattribute__(self, attr):
         v = super(Descriptor, self).__getattribute__(attr)
         if not attr.startswith('_') and attr in self.__class__.string:
@@ -30,23 +30,24 @@ class Descriptor(object):
             return 'HOLA'
         return v
 
-    def __new__(cls, memory_image):
+    def __new__(cls, memory_image, string_metadata=None):
         if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
             raise NotImplementedError("Define inherited class' struct and fields attributes")
+        if cls.strings and not string_metadata:
+            raise 
         return super(Descriptor, cls).__new__(cls, *cls.struct.unpack(_take(cls.struct.size, memory_image)))
-        #return cls(*cls.struct.unpack(_take(cls.struct.size, memory_image)))
-        #return cls.namedtuple_factory()(*cls.struct.unpack(_take(cls.struct.size, memory_image)))
+
     
 class QMetaClassInfoDescriptor(Descriptor):
     __metaclass__  = descriptor_metaclass
-    string = set(('name', ))
+    strings = set(('name', ))
     struct = 'ii'
     fields = 'name, key'
 
 class QMetaMethodDescriptor(Descriptor):
     __metaclass__  = descriptor_metaclass
 
-    string = set(['signature, parameters'])
+    strings = set(['signature, parameters'])
     struct = 'iiiii'
     fields = 'signature, parameters, type, tag, flags'
 
