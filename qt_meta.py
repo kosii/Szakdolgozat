@@ -13,28 +13,21 @@ nehanybol a stringet kell kapni, nehanyat
 uint(honeypot::High) <-  ilyen formaban akarunk visszakapni.
 """
 def descriptor_metaclass(name, bases, dict):
-    if 'struct' in dict and 'fields':
+    if 'struct' in dict and 'fields' in dict:
         dict['struct'] = struct.Struct(dict['struct'])
         bases += (collections.namedtuple(name, dict['fields']), )
     return type(name, bases, dict)
 
 class Descriptor(object):
-
     __metaclass__ = descriptor_metaclass
     strings=set()
-
-    def __getattribute__(self, attr):
-        v = super(Descriptor, self).__getattribute__(attr)
-        if not attr.startswith('_') and attr in self.__class__.string:
-            print self.__class__.string
-            return 'HOLA'
-        return v
 
     def __new__(cls, memory_image, string_metadata=None):
         if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
             raise NotImplementedError("Define inherited class' struct and fields attributes")
         if cls.strings and not string_metadata:
-            raise 
+            raise RuntimeError("TODO!")
+        
         return super(Descriptor, cls).__new__(cls, *cls.struct.unpack(_take(cls.struct.size, memory_image)))
 
     

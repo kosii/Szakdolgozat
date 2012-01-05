@@ -5,7 +5,7 @@ class PE(pefile.PE):
         try:
             self.mmfile = kwargs.pop('mmfile')
         except KeyError:
-            raise ArgumentError('argument mmfile is necessary')
+            raise RuntimeError('argument mmfile is necessary')
         super(PE, self).__init__(*args, **kwargs)
     
     def GetSectionnameOrdinal(self, section_name):
