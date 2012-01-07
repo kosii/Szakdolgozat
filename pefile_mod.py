@@ -1,12 +1,6 @@
 import pefile
 
 class PE(pefile.PE):
-    def __init__(self, *args, **kwargs):
-        try:
-            self.mmfile = kwargs.pop('mmfile')
-        except KeyError:
-            raise RuntimeError('argument mmfile is necessary')
-        super(PE, self).__init__(*args, **kwargs)
     
     def GetSectionnameOrdinal(self, section_name):
         for i, section in enumerate(self.sections):

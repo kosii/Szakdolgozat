@@ -41,22 +41,22 @@ def info_writer(pe, match_object, mmapped_file):
     meta_obj_descr = QMetaObjectDescriptor(islice(mmapped_file, metaObjectPhysicalAddress, None))
     print 'sdf', meta_obj_descr
     qmetaobject_data = islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
-    qmetaobject_stringdata = islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_stringdata), None)
-    meta_obj_data_descr = QMetaObjectDataDescriptor(qmetaobject_data)
+    qmetaobject_stringdata = mmapped_file[pe.vtop(meta_obj_descr.qt_meta_stringdata):]
+    meta_obj_data_descr = QMetaObjectDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
     print meta_obj_data_descr
     for i in xrange(meta_obj_data_descr.classinfoCount):
-        print QMetaClassInfoDescriptor(qmetaobject_data)
+        print QMetaClassInfoDescriptor(qmetaobject_data, qmetaobject_stringdata)
     for i in xrange(meta_obj_data_descr.methodCount):
-        print QMetaMethodDescriptor(qmetaobject_data)
+        print QMetaMethodDescriptor(qmetaobject_data, qmetaobject_stringdata)
     for i in xrange(meta_obj_data_descr.propertyCount):
-        print QMetaPropertyDescriptor(qmetaobject_data)
+        print QMetaPropertyDescriptor(qmetaobject_data, qmetaobject_stringdata)
     enum_count = 0
     for i in xrange(meta_obj_data_descr.enumCount):
-        enum_descriptor = QMetaEnumDescriptor(qmetaobject_data)
+        enum_descriptor = QMetaEnumDescriptor(qmetaobject_data, qmetaobject_stringdata)
         enum_count += enum_descriptor.count
         print enum_descriptor
     for i in xrange(enum_count):
-        print QMetaEnumDataDescriptor(qmetaobject_data)
+        print QMetaEnumDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
     print "found metaObject() function at %s psysical address, at %s virtual address, with metaObject at %s virtual address and %s physical address"%\
       (_0x(match_object.start()), _0x(pe.ptov(match_object.start())), _0x(metaObjectVirtualAddress), _0x(metaObjectPhysicalAddress))
     
@@ -65,7 +65,7 @@ def info_writer(pe, match_object, mmapped_file):
 fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
 #fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
-    pe = pefile_mod.PE(data=mmapped_file, mmfile=mmapped_file)
+    pe = pefile_mod.PE(data=mmapped_file)
     pprint(pe)
     print hex(pe.OPTIONAL_HEADER.AddressOfEntryPoint)
     print hex(pe.OPTIONAL_HEADER.ImageBase)
@@ -73,6 +73,7 @@ with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
         pprint(section)
         print section.Name, section.VirtualAddress, hex(section.VirtualAddress), type(section.VirtualAddress), section.SizeOfRawData
     for i, matchObject in enumerate(compiled_regexp.finditer(mmapped_file)):
+        print i
         info_writer(pe, matchObject, mmapped_file)
-        if i > 5:
+        if i > 10:
             break
