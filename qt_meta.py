@@ -63,6 +63,8 @@ class QMetaEnumDescriptor(Descriptor):
     struct = 'iiii'
     fields = 'name, flags, count, data'
 
+    def read_data(self, ):
+
 class QMetaEnumDataDescriptor(Descriptor):
     __metaclass__ = descriptor_metaclass
     strings = set(('key', ))
@@ -87,11 +89,58 @@ class QMetaObjectDescriptor(Descriptor):
             %(self.__class__.__name__, hex(self.parent_staticMetaObject), hex(self.qt_meta_stringdata), hex(self.qt_meta_data), hex(self.zero))
 
 class QTClass(object):
-    def __init__(self, mmapped_file, ):
-        pass
+    def __init__(self, mmapped_file, qtmetaobject_descriptor, pe):
+        self.meta_obj_descr = qtmetaobject_descriptor
+        qt_meta_stringdata = \
+            mmapped_file[pe.vtop(meta_obj_descr.qt_meta_stringdata):]
+        qt_meta_data = \
+            islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
+        
+        self.meta_obj_data_descr = \
+            QMetaObjectDataDescriptor(qt_meta_data, qt_meta_stringdata)
+        
+        self.class_infos = []
+        
+        for i in xrange(meta_obj_data_descr.classinfoCount):
+            self.class_infos.append(
+                QMetaClassInfoDescriptor(
+                    qmetaobject_data, qmetaobject_stringdata
+                )
+            )
+        self.methods = []
+        for i in xrange(meta_obj_data_descr.methodCount):
+            self.methods.append(
+                QMetaMethodDescriptor(
+                    qmetaobject_data, qmetaobject_stringdata
+                )
+            )
+        self.properties = []
+        for i in xrange(meta_obj_data_descr.propertyCount):
+            self.properties.append(
+                QMetaPropertyDescriptor(
+                    qmetaobject_data, qmetaobject_stringdata
+                )
+            )
+        self.property_notifiactions = []
+        for i in xrange(meta_obj_data_descr.propertyCount):
+            self.property_notifiactions.append(
+                QMetaPropertyChangedDescriptor(
+                    qmetaobject_data
+                )
+            )
+        
+        enum_count = 0
+        for i in xrange(meta_obj_data_descr.enumCount):
+            enum_descriptor = QMetaEnumDescriptor(qmetaobject_data, qmetaobject_stringdata)
+            enum_count += enum_descriptor.count
+            print enum_descriptor
+        for i in xrange(enum_count):
+            print QMetaEnumDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
 
+    def __str__(self):
+        return 
 
-class QT(object):
+class QTFile(object):
     def __init__(self, mmapped_file):
         import pefile_mod
         self.pe = pefile_mod.PE(data=mmaped_file)
