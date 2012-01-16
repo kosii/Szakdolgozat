@@ -10,6 +10,7 @@ class honeypot : public QObject
 	Q_CLASSINFO("author", "Sabrina Schweinsteiger")
     Q_CLASSINFO("url", "http://doc.moosesoft.co.uk/1.0/")
 	Q_PROPERTY(Priority priority READ priority WRITE setPriority NOTIFY priorityChanged)
+	Q_PROPERTY(Priority priority READ priority WRITE setPriority)
 	Q_ENUMS(Priority)
 	Q_FLAGS(Option Options)
 
@@ -40,8 +41,8 @@ public slots:
 	int Slot1(int v);
 
 signals:
-	void priorityChanged(Priority);
 	void Signal(int v);
+	void priorityChanged(Priority p);
 
 private:
 	Priority m_priority;

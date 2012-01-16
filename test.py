@@ -40,8 +40,10 @@ def info_writer(pe, match_object, mmapped_file):
     print hex(metaObjectPhysicalAddress)
     meta_obj_descr = QMetaObjectDescriptor(islice(mmapped_file, metaObjectPhysicalAddress, None))
     print 'sdf', meta_obj_descr
+
     qmetaobject_data = islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
     qmetaobject_stringdata = mmapped_file[pe.vtop(meta_obj_descr.qt_meta_stringdata):]
+
     meta_obj_data_descr = QMetaObjectDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
     print meta_obj_data_descr
     for i in xrange(meta_obj_data_descr.classinfoCount):
@@ -50,6 +52,9 @@ def info_writer(pe, match_object, mmapped_file):
         print QMetaMethodDescriptor(qmetaobject_data, qmetaobject_stringdata)
     for i in xrange(meta_obj_data_descr.propertyCount):
         print QMetaPropertyDescriptor(qmetaobject_data, qmetaobject_stringdata)
+    for i in xrange(meta_obj_data_descr.propertyCount):
+        print QMetaPropertyChangedDescriptor(qmetaobject_data)
+    
     enum_count = 0
     for i in xrange(meta_obj_data_descr.enumCount):
         enum_descriptor = QMetaEnumDescriptor(qmetaobject_data, qmetaobject_stringdata)
@@ -62,16 +67,16 @@ def info_writer(pe, match_object, mmapped_file):
     
     print "class name: %s" % ''.join(string_reader(qmetaobject_stringdata))
 
-fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
-#fd = os.open('ftp.exe', os.O_RDWR)
+#fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
+fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
     pe = pefile_mod.PE(data=mmapped_file)
-    pprint(pe)
-    print hex(pe.OPTIONAL_HEADER.AddressOfEntryPoint)
-    print hex(pe.OPTIONAL_HEADER.ImageBase)
-    for section in pe.sections:
-        pprint(section)
-        print section.Name, section.VirtualAddress, hex(section.VirtualAddress), type(section.VirtualAddress), section.SizeOfRawData
+    #pprint(pe)
+    #print hex(pe.OPTIONAL_HEADER.AddressOfEntryPoint)
+    #print hex(pe.OPTIONAL_HEADER.ImageBase)
+    #for section in pe.sections:
+    #    pprint(section)
+    #    print section.Name, section.VirtualAddress, hex(section.VirtualAddress), type(section.VirtualAddress), section.SizeOfRawData
     for i, matchObject in enumerate(compiled_regexp.finditer(mmapped_file)):
         print i
         info_writer(pe, matchObject, mmapped_file)

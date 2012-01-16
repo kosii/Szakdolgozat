@@ -49,12 +49,17 @@ class QMetaMethodDescriptor(Descriptor):
 class QMetaPropertyDescriptor(Descriptor):
     __metaclass__ = descriptor_metaclass
     strings = set(('name', 'type', ))
-    struct = 'iiii'
-    fields = 'name, type, flags, notify_changed'
+    struct = 'iii'
+    fields = 'name, type, flags'
 
+class QMetaPropertyChangedDescriptor(Descriptor):
+    __metaclass__ = descriptor_metaclass
+    struct = 'i'
+    fields = 'notifyChanged'
+    
 class QMetaEnumDescriptor(Descriptor):
     __metaclass__ = descriptor_metaclass
-    strings = set(('name'))
+    strings = set(('name', ))
     struct = 'iiii'
     fields = 'name, flags, count, data'
 
@@ -81,8 +86,18 @@ class QMetaObjectDescriptor(Descriptor):
         return '%s(parent_staticMetaObject=%s, qt_meta_stringdata=%s, qt_meta_data=%s, zero=%s)'\
             %(self.__class__.__name__, hex(self.parent_staticMetaObject), hex(self.qt_meta_stringdata), hex(self.qt_meta_data), hex(self.zero))
 
-class QT(object):
-    """
-    """
-    def __init__(self):
+class QTClass(object):
+    def __init__(self, mmapped_file, ):
         pass
+
+
+class QT(object):
+    def __init__(self, mmapped_file):
+        import pefile_mod
+        self.pe = pefile_mod.PE(data=mmaped_file)
+
+        for i, matchObject in enumerate(compiled_regexp.finditer(mmapped_file)):
+            print i
+            info_writer(pe, matchObject, mmapped_file)
+            if i > 100:
+                break
