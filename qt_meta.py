@@ -137,8 +137,6 @@ class QTClass(object):
         for i in xrange(enum_count):
             print QMetaEnumDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
 
-    def __str__(self):
-        return 
 
 class QTFile(object):
     def __init__(self, mmapped_file):
