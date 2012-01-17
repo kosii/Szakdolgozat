@@ -1,6 +1,7 @@
 import struct
 import collections
 import itertools
+import re
 
 def _take(n, iterable):
     return ''.join(itertools.islice(iterable, n))
@@ -78,7 +79,8 @@ class QMetaObjectDataDescriptor(Descriptor):
     struct = 'iiiiiiiiiiiiii'
     strings = set(('classname', ))
     fields = ('revision, classname, classinfoCount, '
-        'classinfos, methodCount, methods, propertyCount, properties, enumCount, enums, '
+        'classinfos, methodCount, methods, propertyCount, '
+        'properties, enumCount, enums, '
         'constuctorCount, constructors, flags, signals')
 
 class QMetaObjectDescriptor(Descriptor):
@@ -87,69 +89,100 @@ class QMetaObjectDescriptor(Descriptor):
     struct = 'iiii'
 
     def __str__(self):
-        return '%s(parent_staticMetaObject=%s, qt_meta_stringdata=%s, qt_meta_data=%s, zero=%s)'\
-            %(self.__class__.__name__, hex(self.parent_staticMetaObject), hex(self.qt_meta_stringdata), hex(self.qt_meta_data), hex(self.zero))
+        return '{0}(parent_staticMetaObject={1}, qt_meta_stringdata={2}, '
+        'qt_meta_data={3}, zero={4})'.format(
+            self.__class__.__name__, hex(self.parent_staticMetaObject), 
+            hex(self.qt_meta_stringdata), hex(self.qt_meta_data), 
+            hex(self.zero)
+        )
 
 class QTClass(object):
+    @property
+    def name(self):
+        return self.meta_obj_data_descr.classname
+    
     def __init__(self, mmapped_file, qmetaobject_descriptor, pe):
-        self.meta_obj_descr = qmetaobject_descriptor
+        self.qmetaobject_descriptor = qmetaobject_descriptor
         qt_meta_stringdata = \
-            mmapped_file[pe.vtop(meta_obj_descr.qt_meta_stringdata):]
+            mmapped_file[pe.vtop(qmetaobject_descriptor.qt_meta_stringdata):]
         qt_meta_data = \
-            islice(mmapped_file, pe.vtop(meta_obj_descr.qt_meta_data), None)
+            itertools.islice(mmapped_file, pe.vtop(qmetaobject_descriptor.qt_meta_data), None)
         
         self.meta_obj_data_descr = \
             QMetaObjectDataDescriptor(qt_meta_data, qt_meta_stringdata)
         
         self.class_infos = []
         
-        for i in xrange(meta_obj_data_descr.classinfoCount):
+        for i in xrange(self.meta_obj_data_descr.classinfoCount):
             self.class_infos.append(
                 QMetaClassInfoDescriptor(
-                    qmetaobject_data, qmetaobject_stringdata
+                    qt_meta_data, qt_meta_stringdata
                 )
             )
         self.methods = []
-        for i in xrange(meta_obj_data_descr.methodCount):
+        for i in xrange(self.meta_obj_data_descr.methodCount):
             self.methods.append(
                 QMetaMethodDescriptor(
-                    qmetaobject_data, qmetaobject_stringdata
+                    qt_meta_data, qt_meta_stringdata
                 )
             )
         self.properties = []
-        for i in xrange(meta_obj_data_descr.propertyCount):
+        for i in xrange(self.meta_obj_data_descr.propertyCount):
             self.properties.append(
                 QMetaPropertyDescriptor(
-                    qmetaobject_data, qmetaobject_stringdata
+                    qt_meta_data, qt_meta_stringdata
                 )
             )
-        self.property_notifiactions = []
-        for i in xrange(meta_obj_data_descr.propertyCount):
-            self.property_notifiactions.append(
+        self.property_notifications = []
+        for i in xrange(self.meta_obj_data_descr.propertyCount):
+            self.property_notifications.append(
                 QMetaPropertyChangedDescriptor(
-                    qmetaobject_data
+                    qt_meta_data
                 )
             )
-        
-        enum_count = 0
-        for i in xrange(meta_obj_data_descr.enumCount):
-            enum_descriptor = QMetaEnumDescriptor(qmetaobject_data, qmetaobject_stringdata)
-            enum_count += enum_descriptor.count
-        
-        for i in xrange(enum_count):
-            print QMetaEnumDataDescriptor(qmetaobject_data, qmetaobject_stringdata)
+        self.enums = []
+        for i in xrange(self.meta_obj_data_descr.enumCount):
+            self.enums.append(
+                QMetaEnumDescriptor(
+                    qt_meta_data, qt_meta_stringdata
+                )
+            )
+        self.enums_data = {}
+        for enum_descriptor in self.enums:
+            for i in xrange(enum_descriptor.count):
+                self.enums_data.setdefault(enum_descriptor.name, []).append(
+                    QMetaEnumDataDescriptor(
+                        qt_meta_data, qt_meta_stringdata
+                    )
+                )
 
+#def string_reader(address):
+#    # ch == 0x00 nem mukodott. utanajarni hogy miert nem
+#    return itertools.takewhile(lambda ch: not (ch == '\x00'), address)
+
+def regexify(bytepattern):
+    for b in bytepattern:
+        if b is not None:
+            yield b
+        else:
+            for r in '(....)':
+                yield ord(r)
+    return
+
+pattern = [0x8B, 0x41, 0x04, 0x8b, 0x40, 0x18, 0x85, 0xc0, 0x75, 0x05, 0xb8, None, 0xc3]
+regexp_pattern =  ''.join(map(chr, regexify(pattern)))
+compiled_regexp = re.compile(regexp_pattern, flags=re.DOTALL)
 
 class QTFile(object):
     def __init__(self, mmapped_file):
         import pefile_mod
-        self.pe = pefile_mod.PE(data=mmaped_file)
+        self.pe = pefile_mod.PE(data=mmapped_file)
         self.classes = []
-        for i, matchObject in enumerate(compiled_regexp.finditer(mmapped_file)):
-            qmetaObjectVirtualAddress = struct.Struct('i').unpack(match_object.group(1))[0]
-            qmetaobject_physical_address = self.pe.vtop(metaObjectVirtualAddress)
+        for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
+            qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
+            qmetaobject_physical_address = self.pe.vtop(qmetaObject_virtual_address)
             qmetaobject_descriptor = QMetaObjectDescriptor(mmapped_file[qmetaobject_physical_address:])
             self.classes.append(QTClass(mmapped_file, qmetaobject_descriptor, self.pe))
             #info_writer(pe, matchObject, mmapped_file)
-            if i > 100:
+            if i > 50:
                 break
