@@ -15,8 +15,8 @@ from qt_meta import *
 
 _0x = hex
 
-fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
-#fd = os.open('ftp.exe', os.O_RDWR)
+#fd = os.open('HoneyPot/HoneyPot.exe', os.O_RDWR)
+fd = os.open('ftp.exe', os.O_RDWR)
 with contextlib.closing(mmap.mmap(fd, length=0)) as mmapped_file:
     qtfile = QTFile(mmapped_file)
     #for qtclass in qtfile.classes:

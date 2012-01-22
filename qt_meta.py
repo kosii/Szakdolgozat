@@ -200,8 +200,7 @@ class QTFile(object):
         self.classes = []
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
             qt_class = QTClass(mmapped_file, match_object, self.pe)
-            #if len(qt_class.metacall_function) != 1:
-            print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function
+            if len(set(qt_class.metacall_function)) != 1:
+                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function
             self.classes.append(qt_class)
-            #info_writer(pe, matchObject, mmapped_file)
-            if i > 5: break
+            #if i > 5: break
