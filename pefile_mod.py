@@ -3,6 +3,7 @@ import pefile
 class PE(pefile.PE):
     
     def GetSectionnameOrdinal(self, section_name):
+        section_name = section_name.ljust(8, '\0')
         for i, section in enumerate(self.sections):
             if section.Name == section_name:
                 return i
@@ -14,9 +15,7 @@ class PE(pefile.PE):
     
     def GetSectionnameContent(self, section_name):
         section = self.GetSectionnameSection(section_name)
-        start = section.PointerToRawData
-        end = start + section.SizeOfRawData
-        return self.mmfile[start:end]
+        return section.get_data()
     
     def GetPhysicalAddressSectionOrdinal(self, phys_addr):
         for i, section in enumerate(self.sections):

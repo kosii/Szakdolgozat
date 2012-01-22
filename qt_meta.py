@@ -9,12 +9,6 @@ def _take(n, iterable):
 def string_reader(string_data):
     # ch == 0x00 nem mukodott. utanajarni hogy miert nem
     return ''.join(itertools.takewhile(lambda ch: not (ch == '\x00'), string_data))
-"""
-ahhoz, hogy faszan hozzaferhessunk az adatokhoz, felul kell irni hogy 
-bizonyosokhoz hogy hogyan ferunk hozza. nehanyat at kell szamolni fizikai cimre,
-nehanybol a stringet kell kapni, nehanyat 
-uint(honeypot::High) <-  ilyen formaban akarunk visszakapni.
-"""
 
 def descriptor_metaclass(name, bases, dict):
     if 'struct' in dict and 'fields' in dict:
@@ -101,7 +95,33 @@ class QTClass(object):
     def name(self):
         return self.meta_obj_data_descr.classname
     
-    def __init__(self, mmapped_file, qmetaobject_descriptor, pe):
+    @property
+    def metaobject_function(self):
+        return self._metaobject_function
+    
+    @property
+    def metacall_function(self):
+        if not self._metacall_function:
+            pattern = struct.pack('i', self.metaobject_function)
+            escaped_pattern = re.escape(pattern)
+            section = self.pe.GetSectionnameSection('.rdata')
+            only_aligned = filter(lambda match: not match.start()%4, re.finditer(escaped_pattern, section.get_data()))
+            metacall_virtual_addresses = map(lambda match: struct.unpack('i', section.get_data()[match.start()+8:match.start()+12])[0], only_aligned)
+            #print metacall_virtual_addresses
+            self._metacall_function = map(lambda va: hex(va), metacall_virtual_addresses)
+        return self._metacall_function
+        return struct.pack('i', self.metaobject_function)
+
+    def __init__(self, mmapped_file, match_object, pe):
+
+        self._metaobject_function = pe.ptov(match_object.start())
+        self._metacall_function = None
+
+        self.pe = pe
+        qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
+        qmetaobject_physical_address = pe.vtop(qmetaObject_virtual_address)
+        qmetaobject_descriptor = QMetaObjectDescriptor(mmapped_file[qmetaobject_physical_address:])
+
         self.qmetaobject_descriptor = qmetaobject_descriptor
         qt_meta_stringdata = \
             mmapped_file[pe.vtop(qmetaobject_descriptor.qt_meta_stringdata):]
@@ -155,7 +175,7 @@ class QTClass(object):
                         qt_meta_data, qt_meta_stringdata
                     )
                 )
-
+    
 #def string_reader(address):
 #    # ch == 0x00 nem mukodott. utanajarni hogy miert nem
 #    return itertools.takewhile(lambda ch: not (ch == '\x00'), address)
@@ -179,10 +199,9 @@ class QTFile(object):
         self.pe = pefile_mod.PE(data=mmapped_file)
         self.classes = []
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
-            qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
-            qmetaobject_physical_address = self.pe.vtop(qmetaObject_virtual_address)
-            qmetaobject_descriptor = QMetaObjectDescriptor(mmapped_file[qmetaobject_physical_address:])
-            self.classes.append(QTClass(mmapped_file, qmetaobject_descriptor, self.pe))
+            qt_class = QTClass(mmapped_file, match_object, self.pe)
+            #if len(qt_class.metacall_function) != 1:
+            print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function
+            self.classes.append(qt_class)
             #info_writer(pe, matchObject, mmapped_file)
-            if i > 50:
-                break
+            if i > 5: break
