@@ -1,10 +1,16 @@
 #include <windows.h>
 #include <detours.h>
 
+#include <QtCore/qobjectdefs.h>
+
 static LONG dwSlept = 0;
 
 // Target pointer for the uninstrumented Sleep API.
 static VOID (WINAPI * TrueSleep)(DWORD dwMilliseconds) = Sleep;
+
+static VOID* metacall_address = (VOID*)0x401110;
+
+void qt_metacall(QMetaObject::Call _c, int _id, void **_a) {}
 
 // Detour function that replaces the Sleep API.
 VOID WINAPI TimedSleep(DWORD dwMilliseconds)

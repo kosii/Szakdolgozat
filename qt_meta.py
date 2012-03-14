@@ -16,6 +16,12 @@ def descriptor_metaclass(name, bases, dict):
         bases += (collections.namedtuple(name, dict['fields']), )
     return type(name, bases, dict)
 
+# akartam valami fasza valtoztatast csinalni! ;D
+# csak elfelejtettem :(
+# de valszeg a descriptorokkal vagy a __slot__ tal kapcsolatos volt. vagy lehet hogy teljesen massal
+# janem! abs-szel kell kikenyszeriteni az attributumok felulirasanak a kenyszeret!
+
+
 class Descriptor(object):
     __metaclass__ = descriptor_metaclass
     strings=set()
