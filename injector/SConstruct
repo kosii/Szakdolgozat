@@ -1,0 +1,8 @@
+env = Environment(
+	TARGET_ARCH='x86',
+	CPPPATH=r'C:/Program Files (x86)/Microsoft Research/Detours Express 3.0/include', 
+	LIBPATH=r'C:/Program Files (x86)/Microsoft Research/Detours Express 3.0/lib.X86'
+)
+env.SharedLibrary(target='injected', source=['injected.cpp'], LIBS=['detours'], LINKFLAGS=['/export:TimedSleep'])
+
+env.Program(target='injector', source=['injector.cpp'], LIBS=['detours'])

@@ -37,6 +37,10 @@ public:
      Priority priority() const
      { return m_priority; }
 
+	 void emitSignal() {
+		 printf("emit Signal with argument 5, from emitSignal()\n");
+		 Signal(5);
+	 }
 public slots:
 	int Slot1(int v);
 

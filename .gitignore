@@ -5,6 +5,23 @@ env/
 #binary stuff
 *.exe
 *.pdb
+*.dll
+
+#moc compiled files
+moc_*.cpp
+
+#IDA files
+*.id0
+*.id1
+*.til
+*.idb
+
+#unknown files
+*.exp
+*.nam
+
+#SCONS files
+.sconsign.dblite
 
 #OS junk files
 [Tt]humbs.db

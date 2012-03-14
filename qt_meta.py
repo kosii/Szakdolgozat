@@ -195,12 +195,17 @@ compiled_regexp = re.compile(regexp_pattern, flags=re.DOTALL)
 
 class QTFile(object):
     def __init__(self, mmapped_file):
+        print 'szar'
         import pefile_mod
         self.pe = pefile_mod.PE(data=mmapped_file)
+        print 'fos'
         self.classes = []
+        print 'hugy'
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
+            print 'loszar'
             qt_class = QTClass(mmapped_file, match_object, self.pe)
-            if len(set(qt_class.metacall_function)) != 1:
+            #if len(set(qt_class.metacall_function)) != 1:
+            if True:
                 print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function
             self.classes.append(qt_class)
             #if i > 5: break
