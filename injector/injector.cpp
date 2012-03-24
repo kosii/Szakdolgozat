@@ -1,12 +1,14 @@
 #include <windows.h>
 #include <detours.h>
 #include <stdio.h>
-
+#include <iostream>
 
 int CDECL main(int argc, char **argv){
 	//LPCTSTR lpApplicationName = "C:\\Users\\kosi\\Documents\\Projects\\Szakdolgozat\\HoneyPot\\HoneyPot.exe";
-	TCHAR lpApplicationName[] = "C:\\Users\\kosi\\AppData\\Local\\Amazon\\Kindle\\application\\Kindle.exe";
-	LPTSTR lpCommandLine = NULL;
+	//TCHAR lpApplicationName[] = "C:\\Users\\kosi\\AppData\\Local\\Amazon\\Kindle\\application\\Kindle.exe";
+    TCHAR lpApplicationName[] = "C:\\Users\\kosi\\Documents\\Projects\\Szakdolgozat\\HoneyPot\\HoneyPot.exe";
+	
+    LPTSTR lpCommandLine = NULL;
 	STARTUPINFO si = {sizeof(si)};
     PROCESS_INFORMATION pi;
     // ZeroMemory(&si, sizeof(si));
@@ -34,9 +36,7 @@ int CDECL main(int argc, char **argv){
         LocalFree(hlocal);
         ExitProcess(9009);
     } else {
-        printf("szar\n");
-        //DumpProcess(pi.hProcess);
-        if (ResumeThread(pi.hThread) == -1) {
+        if (1 && (ResumeThread(pi.hThread) == -1)) {
             printf("ResumeThread failed\n");
             DWORD dwError = GetLastError();
             HLOCAL hlocal = NULL;
@@ -48,10 +48,12 @@ int CDECL main(int argc, char **argv){
             printf((const char*)hlocal);
             LocalFree(hlocal);
             ExitProcess(9010);
+        } else {
+            printf("resumethread ok\n");
         }
 
         // Wait until child process exits.
-        if (WaitForSingleObject( pi.hProcess, INFINITE ) == 0xFFFFFFFF) {
+        if (1 && (WaitForSingleObject( pi.hProcess, INFINITE ) == 0xFFFFFFFF)) {
             printf("WaitForSingleObject failed\n");
             DWORD dwError = GetLastError();
             HLOCAL hlocal = NULL;
@@ -63,6 +65,8 @@ int CDECL main(int argc, char **argv){
             printf((const char*)hlocal);
             LocalFree(hlocal);
             ExitProcess(9011);
+        } else {
+            printf("waitforsingleobject OK\n");
         }
 
         // Close process and thread handles. 
