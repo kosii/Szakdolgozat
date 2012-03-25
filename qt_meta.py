@@ -3,6 +3,8 @@ import collections
 import itertools
 import re
 
+import pystache
+
 def _take(n, iterable):
     return ''.join(itertools.islice(iterable, n))
 
@@ -102,26 +104,38 @@ class QTClass(object):
         return self.meta_obj_data_descr.classname
     
     @property
+    def safe_name(self):
+        return self.name.replace(':', '_')
+
+    @property
+    def metacall_address_name(self):
+        return "{name}_metacall_address".format(name=self.safe_name)
+
+    @property
+    def metacall_hook_name(self):
+        return "{name}_metacall_address_hook".format(name=self.safe_name)
+
+    @property
     def metaobject_function(self):
         return self._metaobject_function
     
     @property
-    def metacall_function(self):
-        if not self._metacall_function:
+    def metacall_function_address(self):
+        if not self._metacall_function_address:
             pattern = struct.pack('i', self.metaobject_function)
             escaped_pattern = re.escape(pattern)
             section = self.pe.GetSectionnameSection('.rdata')
             only_aligned = filter(lambda match: not match.start()%4, re.finditer(escaped_pattern, section.get_data()))
             metacall_virtual_addresses = map(lambda match: struct.unpack('i', section.get_data()[match.start()+8:match.start()+12])[0], only_aligned)
             #print metacall_virtual_addresses
-            self._metacall_function = map(lambda va: hex(va), metacall_virtual_addresses)
-        return self._metacall_function
-        return struct.pack('i', self.metaobject_function)
+            self._metacall_function_address = metacall_virtual_addresses[0]
+            #self._metacall_function = map(lambda va: hex(va), metacall_virtual_addresses)
+        return self._metacall_function_address
 
     def __init__(self, mmapped_file, match_object, pe):
 
         self._metaobject_function = pe.ptov(match_object.start())
-        self._metacall_function = None
+        self._metacall_function_address = None
 
         self.pe = pe
         qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
@@ -199,19 +213,18 @@ pattern = [0x8B, 0x41, 0x04, 0x8b, 0x40, 0x18, 0x85, 0xc0, 0x75, 0x05, 0xb8, Non
 regexp_pattern =  ''.join(map(chr, regexify(pattern)))
 compiled_regexp = re.compile(regexp_pattern, flags=re.DOTALL)
 
-class QTFile(object):
+class QTFile(pystache.View):
+    template_name = 'qtfile'
     def __init__(self, mmapped_file):
-        print 'szar'
+        super(QTFile, self).__init__()
         import pefile_mod
         self.pe = pefile_mod.PE(data=mmapped_file)
-        print 'fos'
         self.classes = []
-        print 'hugy'
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
-            print 'loszar'
             qt_class = QTClass(mmapped_file, match_object, self.pe)
             #if len(set(qt_class.metacall_function)) != 1:
             if True:
-                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function
+                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address
             self.classes.append(qt_class)
-            #if i > 5: break
+            if i > -1: break
+    

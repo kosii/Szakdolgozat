@@ -7,13 +7,13 @@
 
 typedef int (WINAPI qt_metacall_signature)(QMetaObject::Call _c, int _id, void **_a);
 
-qt_metacall_signature* original_address = (qt_metacall_signature*)(void*)0x401110;
-
-// QMetaObject::Call qobjectdefs.h ban van definialva
-int WINAPI qt_metacall(QMetaObject::Call _c, int _id, void **_a) {
-    printf("hello from honeypot\n");
-    return original_address(_c, _id, _a);
+{{#classes}}
+qt_metacall_signature* {{metacall_address_name}} = (qt_metacall_signature*)(void*){{metacall_function_address}};
+int WINAPI {{metacall_hook_name}}(QMetaObject::Call _c, int _id, void **_a) {
+    printf("Hello from {{name}}\n");
+    return {{metacall_address_name}}(_c, _id, _a);
 }
+{{/classes}}
 
 BOOL DllProcessAttach(HINSTANCE hinst) {
     LONG errCode;
@@ -35,24 +35,26 @@ BOOL DllProcessAttach(HINSTANCE hinst) {
         DetourTransactionAbort();
         return FALSE;
     }
-    if (NO_ERROR != (errCode = DetourAttach(&(PVOID&)original_address, qt_metacall))) {
-        switch (errCode) {
-            case ERROR_INVALID_BLOCK:
-                printf("DetourAttach failed\n\tThe function referenced is too small to be detoured.");
-                break;
-            case ERROR_INVALID_HANDLE:
-                printf("DetourAttach failed\n\tThe ppPointer parameter is null or points to a null pointer.");
-                break;
-            case ERROR_INVALID_OPERATION:
-                printf("DetourAttach failed\n\tNo pending transaction exists.");
-                break;
-            case ERROR_NOT_ENOUGH_MEMORY:
-                printf("DetourAttach failed\n\tNot enough memory exists to complete the operation.");
-                break;
+    {{#classes}}
+        if (NO_ERROR != (errCode = DetourAttach(&(PVOID&){{metacall_address_name}}, &{{metacall_hook_name}}))) {
+            switch (errCode) {
+                case ERROR_INVALID_BLOCK:
+                    printf("DetourAttach failed\n\tThe function referenced is too small to be detoured.");
+                    break;
+                case ERROR_INVALID_HANDLE:
+                    printf("DetourAttach failed\n\tThe ppPointer parameter is null or points to a null pointer.");
+                    break;
+                case ERROR_INVALID_OPERATION:
+                    printf("DetourAttach failed\n\tNo pending transaction exists.");
+                    break;
+                case ERROR_NOT_ENOUGH_MEMORY:
+                    printf("DetourAttach failed\n\tNot enough memory exists to complete the operation.");
+                    break;
+            }
+            DetourTransactionAbort();
+            return FALSE;
         }
-        DetourTransactionAbort();
-        return FALSE;
-    }
+    {{/classes}}
     if (NO_ERROR != (errCode = DetourTransactionCommit())) {
         switch (errCode) {
             case ERROR_INVALID_DATA:
@@ -74,7 +76,9 @@ BOOL DllProcessAttach(HINSTANCE hinst) {
 BOOL DllProcessDetach() {
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
-    DetourDetach(&(PVOID&)original_address, qt_metacall);
+    {{#classes}}
+    DetourDetach(&(PVOID&){{metacall_address_name}}, {{metacall_hook_name}});
+    {{/classes}}
     DetourTransactionCommit();
     return TRUE;
 }
