@@ -1,6 +1,7 @@
 doksik
 env/
 *.pyc
+injector/injected.cpp
 
 #binary stuff
 *.exe
