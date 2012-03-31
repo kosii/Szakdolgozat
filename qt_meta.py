@@ -125,17 +125,40 @@ class QTClass(object):
             pattern = struct.pack('i', self.metaobject_function)
             escaped_pattern = re.escape(pattern)
             section = self.pe.GetSectionnameSection('.rdata')
-            only_aligned = filter(lambda match: not match.start()%4, re.finditer(escaped_pattern, section.get_data()))
-            metacall_virtual_addresses = map(lambda match: struct.unpack('i', section.get_data()[match.start()+8:match.start()+12])[0], only_aligned)
-            #print metacall_virtual_addresses
-            self._metacall_function_address = metacall_virtual_addresses[0]
-            #self._metacall_function = map(lambda va: hex(va), metacall_virtual_addresses)
+            metacall_virtual_addresses = [
+                struct.unpack('i', section.get_data()[match_object.start()+8:match_object.start()+12])[0]
+                for match_object in re.finditer(escaped_pattern, section.get_data()) 
+                if not match_object.start()%4
+            ]
+            #only_aligned = filter(lambda match: not match.start()%4, re.finditer(escaped_pattern, section.get_data()))
+            #metacall_virtual_addresses = map(lambda match: struct.unpack('i', section.get_data()[match.start()+8:match.start()+12])[0], only_aligned)
+            if len(metacall_virtual_addresses) != 1:
+                raise ValueError("More than one possible qt_metacall function address")
+            self._metacall_function_address = hex(metacall_virtual_addresses[0])
         return self._metacall_function_address
+    
+    @property
+    def metacall_super_function_address(self):
+        import distorm3 as distorm
+        if not self._metacall_super_function_address:
+            metacall_function_physical_address = self.pe.vtop(int(self.metacall_function_address, base=16))
+            super_calls = [
+                op 
+                for op in distorm.Decode(0x400000, self.pe.__data__[metacall_function_physical_address:metacall_function_physical_address+0x20]) 
+                if op[2].startswith('CALL')
+            ]
+            if len(super_calls) != 1:
+                raise ValueError("More than one possible super::qt_metacall function address")
+            op = super_calls[0][2]
+            pattern = re.compile('\[(0x[0-9A-Fa-f]+)\]')
+            self._metacall_super_function_address = pattern.search(op).group(1)
+        return self._metacall_super_function_address
 
     def __init__(self, mmapped_file, match_object, pe):
 
         self._metaobject_function = pe.ptov(match_object.start())
         self._metacall_function_address = None
+        self._metacall_super_function_address = None
 
         self.pe = pe
         qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
@@ -224,7 +247,7 @@ class QTFile(pystache.View):
             qt_class = QTClass(mmapped_file, match_object, self.pe)
             #if len(set(qt_class.metacall_function)) != 1:
             if True:
-                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address
+                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address, qt_class.metacall_super_function_address
             self.classes.append(qt_class)
             if i > -1: break
     

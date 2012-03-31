@@ -1,0 +1,2 @@
+TODO list:
+ - csak a code sectionokben keressuk a metaobject eket

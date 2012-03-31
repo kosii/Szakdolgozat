@@ -7,11 +7,31 @@
 
 typedef int (WINAPI qt_metacall_signature)(QMetaObject::Call _c, int _id, void **_a);
 
+#define METACALL(function, _c, _id, _a, ret_var) __asm {\
+    __asm mov ecx, _this\
+    __asm push _a\
+    __asm push _id\
+    __asm push _c\
+    __asm call function\
+    __asm mov ret_var, eax\
+}
+
 {{#classes}}
 qt_metacall_signature* {{metacall_address_name}} = (qt_metacall_signature*)(void*){{metacall_function_address}};
+qt_metacall_signature* {{metacall_address_name}}_super = *(qt_metacall_signature**){{metacall_super_function_address}};
+
+
 int WINAPI {{metacall_hook_name}}(QMetaObject::Call _c, int _id, void **_a) {
-    printf("Hello from {{name}}\n");
-    return {{metacall_address_name}}(_c, _id, _a);
+    void *_this;
+    int ret_id;
+    __asm mov _this, ecx
+    METACALL({{metacall_address_name}}_super, _c, _id, _a, ret_id)
+    if (ret_id < 0) {
+        return ret_id;
+    } else {
+        METACALL({{metacall_address_name}}, _c, _id, _a, _id)
+        return _id;
+    }
 }
 {{/classes}}
 

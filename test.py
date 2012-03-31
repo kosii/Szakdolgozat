@@ -23,5 +23,5 @@ with contextlib.closing(mmap.mmap(fd, length=0, access=mmap.ACCESS_READ)) as mma
     qtfile = QTFile(mmapped_file)
     # for qtclass in qtfile.classes:
     #     print qtclass.name, hex(qtclass.metacall_function_address)
-    with open('injector/injected2.cpp', 'w') as injected:
+    with open('injector/injected.cpp', 'w') as injected:
     	injected.write(qtfile.render())
