@@ -17,8 +17,9 @@ typedef int (WINAPI qt_metacall_signature)(QMetaObject::Call _c, int _id, void *
 }
 
 {{#classes}}
+{{#do}}
 qt_metacall_signature* {{metacall_address_name}} = (qt_metacall_signature*)(void*){{metacall_function_address}};
-qt_metacall_signature* {{metacall_address_name}}_super = *(qt_metacall_signature**){{metacall_super_function_address}};
+qt_metacall_signature* {{metacall_address_name}}_super = {{#indirection}}*{{/indirection}}(qt_metacall_signature{{#indirection}}*{{/indirection}}*){{metacall_super_function_address}};
 
 
 int WINAPI {{metacall_hook_name}}(QMetaObject::Call _c, int _id, void **_a) {
@@ -33,6 +34,7 @@ int WINAPI {{metacall_hook_name}}(QMetaObject::Call _c, int _id, void **_a) {
         return _id;
     }
 }
+{{/do}}
 {{/classes}}
 
 BOOL DllProcessAttach(HINSTANCE hinst) {
@@ -56,6 +58,7 @@ BOOL DllProcessAttach(HINSTANCE hinst) {
         return FALSE;
     }
     {{#classes}}
+        {{#do}}
         if (NO_ERROR != (errCode = DetourAttach(&(PVOID&){{metacall_address_name}}, &{{metacall_hook_name}}))) {
             switch (errCode) {
                 case ERROR_INVALID_BLOCK:
@@ -74,6 +77,7 @@ BOOL DllProcessAttach(HINSTANCE hinst) {
             DetourTransactionAbort();
             return FALSE;
         }
+        {{/do}}
     {{/classes}}
     if (NO_ERROR != (errCode = DetourTransactionCommit())) {
         switch (errCode) {
@@ -96,9 +100,9 @@ BOOL DllProcessAttach(HINSTANCE hinst) {
 BOOL DllProcessDetach() {
     DetourTransactionBegin();
     DetourUpdateThread(GetCurrentThread());
-    {{#classes}}
+    {{#classes}}{{#do}}
     DetourDetach(&(PVOID&){{metacall_address_name}}, {{metacall_hook_name}});
-    {{/classes}}
+    {{/do}}{{/classes}}
     DetourTransactionCommit();
     return TRUE;
 }

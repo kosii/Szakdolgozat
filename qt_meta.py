@@ -12,6 +12,13 @@ def string_reader(string_data):
     # ch == 0x00 nem mukodott. utanajarni hogy miert nem
     return ''.join(itertools.takewhile(lambda ch: not (ch == '\x00'), string_data))
 
+class DescriptorMetaclass(type):
+    def __new__(cls, name, bases, dict):
+        if 'struct' in dict and 'fields' in dict:
+            dict['struct'] = struct.Struct(dict['struct'])
+            bases += (collections.namedtuple(name, dict['fields']), )
+        return super(DescriptorMetaclass, cls).__new__(cls, name, bases, dict)
+
 def descriptor_metaclass(name, bases, dict):
     if 'struct' in dict and 'fields' in dict:
         dict['struct'] = struct.Struct(dict['struct'])
@@ -125,33 +132,42 @@ class QTClass(object):
             pattern = struct.pack('i', self.metaobject_function)
             escaped_pattern = re.escape(pattern)
             section = self.pe.GetSectionnameSection('.rdata')
-            metacall_virtual_addresses = [
+            metacall_virtual_addresses = set([
                 struct.unpack('i', section.get_data()[match_object.start()+8:match_object.start()+12])[0]
                 for match_object in re.finditer(escaped_pattern, section.get_data()) 
-                if not match_object.start()%4
-            ]
-            #only_aligned = filter(lambda match: not match.start()%4, re.finditer(escaped_pattern, section.get_data()))
-            #metacall_virtual_addresses = map(lambda match: struct.unpack('i', section.get_data()[match.start()+8:match.start()+12])[0], only_aligned)
-            if len(metacall_virtual_addresses) != 1:
-                raise ValueError("More than one possible qt_metacall function address")
-            self._metacall_function_address = hex(metacall_virtual_addresses[0])
+                if not match_object.start()%4 # and 
+            ])
+            if len(metacall_virtual_addresses) > 1:
+                raise ValueError("more than one possible {name}::qt_metacall function address candidate in .rdata section".format(name=self.name))
+            elif not metacall_virtual_addresses:
+                raise ValueError("{name}::qt_metacall function address not found in .rdata section".format(name=self.name))
+            self._metacall_function_address = hex(metacall_virtual_addresses.pop())
         return self._metacall_function_address
     
     @property
     def metacall_super_function_address(self):
         import distorm3 as distorm
-        if not self._metacall_super_function_address:
-            metacall_function_physical_address = self.pe.vtop(int(self.metacall_function_address, base=16))
-            super_calls = [
-                op 
-                for op in distorm.Decode(0x400000, self.pe.__data__[metacall_function_physical_address:metacall_function_physical_address+0x20]) 
-                if op[2].startswith('CALL')
-            ]
-            if len(super_calls) != 1:
-                raise ValueError("More than one possible super::qt_metacall function address")
-            op = super_calls[0][2]
-            pattern = re.compile('\[(0x[0-9A-Fa-f]+)\]')
-            self._metacall_super_function_address = pattern.search(op).group(1)
+        if not self._metacall_super_function_address and self.do:
+            metacall_function_address = int(self.metacall_function_address, base=16)
+            metacall_function_physical_address = self.pe.vtop(metacall_function_address)
+            super_calls = (
+                mnemonic
+                for offset, size, mnemonic, hex_string 
+                in distorm.DecodeGenerator(
+                    metacall_function_address, 
+                    self.pe.__data__[
+                        metacall_function_physical_address:metacall_function_physical_address+0x40
+                    ], distorm.Decode32Bits)
+                if mnemonic.startswith('CALL') or mnemonic.startswith('JMP')
+            )
+            op = super_calls.next()
+            if op.startswith('JMP'):
+                self.do = False
+                return
+            pattern = re.compile('\[?(0x[0-9A-Fa-f]+)\]?')
+            match_object = pattern.search(op)
+            self._metacall_super_function_address = match_object.group(1)
+            self.indirection = match_object.group(0).startswith('[')
         return self._metacall_super_function_address
 
     def __init__(self, mmapped_file, match_object, pe):
@@ -159,6 +175,7 @@ class QTClass(object):
         self._metaobject_function = pe.ptov(match_object.start())
         self._metacall_function_address = None
         self._metacall_super_function_address = None
+        self.do = True
 
         self.pe = pe
         qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
@@ -243,7 +260,9 @@ class QTFile(pystache.View):
         import pefile_mod
         self.pe = pefile_mod.PE(data=mmapped_file)
         self.classes = []
+        print 'rof'
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
+            print 'pisi', i
             qt_class = QTClass(mmapped_file, match_object, self.pe)
             #if len(set(qt_class.metacall_function)) != 1:
             if True:
