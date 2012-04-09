@@ -6,24 +6,17 @@
 int CDECL main(int argc, char **argv){
 	//LPCTSTR lpApplicationName = "C:\\Users\\kosi\\Documents\\Projects\\Szakdolgozat\\HoneyPot\\HoneyPot.exe";
 	TCHAR lpApplicationName[] = "C:\\Users\\kosi\\AppData\\Local\\Amazon\\Kindle\\application\\Kindle.exe";
+    //TCHAR lpApplicationName[] = "C:\\Program Files (x86)\\Full Tilt Poker.Fr\\FullTiltPokerFr.exe";
     //TCHAR lpApplicationName[] = "C:\\Users\\kosi\\Documents\\Projects\\Szakdolgozat\\HoneyPot\\HoneyPot.exe";
 	
     LPTSTR lpCommandLine = NULL;
 	STARTUPINFO si = {sizeof(si)};
     PROCESS_INFORMATION pi;
-    // ZeroMemory(&si, sizeof(si));
-    // ZeroMemory(&pi, sizeof(pi));
-    // si.cb = sizeof(si);
 	DWORD dwFlags = CREATE_DEFAULT_ERROR_MODE | CREATE_SUSPENDED;
-	printf("csa\n");
 	SetLastError(0);
-	printf("y0 -> %s\n", lpApplicationName);
-	// if (!DetourCreateProcessWithDll(lpApplicationName, NULL,
-	//     NULL, NULL, TRUE, dwFlags, NULL, NULL, &si, &pi, "C:\\Users\\kosi\\Documents\\Projects\\Szakdolgozat\\injector\\injected.dll", NULL)) {
 	if (!DetourCreateProcessWithDll(NULL, lpApplicationName,
 	     NULL, NULL, TRUE, dwFlags, NULL, NULL, &si, &pi,
          "injected.dll", NULL)) {
-    	printf("kurva\n");
         DWORD dwError = GetLastError();
         printf("withdll.exe: DetourCreateProcessWithDll failed: %d\n", dwError);
         HLOCAL hlocal = NULL;
@@ -36,7 +29,15 @@ int CDECL main(int argc, char **argv){
         LocalFree(hlocal);
         ExitProcess(9009);
     } else {
-        if (1 && (ResumeThread(pi.hThread) == -1)) {
+        // LPCTSTR pipename = "\\\\.\\pipe\\pipename";
+        // HANDLE ph = CreateNamedPipe(
+        //     pipename, PIPE_ACCESS_INBOUND,
+        //     PIPE_TYPE_MESSAGE, 255, 0, 0, 0, NULL);
+        // if (ph == INVALID_HANDLE_VALUE)
+        //     printf("BUDOSKURVA\n");
+        // else printf("OKOKOK\n");
+
+        if (ResumeThread(pi.hThread) == -1) {
             printf("ResumeThread failed\n");
             DWORD dwError = GetLastError();
             HLOCAL hlocal = NULL;
@@ -52,8 +53,18 @@ int CDECL main(int argc, char **argv){
             printf("resumethread ok\n");
         }
 
+        // varunk beerkezo uzire a pipe-on 1seces timeouttal, ha van, kiirjuk, ha timeout, akkor ellenorizzuk hogy el-e meg a child process
+        // ha nem el, kilepunk, ha el, akkor ujbol varunk
+        // ConnectNamedPipe(ph, NULL);
+        // if (WaitNamedPipe(pipename, NMPWAIT_WAIT_FOREVER)) {
+        //     // read
+        //     printf("kaka\n");
+        // } else {
+        //     printf("pisi\n");
+        //     // wtf
+        // }
         // Wait until child process exits.
-        if (1 && (WaitForSingleObject( pi.hProcess, INFINITE ) == 0xFFFFFFFF)) {
+        if (WaitForSingleObject(pi.hProcess, INFINITE) == 0xFFFFFFFF) {
             printf("WaitForSingleObject failed\n");
             DWORD dwError = GetLastError();
             HLOCAL hlocal = NULL;
@@ -72,8 +83,6 @@ int CDECL main(int argc, char **argv){
         // Close process and thread handles. 
         CloseHandle( pi.hProcess );
         CloseHandle( pi.hThread );
-    	printf("buzivagy!\n");
     }
-    printf("szar\n");
 	return 0;
 }

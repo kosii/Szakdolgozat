@@ -2,6 +2,7 @@ doksik
 env/
 *.pyc
 injector/injected.cpp
+qt_log.txt
 
 #binary stuff
 *.exe

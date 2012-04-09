@@ -171,7 +171,6 @@ class QTClass(object):
         return self._metacall_super_function_address
 
     def __init__(self, mmapped_file, match_object, pe):
-
         self._metaobject_function = pe.ptov(match_object.start())
         self._metacall_function_address = None
         self._metacall_super_function_address = None
@@ -192,7 +191,6 @@ class QTClass(object):
             QMetaObjectDataDescriptor(qt_meta_data, qt_meta_stringdata)
         
         self.class_infos = []
-        
         for i in xrange(self.meta_obj_data_descr.classinfoCount):
             self.class_infos.append(
                 QMetaClassInfoDescriptor(
@@ -201,11 +199,11 @@ class QTClass(object):
             )
         self.methods = []
         for i in xrange(self.meta_obj_data_descr.methodCount):
-            self.methods.append(
-                QMetaMethodDescriptor(
-                    qt_meta_data, qt_meta_stringdata
-                )
+            mmd = QMetaMethodDescriptor(
+                qt_meta_data, qt_meta_stringdata
             )
+            mmd.id = i
+            self.methods.append(mmd)
         self.properties = []
         for i in xrange(self.meta_obj_data_descr.propertyCount):
             self.properties.append(
@@ -268,5 +266,5 @@ class QTFile(pystache.View):
             if True:
                 print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address, qt_class.metacall_super_function_address
             self.classes.append(qt_class)
-            if i > -1: break
+            # if i > 3: break
     
