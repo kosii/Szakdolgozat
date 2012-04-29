@@ -151,7 +151,7 @@ class QTClass(object):
             metacall_function_address = int(self.metacall_function_address, base=16)
             metacall_function_physical_address = self.pe.vtop(metacall_function_address)
             super_calls = (
-                mnemonic
+                (mnemonic, hex_string)
                 for offset, size, mnemonic, hex_string 
                 in distorm.DecodeGenerator(
                     metacall_function_address, 
@@ -160,12 +160,13 @@ class QTClass(object):
                     ], distorm.Decode32Bits)
                 if mnemonic.startswith('CALL') or mnemonic.startswith('JMP')
             )
-            op = super_calls.next()
-            if op.startswith('JMP'):
+            mnemonic, hex_string = super_calls.next()
+            print mnemonic, hex_string
+            if mnemonic.startswith('JMP'):
                 self.do = False
                 return
             pattern = re.compile('\[?(0x[0-9A-Fa-f]+)\]?')
-            match_object = pattern.search(op)
+            match_object = pattern.search(mnemonic)
             self._metacall_super_function_address = match_object.group(1)
             self.indirection = match_object.group(0).startswith('[')
         return self._metacall_super_function_address
@@ -234,10 +235,6 @@ class QTClass(object):
                     )
                 )
     
-#def string_reader(address):
-#    # ch == 0x00 nem mukodott. utanajarni hogy miert nem
-#    return itertools.takewhile(lambda ch: not (ch == '\x00'), address)
-
 def regexify(bytepattern):
     for b in bytepattern:
         if b is not None:
@@ -266,5 +263,5 @@ class QTFile(pystache.View):
             if True:
                 print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address, qt_class.metacall_super_function_address
             self.classes.append(qt_class)
-            # if i > 3: break
+            if i > -1: break
     

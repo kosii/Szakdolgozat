@@ -3,6 +3,7 @@ env/
 *.pyc
 injector/injected.cpp
 qt_log.txt
+zeromq-2.2.0
 
 #binary stuff
 *.exe
