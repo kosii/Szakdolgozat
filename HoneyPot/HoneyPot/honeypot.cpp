@@ -4,6 +4,7 @@ honeypot::honeypot(QObject *parent)
 	: QObject(parent)
 {
 	QObject::connect(this, SIGNAL(Signal(int)), this, SLOT(Slot1(int)));
+	QObject::connect(this, SIGNAL(Signal(int)), this, SIGNAL(Signal2(int)));
 }
 
 honeypot::~honeypot()

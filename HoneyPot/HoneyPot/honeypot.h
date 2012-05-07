@@ -13,8 +13,9 @@ class honeypot : public QObject
 	Q_PROPERTY(Priority priority READ priority WRITE setPriority)
 	Q_ENUMS(Priority)
 	Q_FLAGS(Option Options)
-
+	
 public:
+	virtual int qt_metacall(int _id, void **_a, int r){return 36;}
 	honeypot(QObject *parent);
 	virtual ~honeypot();
 
@@ -46,6 +47,7 @@ public slots:
 
 signals:
 	void Signal(int v);
+	void Signal2(int v);
 	void priorityChanged(Priority p);
 
 private:
