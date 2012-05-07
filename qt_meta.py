@@ -5,6 +5,7 @@ import re
 
 import pystache
 
+import conf
 def _take(n, iterable):
     return ''.join(itertools.islice(iterable, n))
 
@@ -19,12 +20,6 @@ class DescriptorMetaclass(type):
             bases += (collections.namedtuple(name, dict['fields']), )
         return super(DescriptorMetaclass, cls).__new__(cls, name, bases, dict)
 
-def descriptor_metaclass(name, bases, dict):
-    if 'struct' in dict and 'fields' in dict:
-        dict['struct'] = struct.Struct(dict['struct'])
-        bases += (collections.namedtuple(name, dict['fields']), )
-    return type(name, bases, dict)
-
 # akartam valami fasza valtoztatast csinalni! ;D
 # csak elfelejtettem :(
 # de valszeg a descriptorokkal vagy a __slot__ tal kapcsolatos volt. vagy lehet hogy teljesen massal
@@ -32,7 +27,7 @@ def descriptor_metaclass(name, bases, dict):
 
 
 class Descriptor(object):
-    __metaclass__ = descriptor_metaclass
+    __metaclass__ = DescriptorMetaclass
     strings=set()
 
     def __new__(cls, memory_image, string_metadata=None):
@@ -45,19 +40,16 @@ class Descriptor(object):
         return instance._replace(**dict( (s, string_reader(string_metadata[getattr(instance, s):])) for s in cls.strings))
 
 class QMetaClassInfoDescriptor(Descriptor):
-    __metaclass__  = descriptor_metaclass
     strings = set(('name', ))
     struct = 'ii'
     fields = 'name, key'
 
 class QMetaMethodDescriptor(Descriptor):
-    __metaclass__  = descriptor_metaclass
     strings = set(('signature', 'parameters', 'type', ))
     struct = 'iiiii'
     fields = 'signature, parameters, type, tag, flags'
 
 class QMetaPropertyDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     strings = set(('name', 'type', ))
     struct = 'iii'
     fields = 'name, type, flags'
@@ -67,24 +59,20 @@ class QMetaPropertyDescriptor(Descriptor):
         return QMetaPropertyChangedDescriptor(memory_image) if True else None
     
 class QMetaPropertyChangedDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     struct = 'i'
     fields = 'notifyChanged'
     
 class QMetaEnumDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     strings = set(('name', ))
     struct = 'iiii'
     fields = 'name, flags, count, data'
 
 class QMetaEnumDataDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     strings = set(('key', ))
     struct = 'ii'
     fields = 'key, value'
 
 class QMetaObjectDataDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     struct = 'iiiiiiiiiiiiii'
     strings = set(('classname', ))
     fields = ('revision, classname, classinfoCount, '
@@ -93,7 +81,6 @@ class QMetaObjectDataDescriptor(Descriptor):
         'constuctorCount, constructors, flags, signals')
 
 class QMetaObjectDescriptor(Descriptor):
-    __metaclass__ = descriptor_metaclass
     fields = 'parent_staticMetaObject, qt_meta_stringdata, qt_meta_data, zero'
     struct = 'iiii'
 
@@ -128,68 +115,67 @@ class QTClass(object):
     
     @property
     def metacall_function_address(self):
-        if not self._metacall_function_address:
-            pattern = struct.pack('i', self.metaobject_function)
-            escaped_pattern = re.escape(pattern)
-            section = self.pe.GetSectionnameSection('.rdata')
-            metacall_virtual_addresses = set([
-                struct.unpack('i', section.get_data()[match_object.start()+8:match_object.start()+12])[0]
-                for match_object in re.finditer(escaped_pattern, section.get_data()) 
-                if not match_object.start()%4 # and 
-            ])
-            if len(metacall_virtual_addresses) > 1:
-                raise ValueError("more than one possible {name}::qt_metacall function address candidate in .rdata section".format(name=self.name))
-            elif not metacall_virtual_addresses:
-                raise ValueError("{name}::qt_metacall function address not found in .rdata section".format(name=self.name))
-            self._metacall_function_address = hex(metacall_virtual_addresses.pop())
-        return self._metacall_function_address
+        return getattr(self, '_metacall_function_address', None)
     
     @property
     def metacall_super_function_address(self):
+        return getattr(self, '_metacall_super_function_address', None)
+
+    def _calculate_metacall_function_address(self):
+        pattern = struct.pack('i', self.metaobject_function)
+        escaped_pattern = re.escape(pattern)
+        section = self.pe.GetSectionnameSection('.rdata')
+        metacall_virtual_addresses = set([
+            struct.unpack('i', section.get_data()[match_object.start()+8:match_object.start()+12])[0]
+            for match_object in re.finditer(escaped_pattern, section.get_data()) 
+            if not match_object.start()%4
+        ])
+        if len(metacall_virtual_addresses) > 1:
+            raise ValueError("more than one possible {name}::qt_metacall function address candidate in .rdata section".format(name=self.name))
+        elif not metacall_virtual_addresses:
+            raise ValueError("{name}::qt_metacall function address not found in .rdata section".format(name=self.name))
+        self._metacall_function_address = hex(metacall_virtual_addresses.pop())
+
+    def _calculate_metacall_super_function_address(self):
         import distorm3 as distorm
-        if not self._metacall_super_function_address and self.do:
-            metacall_function_address = int(self.metacall_function_address, base=16)
-            metacall_function_physical_address = self.pe.vtop(metacall_function_address)
-            super_calls = (
-                (mnemonic, hex_string)
-                for offset, size, mnemonic, hex_string 
-                in distorm.DecodeGenerator(
-                    metacall_function_address, 
-                    self.pe.__data__[
-                        metacall_function_physical_address:metacall_function_physical_address+0x40
-                    ], distorm.Decode32Bits)
-                if mnemonic.startswith('CALL') or mnemonic.startswith('JMP')
-            )
-            mnemonic, hex_string = super_calls.next()
-            print mnemonic, hex_string
-            if mnemonic.startswith('JMP'):
-                self.do = False
-                return
-            pattern = re.compile('\[?(0x[0-9A-Fa-f]+)\]?')
-            match_object = pattern.search(mnemonic)
-            self._metacall_super_function_address = match_object.group(1)
-            self.indirection = match_object.group(0).startswith('[')
-        return self._metacall_super_function_address
+        metacall_function_address = int(self.metacall_function_address, base=16)
+        metacall_function_physical_address = self.pe.vtop(metacall_function_address)
+        super_calls = (
+            (mnemonic, hex_string)
+            for offset, size, mnemonic, hex_string 
+            in distorm.DecodeGenerator(
+                metacall_function_address, 
+                self.pe.__data__[
+                    metacall_function_physical_address:metacall_function_physical_address+0x40
+                ], distorm.Decode32Bits)
+            if mnemonic.startswith('CALL') or mnemonic.startswith('JMP')
+        )
+        mnemonic, hex_string = super_calls.next()
+        if mnemonic.startswith('JMP'):
+            self.do = False
+            return
+        pattern = re.compile('\[?(0x[0-9A-Fa-f]+)\]?')
+        match_object = pattern.search(mnemonic)
+        self._metacall_super_function_address = match_object.group(1)
+        self.indirection = match_object.group(0).startswith('[')
 
     def __init__(self, mmapped_file, match_object, pe):
-        self._metaobject_function = pe.ptov(match_object.start())
-        self._metacall_function_address = None
-        self._metacall_super_function_address = None
-        self.do = True
-
         self.pe = pe
+        self.do = True
+        self.indirection = True
+
+        self._metaobject_function = pe.ptov(match_object.start())
+        self._calculate_metacall_function_address()
+        self._calculate_metacall_super_function_address()
+
         qmetaObject_virtual_address = struct.Struct('i').unpack(match_object.group(1))[0]
         qmetaobject_physical_address = pe.vtop(qmetaObject_virtual_address)
-        qmetaobject_descriptor = QMetaObjectDescriptor(mmapped_file[qmetaobject_physical_address:])
+        self.qmetaobject_descriptor = QMetaObjectDescriptor(mmapped_file[qmetaobject_physical_address:])
 
-        self.qmetaobject_descriptor = qmetaobject_descriptor
-        qt_meta_stringdata = \
-            mmapped_file[pe.vtop(qmetaobject_descriptor.qt_meta_stringdata):]
-        qt_meta_data = \
-            itertools.islice(mmapped_file, pe.vtop(qmetaobject_descriptor.qt_meta_data), None)
+        qt_meta_stringdata = mmapped_file[pe.vtop(self.qmetaobject_descriptor.qt_meta_stringdata):]
+        qt_meta_data = itertools.islice(mmapped_file, pe.vtop(self.qmetaobject_descriptor.qt_meta_data), None)
         
-        self.meta_obj_data_descr = \
-            QMetaObjectDataDescriptor(qt_meta_data, qt_meta_stringdata)
+        self.meta_obj_data_descr = QMetaObjectDataDescriptor(qt_meta_data, qt_meta_stringdata)
         
         self.class_infos = []
         for i in xrange(self.meta_obj_data_descr.classinfoCount):
@@ -250,18 +236,25 @@ compiled_regexp = re.compile(regexp_pattern, flags=re.DOTALL)
 
 class QTFile(pystache.View):
     template_name = 'qtfile'
-    def __init__(self, mmapped_file):
+
+    def __init__(self, mmapped_file, n=None):
         super(QTFile, self).__init__()
         import pefile_mod
         self.pe = pefile_mod.PE(data=mmapped_file)
         self.classes = []
-        print 'rof'
         for i, match_object in enumerate(compiled_regexp.finditer(mmapped_file)):
-            print 'pisi', i
+            if i == n: break
             qt_class = QTClass(mmapped_file, match_object, self.pe)
-            #if len(set(qt_class.metacall_function)) != 1:
-            if True:
-                print qt_class.name, hex(qt_class.metaobject_function), qt_class.metacall_function_address, qt_class.metacall_super_function_address
+            if conf.debug:
+                print "QT class found with:\n"\
+                    "\tname: {name}\n"\
+                    "\tmetaObject function@0x{metaObject_function}\n"\
+                    "\tqt_metacall function@{qt_metacall_function}\n"\
+                    "\tsuper's qt_metacall_function@{metacall_super_function_address}".format(
+                        name=qt_class.name, 
+                        metaObject_function=hex(qt_class.metaobject_function),
+                        qt_metacall_function=qt_class.metacall_function_address,
+                        metacall_super_function_address=qt_class.metacall_super_function_address
+                    )
             self.classes.append(qt_class)
-            if i > -1: break
     
