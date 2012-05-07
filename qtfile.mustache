@@ -1,5 +1,9 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
+
+#include "zmq.hpp"
 
 #include <windows.h>
 #include <detours.h>
@@ -18,8 +22,9 @@ typedef int (WINAPI qt_metacall_signature)(QMetaObject::Call _c, int _id, void *
     __asm mov ret_var, eax\
 }
 
-std::ofstream logfile;
-DWORD start;
+
+zmq::context_t *context;
+zmq::socket_t *sock;
 
 {{#classes}}
 {{#do}}
@@ -36,10 +41,19 @@ int WINAPI {{metacall_hook_name}}(QMetaObject::Call _c, int _id, void **_a) {
         return ret_id;
     } else {
         if (_c == QMetaObject::InvokeMetaMethod){
+            std::stringstream oss;
+            std::string s;
+            zmq::message_t *message;
             switch (ret_id) {
                 {{#methods}}
                 case {{id}}:
-                    logfile<<(GetTickCount()-start)/1000.0<<"s: {{name}}::{{signature}} called"<<std::endl;
+                    oss<<"{{name}}::{{signature}} called";
+                    s = oss.str();
+                    //logfile<<(GetTickCount()-start)/1000.0<<"s: {{name}}::{{signature}} called"<<std::endl;
+                    message = new zmq::message_t(s.length());
+                    memcpy((void *)message->data(), s.c_str(), s.length());
+                    sock->send(*message);
+                    delete message;
                     break;
                 {{/methods}}
             }
@@ -124,11 +138,15 @@ BOOL WINAPI DllMain(HINSTANCE hinst, DWORD dwReason, LPVOID reserved)
 {
     switch (dwReason) {
         case DLL_PROCESS_ATTACH:
-            start = GetTickCount();
-            logfile.open("qt_log.txt", std::ios::trunc);
+            context = new zmq::context_t(1);
+            sock = new zmq::socket_t(*context, ZMQ_PUSH);
+            sock->connect("tcp://localhost:5556");
             return DllProcessAttach(hinst);
         case DLL_PROCESS_DETACH:
-            logfile.close();
+            //if (context) {
+                //delete context;
+            //}
+            //logfile.close();
             return DllProcessDetach();
         default:
             return TRUE;
