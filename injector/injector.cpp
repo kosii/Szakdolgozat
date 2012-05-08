@@ -34,7 +34,6 @@ int CDECL main(int argc, char **argv){
             LocalFree(hlocal);
             ExitProcess(9009);
         } else {
-            printf("FOOS\n");
             if (ResumeThread(pi.hThread) == -1) {
                 DWORD dwError = GetLastError();
                 HLOCAL hlocal = NULL;
