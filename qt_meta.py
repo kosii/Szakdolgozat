@@ -6,11 +6,11 @@ import re
 import pystache
 
 import conf
+
 def _take(n, iterable):
-    return ''.join(itertools.islice(iterable, n))
+    return ''.join(map(str,itertools.islice(iterable, n)))
 
 def string_reader(string_data):
-    # ch == 0x00 nem mukodott. utanajarni hogy miert nem
     return ''.join(itertools.takewhile(lambda ch: not (ch == '\x00'), string_data))
 
 class DescriptorMetaclass(type):
@@ -20,9 +20,6 @@ class DescriptorMetaclass(type):
             bases += (collections.namedtuple(name, dict['fields']), )
         return super(DescriptorMetaclass, cls).__new__(cls, name, bases, dict)
 
-# akartam valami fasza valtoztatast csinalni! ;D
-# csak elfelejtettem :(
-# de valszeg a descriptorokkal vagy a __slot__ tal kapcsolatos volt. vagy lehet hogy teljesen massal
 # janem! abs-szel kell kikenyszeriteni az attributumok felulirasanak a kenyszeret!
 
 
@@ -32,20 +29,20 @@ class Descriptor(object):
 
     def __new__(cls, memory_image, string_metadata=None):
         if not hasattr(cls, 'struct') or not hasattr(cls, 'fields'):
-            raise NotImplementedError("Define inherited class' struct and fields attributes")
+            raise RuntimeError("Define inherited class' struct and fields attributes")
         if cls.strings and not string_metadata:
-            raise RuntimeError("TODO!")
+            raise RuntimeError("Descriptor class using string field types cannot be instantiated without passing string_metadata argument")
         
         instance = super(Descriptor, cls).__new__(cls, *cls.struct.unpack(_take(cls.struct.size, memory_image)))
         return instance._replace(**dict( (s, string_reader(string_metadata[getattr(instance, s):])) for s in cls.strings))
 
 class QMetaClassInfoDescriptor(Descriptor):
-    strings = set(('name', ))
+    strings = set(('key', 'value'))
     struct = 'ii'
-    fields = 'name, key'
+    fields = 'key, value'
 
 class QMetaMethodDescriptor(Descriptor):
-    strings = set(('signature', 'parameters', 'type', ))
+    strings = set(('signature', 'parameters', 'type', 'tag'))
     struct = 'iiiii'
     fields = 'signature, parameters, type, tag, flags'
 
@@ -54,9 +51,12 @@ class QMetaPropertyDescriptor(Descriptor):
     struct = 'iii'
     fields = 'name, type, flags'
     
-    def read_data(self, memory_image):
-        # we had to check whether we have a notification changed method
-        return QMetaPropertyChangedDescriptor(memory_image) if True else None
+    def has_notify(self):
+        return self.flags & 0x400000
+
+    # def read_data(self, memory_image):
+    #     # we had to check whether we have a notification changed method
+    #     return QMetaPropertyChangedDescriptor(memory_image) if True else None
     
 class QMetaPropertyChangedDescriptor(Descriptor):
     struct = 'i'
@@ -84,13 +84,13 @@ class QMetaObjectDescriptor(Descriptor):
     fields = 'parent_staticMetaObject, qt_meta_stringdata, qt_meta_data, zero'
     struct = 'iiii'
 
-    def __str__(self):
-        return '{0}(parent_staticMetaObject={1}, qt_meta_stringdata={2}, '
-        'qt_meta_data={3}, zero={4})'.format(
-            self.__class__.__name__, hex(self.parent_staticMetaObject), 
-            hex(self.qt_meta_stringdata), hex(self.qt_meta_data), 
-            hex(self.zero)
-        )
+    # def __str__(self):
+    #     return '{0}(parent_staticMetaObject={1}, qt_meta_stringdata={2}, '
+    #     'qt_meta_data={3}, zero={4})'.format(
+    #         self.__class__.__name__, hex(self.parent_staticMetaObject), 
+    #         hex(self.qt_meta_stringdata), hex(self.qt_meta_data), 
+    #         hex(self.zero)
+    #     )
 
 class QTClass(object):
     @property
@@ -198,13 +198,9 @@ class QTClass(object):
                     qt_meta_data, qt_meta_stringdata
                 )
             )
-        self.property_notifications = []
-        for i in xrange(self.meta_obj_data_descr.propertyCount):
-            self.property_notifications.append(
-                QMetaPropertyChangedDescriptor(
-                    qt_meta_data
-                )
-            )
+        for prop in self.properties:
+            if prop.has_notify():
+                prop.nofitication = QMetaPropertyChangedDescriptor(qt_meta_data)
         self.enums = []
         for i in xrange(self.meta_obj_data_descr.enumCount):
             self.enums.append(

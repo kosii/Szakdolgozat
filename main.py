@@ -1,5 +1,4 @@
 import os, sys, re, mmap, contextlib
-import subprocess
 import threading, datetime
 from pprint import pprint
 
@@ -17,7 +16,7 @@ import conf
 # 'C:/Program Files (x86)/Skype/Phone/Skype.exe'
 
 
-args = parser.parse_args(['-d', '-r', '-c', '-h', 'C:/Program Files (x86)/Full Tilt Poker.Fr/FullTiltPokerFr.exe'])
+args = parser.parse_args(['HoneyPot/HoneyPot.exe'])
 conf.debug = bool(args.debug)
 
 if args.do_not_regenerate:

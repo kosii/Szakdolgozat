@@ -34,7 +34,7 @@ class PE(pefile.PE):
         raise ValueError("Invalid VirtualAddress")
     
     def GetVirtualAddressSectionName(self, virtual_addr):
-        ordinal = get_sectionordinal_by_virtual_address(self, virtual_addr)
+        ordinal = self.GetVirtualAddressSectionOrdinal(virtual_addr)
         return self.sections[ordinal].Name
     
     def vtop(self, virt_addr):
