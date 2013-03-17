@@ -2,8 +2,12 @@ DEBUG=False
 env = Environment(
 	MSVC_VERSION='10.0',
 	TARGET_ARCH='x86',
-	CPPPATH=[r'C:/Program Files (x86)/Microsoft Research/Detours Express 3.0/include', r'C:/qt-everywhere-opensource-src-4.7.4/include', r'../zeromq-2.2.0/include'], 
-	LIBPATH=[r'C:/Program Files (x86)/Microsoft Research/Detours Express 3.0/lib.X86', r'C:/qt-everywhere-opensource-src-4.7.4/lib', r'../zeromq-2.2.0/lib']
+	CPPPATH=[r'C:/Detours Express 3.0/include', 
+		r'C:/qt/4.8.3/include',
+		r'C:/zeromq2-x/include'], 
+	LIBPATH=[r'C:/Detours Express 3.0/lib.X86', 
+		r'C:/qt/4.8.3/lib', 
+		r'C:/zeromq2-x/lib/']
 )
 
 env.SharedLibrary(target='injected', source=['injected.cpp'], LIBS=['detours', 'libzmq'], LINKFLAGS=['/export:DllMain'], CXXFLAGS=['/Zi'] if DEBUG else [])

@@ -2,6 +2,12 @@ import os, sys, re, mmap, contextlib
 import threading, datetime
 from pprint import pprint
 
+sys.path.append('.')
+
+try:
+	import scons
+except ImportError as e:
+	sys.stderr.write(e)
 import SCons.Script
 
 import workers
@@ -10,13 +16,8 @@ from qt_meta import QTFile
 from context_managers import filedescriptor, restore_cwd
 import conf
 
-# C:/Users/kosi/AppData/Local/Amazon/Kindle/application/Kindle.exe
-# 'HoneyPot/HoneyPot.exe'
-# "C:/Program Files (x86)/Full Tilt Poker.Fr/FullTiltPokerFr.exe"
-# 'C:/Program Files (x86)/Skype/Phone/Skype.exe'
-
-
-args = parser.parse_args(['HoneyPot/HoneyPot.exe'])
+# C:/Users/kosi/AppData/Local/Amazon/Kindle/application/Kindle.exe 
+args = parser.parse_args(['-r', r'C:\Users\kosii\AppData\Local\Amazon\Kindle\application\Kindle.exe'])
 conf.debug = bool(args.debug)
 
 if args.do_not_regenerate:
