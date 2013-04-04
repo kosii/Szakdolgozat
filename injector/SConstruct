@@ -3,10 +3,10 @@ env = Environment(
 	MSVC_VERSION='10.0',
 	TARGET_ARCH='x86',
 	CPPPATH=[r'C:/Detours Express 3.0/include', 
-		r'C:/qt/4.8.3/include',
+		r'C:/qt/4.8.4/include',
 		r'C:/zeromq2-x/include'], 
 	LIBPATH=[r'C:/Detours Express 3.0/lib.X86', 
-		r'C:/qt/4.8.3/lib', 
+		r'C:/qt/4.8.4/lib',
 		r'C:/zeromq2-x/lib/']
 )
 
