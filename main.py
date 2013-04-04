@@ -4,27 +4,26 @@ from pprint import pprint
 
 sys.path.append('.')
 
-try:
-	import scons
-except ImportError as e:
-	sys.stderr.write(e)
+import scons
 import SCons.Script
-
 import workers
 from arguments import parser
 from qt_meta import QTFile
-from context_managers import filedescriptor, restore_cwd
+from context_managers import filedescriptor, restore_cwd, eyecandy
+from utils import Eyecandy
 import conf
 
 # C:/Users/kosi/AppData/Local/Amazon/Kindle/application/Kindle.exe 
-args = parser.parse_args(['-r', r'C:\Users\kosii\AppData\Local\Amazon\Kindle\application\Kindle.exe'])
+args = parser.parse_args([ r'C:\Users\kosii\AppData\Local\Amazon\Kindle\application\Kindle.exe'])
 conf.debug = bool(args.debug)
 
 if args.do_not_regenerate:
 	with filedescriptor(args.input_file, os.O_RDONLY) as fd:
 		with contextlib.closing(mmap.mmap(fd, length=0, access=mmap.ACCESS_READ)) as mmapped_file:
-		    with open('injector/injected.cpp', 'w') as injected:
-		    	injected.write(QTFile(mmapped_file, n=args.n).render())
+		    with open('injector/injected.cpp', 'w') as injected_dll_source:
+		    	print 'Identifying Qt classes inside {input_file} ...'.format(input_file=args.input_file)
+		    	with eyecandy():
+			    	injected_dll_source.write(QTFile(mmapped_file, n=args.n).render())
 
 if args.do_not_recompile:
 	with restore_cwd():
